@@ -1,2 +1,1 @@
-# hub
-A list of companies and organizations with introductions
+# jekyll-company-directory

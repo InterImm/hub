@@ -1,0 +1,30 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely need to edit after that.
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+title: “未来星际企业”
+email: admin@interimm.org
+description: "在这里脑洞出你自己的未来星际企业"
+baseurl: "hub" # the subpath of your site, e.g. /blog
+url: "http://interimm.org" # the base hostname & protocol for your site
+twitter_username:
+github_username:  interimm
+
+
+#
+subscribe:
+   title: 订阅
+   link: http://interimm.org
+
+# Site Manager
+
+author:
+  name: InterImm
+
+
+# Build settings
+markdown: kramdown

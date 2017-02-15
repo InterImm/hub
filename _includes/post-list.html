@@ -1,0 +1,39 @@
+<div class="panel panel-default panel-horizontal">
+  <div class="panel-heading text-center" style="width:10em;">
+      <!-- <span><img class="post-list-meta-author-image" src="https://avatars1.githubusercontent.com/u/663798"</span> -->
+      <span>{% if post.author %}
+        {{ post.author }}
+        {% else %}
+        {{ site.author.name }}
+        {% endif %}</span>
+      <hr />
+      <div class="post-list-meta-date" style="padding-top: 10px;">{{ post.date | date: "%b %-d, %Y" }}</div>
+  </div>
+
+  <div class="panel-body">
+
+<!--div class="col-xs-2 col-md-3 text-center age">
+  <img src="https://placeholdit.imgix.net/~text?txtsize=40&txt=John%20Doe&w=200&h=200" class="img-circle img-responsive" alt="" />
+</div-->
+<div class="col-xs-12 col-md-12 section-box">
+  <h2>
+      <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+  </h2>
+  <p>
+      {{ post.summary }}
+  </p>
+  <hr />
+  <div class="row rating-desc">
+      <div class="col-md-12">
+          <span class="glyphicon glyphicon-th-large"></span>
+             <span class="post-list-meta-categories">{% if post.categories %}{% for category in post.categories %}<span>{ {{ category }} }</span>{% endfor %}{% endif %}<span>
+          <span class="separator">|</span>
+          <span class="glyphicon glyphicon-tags"></span>
+             <span class="post-list-meta-categories">{% if post.tags %}{% for tag in post.tags %}<span>#{{ tag }}</span>{% endfor %}{% endif %}<span>
+      </div>
+  </div>
+</div>
+
+  </div>
+  <div class="panel-footer text-center" style="width:4em;"></div>
+</div>
