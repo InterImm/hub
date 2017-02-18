@@ -10,16 +10,16 @@
 
 <div class="company-container">
 {% assign companies = site.data.companies | sort %}
-{% for company in companies reversed %}
+{% for company in companies reversed  limit:2 %}
    {% assign companyitem = company[1] %}
 
 
 
 
-<div class="mix col-sm-4 wow fadeIn" data-wow-delay="0.4s" data-founded-date="{{ companyitem.founded }}">
+<div class="mix col-sm-6 wow fadeIn" data-wow-delay="0.4s" data-founded-date="{{ companyitem.founded }}">
 <div class="panel panel-default">
    <div class="panel-heading">
-    <h3 class="panel-title">
+    <h3 class="panel-title" style="text-align:center;font-weight:bold;">
    {{ companyitem.name }}</h3>
    </div>
 
