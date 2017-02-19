@@ -95,3 +95,6 @@ padding-left: 0.3em;
   letter-spacing: 0;
   display: block;
 }
+.label {
+   border-radius: 0; 
+}

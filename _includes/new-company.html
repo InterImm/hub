@@ -59,17 +59,20 @@
      <fieldset class="form-group row">
        <div class="col-sm-12">
          <textarea class="form-control companyabouttextarea" name="fields[about]" type="text" maxlength="300" rows= "10" id="company-form[about]" placeholder="公司详情（例如：维珍银河公司 - Virgin Galactic）；必填" required></textarea>
-         <span class="help-block"><p id="characterLeft" class="help-block ">300 字限制；如需很长的详情，可以在写在我们的 <a href="https://github.com/InterImm/hub/issues" target="_blank"><span class="label label-default">GitHub Issues</span></a> 中。<br> 可以使用简单的 Markdown 语法</p></span>
+         <span class="help-block"><p id="characterLeft" class="help-block ">300 字限制；如需很长的详情，可以提交之后在跳转的页面中继续添加，或者在我们的 <a href="https://github.com/InterImm/hub/issues" target="_blank"><span class="label label-default">GitHub Issues</span></a> 中添加。<br> 可以使用简单的 Markdown 语法</p></span>
        </div>
      </fieldset>
 
 
 
     <fieldset class="form-group row">
-      <button id="company--button" type="submit" class="btn btn-primary btn-lg">
+      <button id="company--button" type="submit" class="btn btn-primary btn-lg" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="点击后会跳转到 GitHub 待审核的企业列表，可以添加后续评论。如跳转失败请使用科学上网。">
         提交
       </button>
+
    </fieldset>
 
+
   </form>
+
 </div>
