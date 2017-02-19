@@ -13,7 +13,7 @@ padding-right: 1em;
 
 
 /* Post List Begin */
-body{ margin-top:20px;}
+/*body{ margin-top:20px;}*/
 .glyphicon { margin-right:5px;}
 .section-box h2 { margin-top:0px;}
 .glyphicon-heart { color:#e74c3c;}
@@ -96,5 +96,5 @@ padding-left: 0.3em;
   display: block;
 }
 .label {
-   border-radius: 0; 
+   border-radius: 0;
 }

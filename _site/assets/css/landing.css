@@ -247,6 +247,17 @@ a:hover, a:focus {
     transition: top 0.4s ease 0s;
 }
 
+.navbar-fixed-open {
+   border: 0px solid rgba(0, 0, 0, 0);
+   background: black;
+   margin: auto;
+   min-height: 60px;
+   padding-top: 8px;
+   position: fixed;
+   top: 0px;
+   transition: top 0.4s ease 0s;
+}
+
 .navbar.open {
     top: 0;
 }
@@ -325,6 +336,7 @@ header {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
+  /*opacity: 0.95;*/
 }
 
 .header-info {

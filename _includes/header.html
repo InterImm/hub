@@ -1,21 +1,30 @@
-<nav class="navbar navbar-default navbar-inverse navbar-static-top" role="navigation">
-  <div class="container-fluid">
+<nav class="navbar-findcond navbar-fixed-top navbar-fixed-open">
+    <div class="container">
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="{{ site.baseurl }}/">{{ site.title }}</a>
+         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+            <span class="sr-only">切换导航</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+         </button>
+         <a class="navbar-brand brand-style" href="{{ "/" | prepend: site.baseurl }}"><i class="fa fa-building-o"></i> &nbsp; 星际企业</a>
       </div>
-      <div class="collapse navbar-collapse">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a class="nav-link" href="getting-started.html">Getting Started</a></li>
-          <li><a class="nav-link current" href="documentation.html">Documentation</a></li>
-          <li><a class="nav-link" href="free-psd.html">Free PSD</a></li>
-          <li><a class="nav-link" href="color-picker.html">Color Picker</a></li>
-        </ul>
+      <div class="collapse navbar-collapse" id="navbar">
+         <ul class="nav navbar-nav navbar-left" style="margin-right:0.5em;">
+            <li><a href="{{ "/companies.html" | prepend: site.baseurl}}"><i class="fa fa-list"></i>&nbsp; 全部企业</a></li>
+            <li><a href="{{ "/about.html" | prepend: site.baseurl}}"><i class="fa fa-superpowers"></i>&nbsp; 关于</a></li>
+         </ul>
+
+         <ul class="nav navbar-nav navbar-right" style="margin-right:0.5em;">
+
+         <li><a href="{{ "/#list" | prepend: site.baseurl }}"><i class="fa fa-compass"></i>&nbsp; 精选企业</a></li>
+         <li><a href="{{ "/#add" | prepend: site.baseurl }}"> <i class="fa fa-puzzle-piece"></i>&nbsp; 添加企业</a></li>
+         <li class="dropdown" style="margin-left:1.5em;"><a href="http://interimm.org" target="_blank"><i class="fa fa-arrow-circle-o-down" style="display:none;"></i><img src="assets/images/logo.png" alt="Logo" id="logo--icon--right"></a></li>
+         </ul>
+
+
+
+
       </div>
-    </div>
+   </div>
 </nav>
