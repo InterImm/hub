@@ -15,12 +15,14 @@ title: 未来星际企业 | 星际移民中心
 
     {% include landing/landing-splash.html %}
 
-<div class="container">
-    <section id="list" class="pad-xl">
+<div class="wrapper container" id="stars-bg">
+   <canvas id="stars"></canvas>
+   <div id="dunes"></div>
+    <section id="list" class="pad-xl" style="background-image: assets/explorer.svg;>
       <div class="container">
         <div class="row">
           <div class="col-sm-8 col-sm-offset-2 text-center margin-30 wow fadeIn" data-wow-delay="0.6s">
-            <h2>星际企业精选</h2>
+            <h2 id="landing--title" class="landing--section--title">最新星际企业</h2>
             <a href="#add" class="scroll"><span class="label label-default" style="font-size:110%;">创建自己的星际企业</span></a>
             <a href="{{ "/companies.html" | prepend: site.baseurl }}"><span class="label label-default" style="font-size:110%;">全部星际企业列表</span></a>
           </div>
@@ -33,7 +35,7 @@ title: 未来星际企业 | 星际移民中心
            <div class="wrapper container">
              <div class="row">
 
-             {% include list-recent.html %}
+             {% include list-showcase.html %}
 
 
             </div>
@@ -43,10 +45,8 @@ title: 未来星际企业 | 星际移民中心
     </section>
 </div>
 
-
-
 <!-- Add your company -->
-<hr  class="line red">
+<!-- <hr class="line black"> -->
 
     <section id="add" class="pad-lg light-gray-bg">
       <div class="container">
@@ -151,25 +151,7 @@ title: 未来星际企业 | 星际移民中心
 
 
 
-    <footer style="border-top: 4px solid black;">
-      <div class="container">
-
-        <div class="row">
-          <div class="col-sm-8 margin-20">
-            <ul class="list-inline social">
-               <li>2017</li>
-               <li><a href="http://github.com/interimm/hub">使用 Bootstrap + Jekyll + Github</a></li>
-            </ul>
-          </div>
-
-          <div class="col-sm-4 text-right">
-             <p><small><a href="http://interimm.org">星际移民中心</a>用 <i class="fa fa-heart" style="color:red;"></i> 制作</small></p>
-
-          </div>
-        </div>
-
-      </div>
-    </footer>
+    {% include footer.html %}
 
 
 
@@ -195,6 +177,9 @@ title: 未来星际企业 | 星际移民中心
   $('[data-toggle="tooltip"]').tooltip()
 })
     </script>
+
+    <script src="assets/js/stars-bg.js"></script>
+
 
 
     </body>

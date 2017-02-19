@@ -35,6 +35,10 @@ h2 {
   font-weight: 700;
 }
 
+.landing--section--title {
+   margin-bottom:1em;
+}
+
 h3 {
   font-size: 16px;
   line-height: 30px;
@@ -741,4 +745,39 @@ footer {
     border-bottom: 2px solid rgb(112, 203, 206);
     border-radius: 0px;
     border-top: 2px solid rgb(112, 203, 206);
+}
+
+
+/* particle effects */
+
+
+#landing--title {
+  /*position: absolute;*/
+  width: 100%;
+  height: 100%;
+  /*display: table;*/
+  color: #FFFFFF;
+  vertical-align: middle;
+  /*font-size: 3.5vw;*/
+  font-weight: 300;
+  /*letter-spacing: 0.9em;*/
+  text-shadow: 0 2px 5px rgba(25, 41, 48, 0.1), 0 4px 5px rgba(25, 41, 48, 0.1), 0 6px 5px rgba(25, 41, 48, 0.1), 0 8px 5px rgba(25, 41, 48, 0.1), 0 10px 5px rgba(25, 41, 48, 0.1), 0 12px 5px rgba(25, 41, 48, 0.1), 0 14px 5px rgba(25, 41, 48, 0.1), 0 16px 5px rgba(25, 41, 48, 0.1), 0 18px 5px rgba(25, 41, 48, 0.1), 0 20px 5px rgba(25, 41, 48, 0.1);
+}
+
+/* stars as background */
+
+#stars-bg {
+  background: linear-gradient(to bottom, #002131 0%, #eee 60%);
+  /*height: 100vh;*/
+  /*margin: 0;*/
+  width: 100% !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+}
+
+#stars {
+  margin-top: 0;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
 }

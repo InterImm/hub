@@ -62,7 +62,7 @@
          </ul>
          <ul class="nav navbar-nav navbar-right" style="margin-right:0.5em;">
 
-         <li><a href="#list" class="scroll"><i class="fa fa-compass"></i>&nbsp; 精选企业</a></li>
+         <li><a href="#list" class="scroll"><i class="fa fa-compass"></i>&nbsp; 最新企业</a></li>
          <li><a href="#add" class="scroll"> <i class="fa fa-puzzle-piece"></i>&nbsp; 添加企业</a></li>
          <li class="dropdown" style="margin-left:1.5em;"><a href="http://interimm.org" target="_blank"><i class="fa fa-arrow-circle-o-down" style="display:none;"></i><img src="assets/images/logo.png" alt="Logo" id="logo--icon--right"></a></li>
          </ul>
@@ -90,7 +90,7 @@
 
     <div class="row header-info">
       <div class="col-sm-10 col-sm-offset-1 text-center">
-        <h1 class="wow fadeIn">星际企业</h1>
+        <h1 class="wow fadeIn" id="landing--title">星际企业</h1>
         <br />
         <p class="lead wow fadeIn" data-wow-delay="0.5s">严肃的星际企业脑洞基地 <br>
         在这里“脑洞出”你自己的星际企业<br>
@@ -123,12 +123,14 @@
      </div>
 
 
-<div class="container">
-    <section id="list" class="pad-xl">
+<div class="wrapper container" id="stars-bg">
+   <canvas id="stars"></canvas>
+   <div id="dunes"></div>
+    <section id="list" class="pad-xl" style="background-image: assets/explorer.svg;>
       <div class="container">
         <div class="row">
           <div class="col-sm-8 col-sm-offset-2 text-center margin-30 wow fadeIn" data-wow-delay="0.6s">
-            <h2>星际企业精选</h2>
+            <h2 id="landing--title" class="landing--section--title">最新星际企业</h2>
             <a href="#add" class="scroll"><span class="label label-default" style="font-size:110%;">创建自己的星际企业</span></a>
             <a href="/companies.html"><span class="label label-default" style="font-size:110%;">全部星际企业列表</span></a>
           </div>
@@ -141,17 +143,7 @@
            <div class="wrapper container">
              <div class="row">
 
-             <div class="row comnapy-controls" style="text-align:right;margin-right:1em;margin-bottom:1em;">按创立年代排序
-   <button type="button" class="btn btn-default" data-mixitup-control data-sort="founded-date:asc">
-      <i class="fa fa-chevron-down" aria-hidden="true"></i>
-   </button>
-   <button type="button" class="btn btn-default" data-mixitup-control data-sort="founded-date:desc">
-      <i class="fa fa-chevron-up" aria-hidden="true"></i>
-   </button>
-
-</div>
-
-<div class="company-container">
+             <div class="company-container">
 
 
    
@@ -314,10 +306,8 @@
     </section>
 </div>
 
-
-
 <!-- Add your company -->
-<hr  class="line red">
+<!-- <hr class="line black"> -->
 
     <section id="add" class="pad-lg light-gray-bg">
       <div class="container">
@@ -600,7 +590,7 @@
 
             <div class="row">
 
-              <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+              <div class="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
   <form data-toggle="validator" role="form" method="post" action="https://api.staticman.net/v2/entry/interimm/hub/gh-pages">
 
 <input name="options[redirect]" type="hidden" value="https://github.com/InterImm/hub/pulls">
@@ -660,7 +650,7 @@
 
      <fieldset class="form-group row">
        <div class="col-sm-12">
-         <textarea class="form-control companyabouttextarea" name="fields[about]" type="text" maxlength="300" rows= "10" id="company-form[about]" placeholder="公司详情（例如：维珍银河公司 - Virgin Galactic）；必填" required></textarea>
+         <textarea class="form-control companyabouttextarea" name="fields[about]" type="text" maxlength="300" rows= "10" id="company-form[about]" placeholder="公司详情（例如：时属维珍集团子公司，其开发的太空船系列亚轨道飞船在 20 世纪 20 年代的亚轨道旅游热潮中占据了大部分市场份额。后并入轨道旅游局。）；必填" required></textarea>
          <span class="help-block"><p id="characterLeft" class="help-block ">300 字限制；如需很长的详情，可以提交之后在跳转的页面中继续添加，或者在我们的 <a href="https://github.com/InterImm/hub/issues" target="_blank"><span class="label label-default">GitHub Issues</span></a> 中添加。<br> 可以使用简单的 Markdown 语法</p></span>
        </div>
      </fieldset>
@@ -700,24 +690,25 @@
 
 
     <footer style="border-top: 4px solid black;">
-      <div class="container">
+  <div class="container">
 
-        <div class="row">
-          <div class="col-sm-8 margin-20">
-            <ul class="list-inline social">
-               <li>2017</li>
-               <li><a href="http://github.com/interimm/hub">使用 Bootstrap + Jekyll + Github</a></li>
-            </ul>
-          </div>
+    <div class="row">
+      <div class="col-sm-8 margin-20">
+        <ul class="list-inline social">
+           <li>2017</li>
+           <li><a href="http://github.com/interimm/hub">使用 Bootstrap + Jekyll + Github</a></li>
+        </ul>
+      </div>
 
-          <div class="col-sm-4 text-right">
-             <p><small><a href="http://interimm.org">星际移民中心</a>用 <i class="fa fa-heart" style="color:red;"></i> 制作</small></p>
-
-          </div>
-        </div>
+      <div class="col-sm-4 text-right">
+         <p><small><a href="http://interimm.org">星际移民中心</a>用 <i class="fa fa-heart" style="color:red;"></i> 制作</small></p>
 
       </div>
-    </footer>
+    </div>
+
+  </div>
+</footer>
+
 
 
 
@@ -757,6 +748,9 @@
   $('[data-toggle="tooltip"]').tooltip()
 })
     </script>
+
+    <script src="assets/js/stars-bg.js"></script>
+
 
 
     </body>
