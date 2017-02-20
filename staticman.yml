@@ -7,4 +7,5 @@ format: yml
 moderation: true
 path: "_data/companies"
 requiredFields: ['email', 'name', 'founded' , 'base' ,'category','about']
-transforms: {}
+transforms:
+  email: ""
