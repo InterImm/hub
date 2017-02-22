@@ -9,6 +9,10 @@
   <meta name="description" content="星际移民中心设立的未来公司黄页">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
+  <meta http-equiv="cache-control" content="no-cache, must-revalidate, post-check=0, pre-check=0">
+  <!-- <meta http-equiv="expires" content="Sat, 31 Oct 2014 00:00:00 GMT"> -->
+  <meta http-equiv="pragma" content="no-cache">
+
   <meta property="og:title" content="">
 	<meta property="og:type" content="website">
 	<meta property="og:url" content="">
@@ -16,25 +20,25 @@
 	<meta property="og:description" content="">
 
   <!-- Styles -->
-  <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="assets/css/animate.css">
+  <link rel="stylesheet" href="http://localhost:4000/assets/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/animate.css">
   <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900|Montserrat:400,700' rel='stylesheet' type='text/css'>
 
 
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/bootflat/css/bootflat.min.css">
-  <link rel="stylesheet" href="assets/css/landing.css">
-  <link rel="stylesheet" href="hub/assets/css/custom.css">
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/assets/bootflat/css/bootflat.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/landing.css">
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/custom.css">
 
 
 
   <script src="assets/js/modernizr-2.7.1.js"></script>
 
-  <link rel="canonical" href="http://localhost:4000hub/">
+  <link rel="canonical" href="http://localhost:4000/">
 
-  <link rel="alternate" type="application/rss+xml" title="“未来星际企业”" href="http://localhost:4000hub/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="“未来星际企业”" href="http://localhost:4000/feed.xml">
 
-  <link rel="stylesheet" href="assets/css/bootstrap-select.min.css">
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/bootstrap-select.min.css">
 
 </head>
 
@@ -52,17 +56,17 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
          </button>
-         <a class="navbar-brand brand-style" href="#top"><i class="fa fa-building-o"></i> &nbsp; 星际企业</a>
+         <a class="navbar-brand brand-style" href="http://localhost:4000#top"><i class="fa fa-building-o"></i> &nbsp; 星际企业</a>
       </div>
       <div class="collapse navbar-collapse" id="navbar">
          <ul class="nav navbar-nav navbar-left" style="margin-right:0.5em;">
 
-         <li><a href="hub/companies.html"><i class="fa fa-list"></i>&nbsp; 全部企业</a></li>
-         <li><a href="hub/about.html"><i class="fa fa-superpowers"></i>&nbsp; 关于</a></li>
+         <li><a href="http://localhost:4000/companies.html"><i class="fa fa-list"></i>&nbsp; 全部企业</a></li>
+         <li><a href="http://localhost:4000/about.html"><i class="fa fa-superpowers"></i>&nbsp; 关于</a></li>
          </ul>
          <ul class="nav navbar-nav navbar-right" style="margin-right:0.5em;">
 
-         <li><a href="#list" class="scroll"><i class="fa fa-compass"></i>&nbsp; 最新企业</a></li>
+         <li><a href="#list" class="scroll"><i class="fa fa-compass"></i>&nbsp; 精选企业</a></li>
          <li><a href="#add" class="scroll"> <i class="fa fa-puzzle-piece"></i>&nbsp; 添加企业</a></li>
          <li class="dropdown" style="margin-left:1.5em;"><a href="http://interimm.org" target="_blank"><i class="fa fa-arrow-circle-o-down" style="display:none;"></i><img src="assets/images/logo.png" alt="Logo" id="logo--icon--right"></a></li>
          </ul>
@@ -80,7 +84,7 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-6 signin navbar-nav">
-         <a href="hub/companies.html">全部企业</a>
+         <a href="/companies.html">全部企业</a>
 
       </div>
       <div class="col-xs-6 text-right">
@@ -101,7 +105,7 @@
           <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
             <div class="row">
               <div class="col-xs-6 text-right wow fadeInUp" data-wow-delay="1s">
-                <a href="#list" class="btn btn-secondary btn-lg scroll">星际企业精选</a>
+                <a href="#list" class="btn btn-secondary btn-lg scroll">精选星际企业</a>
               </div>
               <div class="col-xs-6 text-left wow fadeInUp" data-wow-delay="1s">
                 <a href="#add" class="btn btn-secondary btn-lg scroll">添加星际企业</a>
@@ -130,9 +134,9 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-8 col-sm-offset-2 text-center margin-30 wow fadeIn" data-wow-delay="0.6s">
-            <h2 id="landing--title" class="landing--section--title">最新星际企业</h2>
+            <h2 id="landing--title" class="landing--section--title">精选星际企业</h2>
             <a href="#add" class="scroll"><span class="label label-default" style="font-size:110%;">创建自己的星际企业</span></a>
-            <a href="hub/companies.html"><span class="label label-default" style="font-size:110%;">全部星际企业列表</span></a>
+            <a href="/companies.html"><span class="label label-default" style="font-size:110%;">全部星际企业列表</span></a>
           </div>
         </div>
 
@@ -151,32 +155,30 @@
 
 
 
-<div class="mix col-sm-6 wow fadeIn" data-wow-delay="0.4s" data-founded-date="2002">
+<div class="mix col-sm-6 wow fadeIn" data-wow-delay="0.4s" data-founded-date="2057">
 <div class="panel panel-default">
    <div class="panel-heading">
     <h3 class="panel-title" style="text-align:center;font-weight:bold;">
-   太空探索技术公司 - Space Exploration Technologies Corporation (SpaceX)</h3>
+   艾娃火星 - Ava Mars</h3>
    </div>
 
    <div class="panel-body">
-   <ul id="spacex" class="nav nav-tabs nav-justified">
-    <li class="active"><a href="#spacex-basics" data-toggle="tab"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
-    <li class=""><a href="#spacex-about" data-toggle="tab"><i class="fa fa-file-text" aria-hidden="true"></i></a></li>
+   <ul id="company-1487526020417" class="nav nav-tabs nav-justified">
+    <li class="active"><a href="#company-1487526020417-basics" data-toggle="tab"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+    <li class=""><a href="#company-1487526020417-about" data-toggle="tab"><i class="fa fa-file-text" aria-hidden="true"></i></a></li>
    </ul>
-   <div id="spacex-Content" class="tab-content">
-    <div class="tab-pane fade active in" id="spacex-basics">
+   <div id="company-1487526020417-Content" class="tab-content">
+    <div class="tab-pane fade active in" id="company-1487526020417-basics">
 
       <ul class="list-group" style="font-size:90%;">
               <li class="list-group-item">
                 <h4 class="list-group-item-heading">成立年份</h4>
-                <p class="list-group-item-text">2002</p>
+                <p class="list-group-item-text">2057</p>
              </li>
               <li class="list-group-item">
                 <h4 class="list-group-item-heading">公司基地</h4>
                 <p class="list-group-item-text">
-                  美国加利福利亚州霍桑（2002 ～ 2039）<br>
-                  
-                  近地轨道 X 空间站（2039 ～ 2041）<br>
+                  沙特阿拉伯<br>
                   
                </p>
             </li>
@@ -185,21 +187,12 @@
              <h4 class="list-group-item-heading">公司类型</h4>
              <p class="list-group-item-text">
                 
-                   载人飞船 <br>
-                  
-                   货物运输 <br>
+                   太空矿业 <br>
                   
                </p>
             </li>
 
             
-              <li class="list-group-item">
-                <h4 class="list-group-item-heading">网站</h4>
-                <p class="list-group-item-text" style="overflow:hidden;text-overflow: ellipsis;">
-                  http://spacex.com
-               </p>
-             </li>
-             
 
 
              
@@ -211,10 +204,8 @@
 
 
     </div>
-    <div class="tab-pane fade" id="spacex-about">
-      <p markdown="1"><p>由 Elon Musk 创立的私人航天公司，以猎鹰系列火箭起家，后因研制出成熟的可重复使用火箭技术，在国际发射市场上占据了一席之地。载人登火“赤风”计划中，其研制的“红龙”飞船作为乘员舱使用。2037年，为了开拓小行星和太空旅游业务，公司总裁 Musk 决定将公司的名义总部移至位于近地轨道的大型空间站—— X 空间站中，这也使 SpaceX 成为首个真正意义上的“太空公司”。</p>
-
-<p>2041 年，由于公司内部关于发展方向的矛盾分歧越发严重，SpaceX 最终拆分成 “SpaceX 旅游”和“SpaceX 小行星”两家公司，Musk 也在一夜间离开公众视野。</p>
+    <div class="tab-pane fade" id="company-1487526020417-about">
+      <p markdown="1"><p>艾娃火星公司是一家火星矿业公司。其前身天穹资源（Arc Resources Inc.）原本从事小行星采矿行业，在激烈的市场竞争中，当时的公司总裁 Ava 说服大家将重心从小行星采矿转移到火星采矿业，产业主要为火星表面建设服务。此后公司经历了高速发展时期，在并购了几家小型的火星矿业公司之后，改名为艾娃火星（Ava Mars），用来纪念英年早逝的 Ava。</p>
 </p>
 
    </div>
@@ -314,7 +305,7 @@
         <div class="row">
           <div class="col-sm-10 col-sm-offset-1 text-center" style="color:#f14444;">
             <!-- <i class="fa fa-puzzle-piece fa-3x margin-40 fa-section-title"></i> -->
-            <h2 class="black">添加你的脑洞企业</h2>
+            <h2 class="black">添加你的星际企业</h2>
 
 
             <div class="panel panel-default">
@@ -337,11 +328,11 @@
 
                         <div class="panel-collapse collapse alert alert-info info-dismissable" role="tabpanel" id="collapseListGroup0" aria-labelledby="collapseListGroupHeading0" aria-expanded="false" style="height: 0px;padding:1em;margin-top:1em;">
                                             <iframe id="embed_dom" name="embed_dom" frameborder="0" style="border:1px solid #000;display:block;width:100%; height:500px;" src="https://www.processon.com/embed/544d18d00cf2fa24a909aa74"></iframe>
-                                            <a href="hub/assets/images/space-professions.png" target="_blank" style="margin-top:1em;"><span class="label label-default">下载图片</span></a>
+                                            <a href="/assets/images/space-professions.png" target="_blank" style="margin-top:1em;"><span class="label label-default">下载图片</span></a>
                        </div>
 
                        <div class="panel-collapse collapse alert alert-info info-dismissable" role="tabpanel" id="collapseListGroup2" aria-labelledby="collapseListGroupHeading2" aria-expanded="false" style="height: 0px;padding:1em;margin-top:1em;">
-                                           <img src="hub/assets/images/MarsDevelopment-Extended.svg" class="img-responsive" alt="火星基础建设">
+                                           <img src="/assets/images/MarsDevelopment-Extended.svg" class="img-responsive" alt="火星基础建设">
                       </div>
 
                 </li>
@@ -641,7 +632,7 @@
 
      <fieldset class="form-group row">
        <div class="col-sm-12">
-         <input class="form-control" type="text" id="company-form[name]" name="fields[name]" placeholder="星际企业网址（例如：http://www.virgingalactic.com/）"/>
+         <input class="form-control" type="text" id="company-form[link]" name="fields[link]" placeholder="星际企业网址（例如：http://www.virgingalactic.com/； 必须能够访问）"/>
 
        </div>
      </fieldset>
