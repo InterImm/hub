@@ -1,9 +1,10 @@
 <div class="company-container">
+   {% assign selected = site.data.selected-companies %}
 {% assign companies = site.data.companies | sort %}
-{% for company in companies reversed limit:2 %}
+{% for company in companies %}
    {% assign companyitem = company[1] %}
 
-
+{% if company[0] == selected[0] or company[0] == selected[1] %}
 
 
 <div class="mix col-sm-6 wow fadeIn" data-wow-delay="0.4s" data-founded-date="{{ companyitem.founded }}">
@@ -81,5 +82,6 @@
 
 </div>
 </div>
+{% endif %}
 {% endfor %}
 </div>
