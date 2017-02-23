@@ -41,11 +41,30 @@
 
 </head>
 
+
+<style>
+div:target {
+   height: 100%;
+   width: 100%;
+   /*position: fixed; */
+   left: 0;
+   top: 60px;
+   padding-top: 2em;
+   background-color: rgb(0,0,0); /* Black fallback color */
+   background-color: rgba(0,0,0, 0.9); /* Black w/opacity */
+   overflow-x: hidden; /* Disable horizontal scroll */
+   transition: 0.1s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+   z-index: 8888;
+   }​
+   div::before {
+      content: "aaaa"
+   }
+</style>
 <body>
 
 
 
-<nav class="navbar-findcond navbar-fixed-top navbar-fixed-open">
+<nav class="navbar-findcond navbar-fixed-top navbar-fixed-open" style="z-index:9999;">
     <div class="container">
       <div class="navbar-header">
          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
@@ -78,10 +97,11 @@
 
 
 
+
     <section id="list" class="pad-xl">
       <div class="container">
         <div class="row">
-          <div class="col-sm-8 col-sm-offset-2 text-center margin-30 wow fadeIn" data-wow-delay="0.1s">
+          <div class="col-sm-8 col-sm-offset-2 text-center margin-30">
             <h2>星际企业列表</h2>
 
           </div>
@@ -90,599 +110,613 @@
 
 
 
-        <div class="wow fadeInUp" data-wow-delay="0.3s">
-           <div class="row">
+        <div>
+           <div class="grid row">
 
-             <div class="row comnapy-controls" style="text-align:right;margin-right:1em;margin-bottom:1em;">按创立年代排序
-   <button type="button" class="btn btn-default" data-mixitup-control data-sort="founded-date:asc">
-      <i class="fa fa-chevron-down" aria-hidden="true"></i>
-   </button>
-   <button type="button" class="btn btn-default" data-mixitup-control data-sort="founded-date:desc">
-      <i class="fa fa-chevron-up" aria-hidden="true"></i>
-   </button>
-
-</div>
-
-<div class="company-container">
+             <!-- <div class="company-container"> -->
+  
+  
+  
 
 
-   
+  <div id="virgin-galactic-full" class="col-sm-4 grid-item" data-founded-date="2004 style="float:left;">
+     <a href="/companies.html"><span style="color:white;float:right;margin-top:-1.5em;" class="noselect"><i class="fa fa-close"></i></span></a>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+            <a href="#virgin-galactic-full" style="float:right;">
+           <span style="line-height: 30px;padding-left:0.5em;"><i class="fa fa-link"></i></span></a>
+
+        <h3 class="panel-title">维珍银河公司 - Virgin Galactic</h3>
 
 
+      </div>
 
+      <div class="panel-body">
+        <ul id="virgin-galactic" class="nav nav-tabs nav-justified">
+          <li class="active"><a href="#virgin-galactic-basics" data-toggle="tab"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+          <li class=""><a href="#virgin-galactic-about" data-toggle="tab"><i class="fa fa-file-text" aria-hidden="true"></i></a></li>
+        </ul>
+        <div id="virgin-galactic-Content" class="tab-content">
+          <div class="tab-pane active in" id="virgin-galactic-basics">
 
-<div class="mix col-sm-4 wow fadeIn" data-wow-delay="0.4s" data-founded-date="2004">
-<div class="panel panel-default">
-   <div class="panel-heading">
-    <h3 class="panel-title">
-   维珍银河公司 - Virgin Galactic</h3>
-   </div>
-
-   <div class="panel-body">
-   <ul id="virgin-galactic" class="nav nav-tabs nav-justified">
-    <li class="active"><a href="#virgin-galactic-basics" data-toggle="tab"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
-    <li class=""><a href="#virgin-galactic-about" data-toggle="tab"><i class="fa fa-file-text" aria-hidden="true"></i></a></li>
-   </ul>
-   <div id="virgin-galactic-Content" class="tab-content">
-    <div class="tab-pane fade active in" id="virgin-galactic-basics">
-
-      <ul class="list-group" style="font-size:90%;">
+            <ul class="list-group" style="font-size:90%;">
               <li class="list-group-item">
                 <h4 class="list-group-item-heading">成立年份</h4>
                 <p class="list-group-item-text">2004</p>
-             </li>
+              </li>
               <li class="list-group-item">
                 <h4 class="list-group-item-heading">公司基地</h4>
+                <p class="list-group-item-text"> 美国加利福利亚州帕萨迪纳<br> 
+                </p>
+              </li>
+
+              <li class="list-group-item">
+                <h4 class="list-group-item-heading">公司类型</h4>
                 <p class="list-group-item-text">
-                  美国加利福利亚州帕萨迪纳<br>
-                  
-               </p>
-            </li>
+                   载人飞船 <br>  旅游观光 <br> 
+                </p>
+              </li>
 
-            <li class="list-group-item">
-             <h4 class="list-group-item-heading">公司类型</h4>
-             <p class="list-group-item-text">
-                
-                   载人飞船 <br>
-                  
-                   旅游观光 <br>
-                  
-               </p>
-            </li>
-
-            
+              
               <li class="list-group-item">
                 <h4 class="list-group-item-heading">网站</h4>
                 <p class="list-group-item-text" style="overflow:hidden;text-overflow: ellipsis;">
                   http://www.virgingalactic.com/
-               </p>
-             </li>
-             
+                </p>
+              </li>
+                
+
+            </ul>
 
 
-             
-
-             
-
-           </ul>
-
-
-
-    </div>
-    <div class="tab-pane fade" id="virgin-galactic-about">
-      <p markdown="1"><p>时属维珍集团子公司，其开发的太空船系列亚轨道飞船在 20 世纪 20 年代的亚轨道旅游热潮中占据了大部分市场份额。后并入轨道旅游局。</p>
+          </div>
+          <div class="tab-pane" id="virgin-galactic-about">
+            <p markdown="1"><p>时属维珍集团子公司，其开发的太空船系列亚轨道飞船在 20 世纪 20 年代的亚轨道旅游热潮中占据了大部分市场份额。后并入轨道旅游局。</p>
 </p>
 
-   </div>
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
 
 
 
-
-</div>
-
-</div>
-</div>
-
-   
+  </div>
+  
+  
 
 
+  <div id="spacex-full" class="col-sm-4 grid-item" data-founded-date="2002 style="float:left;">
+     <a href="/companies.html"><span style="color:white;float:right;margin-top:-1.5em;" class="noselect"><i class="fa fa-close"></i></span></a>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+            <a href="#spacex-full" style="float:right;">
+           <span style="line-height: 30px;padding-left:0.5em;"><i class="fa fa-link"></i></span></a>
+
+        <h3 class="panel-title">太空探索技术公司 - Space Exploration Technologies Corporation (SpaceX)</h3>
 
 
-<div class="mix col-sm-4 wow fadeIn" data-wow-delay="0.4s" data-founded-date="2002">
-<div class="panel panel-default">
-   <div class="panel-heading">
-    <h3 class="panel-title">
-   太空探索技术公司 - Space Exploration Technologies Corporation (SpaceX)</h3>
-   </div>
+      </div>
 
-   <div class="panel-body">
-   <ul id="spacex" class="nav nav-tabs nav-justified">
-    <li class="active"><a href="#spacex-basics" data-toggle="tab"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
-    <li class=""><a href="#spacex-about" data-toggle="tab"><i class="fa fa-file-text" aria-hidden="true"></i></a></li>
-   </ul>
-   <div id="spacex-Content" class="tab-content">
-    <div class="tab-pane fade active in" id="spacex-basics">
+      <div class="panel-body">
+        <ul id="spacex" class="nav nav-tabs nav-justified">
+          <li class="active"><a href="#spacex-basics" data-toggle="tab"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+          <li class=""><a href="#spacex-about" data-toggle="tab"><i class="fa fa-file-text" aria-hidden="true"></i></a></li>
+        </ul>
+        <div id="spacex-Content" class="tab-content">
+          <div class="tab-pane active in" id="spacex-basics">
 
-      <ul class="list-group" style="font-size:90%;">
+            <ul class="list-group" style="font-size:90%;">
               <li class="list-group-item">
                 <h4 class="list-group-item-heading">成立年份</h4>
                 <p class="list-group-item-text">2002</p>
-             </li>
+              </li>
               <li class="list-group-item">
                 <h4 class="list-group-item-heading">公司基地</h4>
+                <p class="list-group-item-text"> 美国加利福利亚州霍桑（2002 ～ 2039）<br>  近地轨道 X 空间站（2039 ～ 2041）<br> 
+                </p>
+              </li>
+
+              <li class="list-group-item">
+                <h4 class="list-group-item-heading">公司类型</h4>
                 <p class="list-group-item-text">
-                  美国加利福利亚州霍桑（2002 ～ 2039）<br>
-                  
-                  近地轨道 X 空间站（2039 ～ 2041）<br>
-                  
-               </p>
-            </li>
+                   载人飞船 <br>  货物运输 <br> 
+                </p>
+              </li>
 
-            <li class="list-group-item">
-             <h4 class="list-group-item-heading">公司类型</h4>
-             <p class="list-group-item-text">
-                
-                   载人飞船 <br>
-                  
-                   货物运输 <br>
-                  
-               </p>
-            </li>
-
-            
+              
               <li class="list-group-item">
                 <h4 class="list-group-item-heading">网站</h4>
                 <p class="list-group-item-text" style="overflow:hidden;text-overflow: ellipsis;">
                   http://spacex.com
-               </p>
-             </li>
-             
+                </p>
+              </li>
+                
+
+            </ul>
 
 
-             
-
-             
-
-           </ul>
-
-
-
-    </div>
-    <div class="tab-pane fade" id="spacex-about">
-      <p markdown="1"><p>由 Elon Musk 创立的私人航天公司，以猎鹰系列火箭起家，后因研制出成熟的可重复使用火箭技术，在国际发射市场上占据了一席之地。载人登火“赤风”计划中，其研制的“红龙”飞船作为乘员舱使用。2037年，为了开拓小行星和太空旅游业务，公司总裁 Musk 决定将公司的名义总部移至位于近地轨道的大型空间站—— X 空间站中，这也使 SpaceX 成为首个真正意义上的“太空公司”。</p>
+          </div>
+          <div class="tab-pane" id="spacex-about">
+            <p markdown="1"><p>由 Elon Musk 创立的私人航天公司，以猎鹰系列火箭起家，后因研制出成熟的可重复使用火箭技术，在国际发射市场上占据了一席之地。载人登火“赤风”计划中，其研制的“红龙”飞船作为乘员舱使用。2037年，为了开拓小行星和太空旅游业务，公司总裁 Musk 决定将公司的名义总部移至位于近地轨道的大型空间站—— X 空间站中，这也使 SpaceX 成为首个真正意义上的“太空公司”。</p>
 
 <p>2041 年，由于公司内部关于发展方向的矛盾分歧越发严重，SpaceX 最终拆分成 “SpaceX 旅游”和“SpaceX 小行星”两家公司，Musk 也在一夜间离开公众视野。</p>
 </p>
 
-   </div>
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
 
 
 
-
-</div>
-
-</div>
-</div>
-
-   
+  </div>
+  
+  
 
 
+  <div id="company-1487691821639-full" class="col-sm-4 grid-item" data-founded-date="2062 style="float:left;">
+     <a href="/companies.html"><span style="color:white;float:right;margin-top:-1.5em;" class="noselect"><i class="fa fa-close"></i></span></a>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+            <a href="#company-1487691821639-full" style="float:right;">
+           <span style="line-height: 30px;padding-left:0.5em;"><i class="fa fa-link"></i></span></a>
+
+        <h3 class="panel-title">环太阳系旅游公司</h3>
 
 
-<div class="mix col-sm-4 wow fadeIn" data-wow-delay="0.4s" data-founded-date="2022">
-<div class="panel panel-default">
-   <div class="panel-heading">
-    <h3 class="panel-title">
-   太空捷运公司 - Space Rapid Transit Corporation</h3>
-   </div>
+      </div>
 
-   <div class="panel-body">
-   <ul id="company-1487606741847" class="nav nav-tabs nav-justified">
-    <li class="active"><a href="#company-1487606741847-basics" data-toggle="tab"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
-    <li class=""><a href="#company-1487606741847-about" data-toggle="tab"><i class="fa fa-file-text" aria-hidden="true"></i></a></li>
-   </ul>
-   <div id="company-1487606741847-Content" class="tab-content">
-    <div class="tab-pane fade active in" id="company-1487606741847-basics">
+      <div class="panel-body">
+        <ul id="company-1487691821639" class="nav nav-tabs nav-justified">
+          <li class="active"><a href="#company-1487691821639-basics" data-toggle="tab"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+          <li class=""><a href="#company-1487691821639-about" data-toggle="tab"><i class="fa fa-file-text" aria-hidden="true"></i></a></li>
+        </ul>
+        <div id="company-1487691821639-Content" class="tab-content">
+          <div class="tab-pane active in" id="company-1487691821639-basics">
 
-      <ul class="list-group" style="font-size:90%;">
+            <ul class="list-group" style="font-size:90%;">
+              <li class="list-group-item">
+                <h4 class="list-group-item-heading">成立年份</h4>
+                <p class="list-group-item-text">2062</p>
+              </li>
+              <li class="list-group-item">
+                <h4 class="list-group-item-heading">公司基地</h4>
+                <p class="list-group-item-text"> 环太阳系号星舰<br> 
+                </p>
+              </li>
+
+              <li class="list-group-item">
+                <h4 class="list-group-item-heading">公司类型</h4>
+                <p class="list-group-item-text">
+                   旅游观光 <br> 
+                </p>
+              </li>
+
+               
+              <li class="list-group-item">
+                <h4 class="list-group-item-heading">添加</h4>
+                <p class="list-group-item-text">Peter Wang</p>
+              </li>
+              
+
+            </ul>
+
+
+          </div>
+          <div class="tab-pane" id="company-1487691821639-about">
+            <p markdown="1"><p>环太阳系旅游公司，前身为环太平洋旅游公司，是 Peter Wang 先生创建的一家主营旅游业的公司，最初主要业务集中在太平洋及周围大陆，在人类技术大爆炸太空旅游成本越来越低后，开始进军太阳系。 环太阳系号星舰为公司立下来汗马功劳，但是由于日渐损耗，经过董事会的讨论一致同意将其永久降落在火星星坠城附近，成为公司的火星总部，同时利用一部分船体改造成一个人类从地球到火星及其期间公司发展过程的博物馆。</p>
+</p>
+
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+
+
+
+  </div>
+  
+  
+
+
+  <div id="company-1487606741847-full" class="col-sm-4 grid-item" data-founded-date="2022 style="float:left;">
+     <a href="/companies.html"><span style="color:white;float:right;margin-top:-1.5em;" class="noselect"><i class="fa fa-close"></i></span></a>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+            <a href="#company-1487606741847-full" style="float:right;">
+           <span style="line-height: 30px;padding-left:0.5em;"><i class="fa fa-link"></i></span></a>
+
+        <h3 class="panel-title">太空捷运公司 - Space Rapid Transit Corporation</h3>
+
+
+      </div>
+
+      <div class="panel-body">
+        <ul id="company-1487606741847" class="nav nav-tabs nav-justified">
+          <li class="active"><a href="#company-1487606741847-basics" data-toggle="tab"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+          <li class=""><a href="#company-1487606741847-about" data-toggle="tab"><i class="fa fa-file-text" aria-hidden="true"></i></a></li>
+        </ul>
+        <div id="company-1487606741847-Content" class="tab-content">
+          <div class="tab-pane active in" id="company-1487606741847-basics">
+
+            <ul class="list-group" style="font-size:90%;">
               <li class="list-group-item">
                 <h4 class="list-group-item-heading">成立年份</h4>
                 <p class="list-group-item-text">2022</p>
-             </li>
+              </li>
               <li class="list-group-item">
                 <h4 class="list-group-item-heading">公司基地</h4>
+                <p class="list-group-item-text"> 中国台湾<br> 
+                </p>
+              </li>
+
+              <li class="list-group-item">
+                <h4 class="list-group-item-heading">公司类型</h4>
                 <p class="list-group-item-text">
-                  中国台湾<br>
-                  
-               </p>
-            </li>
+                   航天发射、载人飞船、亚轨道旅游 <br> 
+                </p>
+              </li>
 
-            <li class="list-group-item">
-             <h4 class="list-group-item-heading">公司类型</h4>
-             <p class="list-group-item-text">
                 
-                   航天发射、载人飞船、亚轨道旅游 <br>
-                  
-               </p>
-            </li>
 
-            
+            </ul>
 
 
-             
-
-             
-
-           </ul>
-
-
-
-    </div>
-    <div class="tab-pane fade" id="company-1487606741847-about">
-      <p markdown="1"><p>公司成立之初以当时正火热的亚轨道旅游为主要业务，后来拓展到近地轨道发射。2034 年被 ULA 收购。</p>
+          </div>
+          <div class="tab-pane" id="company-1487606741847-about">
+            <p markdown="1"><p>公司成立之初以当时正火热的亚轨道旅游为主要业务，后来拓展到近地轨道发射。2034 年被 ULA 收购。</p>
 </p>
 
-   </div>
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
 
 
 
-
-</div>
-
-</div>
-</div>
-
-   
+  </div>
+  
+  
 
 
+  <div id="company-1487606587591-full" class="col-sm-4 grid-item" data-founded-date="2022 style="float:left;">
+     <a href="/companies.html"><span style="color:white;float:right;margin-top:-1.5em;" class="noselect"><i class="fa fa-close"></i></span></a>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+            <a href="#company-1487606587591-full" style="float:right;">
+           <span style="line-height: 30px;padding-left:0.5em;"><i class="fa fa-link"></i></span></a>
+
+        <h3 class="panel-title">小绿人空间仪器 - Little Green Man Space Drone</h3>
 
 
-<div class="mix col-sm-4 wow fadeIn" data-wow-delay="0.4s" data-founded-date="2022">
-<div class="panel panel-default">
-   <div class="panel-heading">
-    <h3 class="panel-title">
-   小绿人空间仪器 - Little Green Man Space Drone</h3>
-   </div>
+      </div>
 
-   <div class="panel-body">
-   <ul id="company-1487606587591" class="nav nav-tabs nav-justified">
-    <li class="active"><a href="#company-1487606587591-basics" data-toggle="tab"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
-    <li class=""><a href="#company-1487606587591-about" data-toggle="tab"><i class="fa fa-file-text" aria-hidden="true"></i></a></li>
-   </ul>
-   <div id="company-1487606587591-Content" class="tab-content">
-    <div class="tab-pane fade active in" id="company-1487606587591-basics">
+      <div class="panel-body">
+        <ul id="company-1487606587591" class="nav nav-tabs nav-justified">
+          <li class="active"><a href="#company-1487606587591-basics" data-toggle="tab"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+          <li class=""><a href="#company-1487606587591-about" data-toggle="tab"><i class="fa fa-file-text" aria-hidden="true"></i></a></li>
+        </ul>
+        <div id="company-1487606587591-Content" class="tab-content">
+          <div class="tab-pane active in" id="company-1487606587591-basics">
 
-      <ul class="list-group" style="font-size:90%;">
+            <ul class="list-group" style="font-size:90%;">
               <li class="list-group-item">
                 <h4 class="list-group-item-heading">成立年份</h4>
                 <p class="list-group-item-text">2022</p>
-             </li>
+              </li>
               <li class="list-group-item">
                 <h4 class="list-group-item-heading">公司基地</h4>
+                <p class="list-group-item-text"> 美国加利福尼亚州<br> 
+                </p>
+              </li>
+
+              <li class="list-group-item">
+                <h4 class="list-group-item-heading">公司类型</h4>
                 <p class="list-group-item-text">
-                  美国加利福尼亚州<br>
-                  
-               </p>
-            </li>
+                   微型太空飞行器、微型太空仪器 <br> 
+                </p>
+              </li>
 
-            <li class="list-group-item">
-             <h4 class="list-group-item-heading">公司类型</h4>
-             <p class="list-group-item-text">
                 
-                   微型太空飞行器、微型太空仪器 <br>
-                  
-               </p>
-            </li>
 
-            
+            </ul>
 
 
-             
-
-             
-
-           </ul>
-
-
-
-    </div>
-    <div class="tab-pane fade" id="company-1487606587591-about">
-      <p markdown="1"><p>公司以微型太空飞行器起家，高 Dv 小质量飞行器是他们的核心竞争力。后来借助这些飞行器，他们把业务扩展到了太空 3D 打印，小行星采矿和太空设施建设中。</p>
+          </div>
+          <div class="tab-pane" id="company-1487606587591-about">
+            <p markdown="1"><p>公司以微型太空飞行器起家，高 Dv 小质量飞行器是他们的核心竞争力。后来借助这些飞行器，他们把业务扩展到了太空 3D 打印，小行星采矿和太空设施建设中。</p>
 </p>
 
-   </div>
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
 
 
 
-
-</div>
-
-</div>
-</div>
-
-   
+  </div>
+  
+  
 
 
+  <div id="company-1487584228122-full" class="col-sm-4 grid-item" data-founded-date="2050 style="float:left;">
+     <a href="/companies.html"><span style="color:white;float:right;margin-top:-1.5em;" class="noselect"><i class="fa fa-close"></i></span></a>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+            <a href="#company-1487584228122-full" style="float:right;">
+           <span style="line-height: 30px;padding-left:0.5em;"><i class="fa fa-link"></i></span></a>
+
+        <h3 class="panel-title">太阳系运输集团（SSTG）</h3>
 
 
-<div class="mix col-sm-4 wow fadeIn" data-wow-delay="0.4s" data-founded-date="2050">
-<div class="panel panel-default">
-   <div class="panel-heading">
-    <h3 class="panel-title">
-   太阳系运输集团（SSTG）</h3>
-   </div>
+      </div>
 
-   <div class="panel-body">
-   <ul id="company-1487584228122" class="nav nav-tabs nav-justified">
-    <li class="active"><a href="#company-1487584228122-basics" data-toggle="tab"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
-    <li class=""><a href="#company-1487584228122-about" data-toggle="tab"><i class="fa fa-file-text" aria-hidden="true"></i></a></li>
-   </ul>
-   <div id="company-1487584228122-Content" class="tab-content">
-    <div class="tab-pane fade active in" id="company-1487584228122-basics">
+      <div class="panel-body">
+        <ul id="company-1487584228122" class="nav nav-tabs nav-justified">
+          <li class="active"><a href="#company-1487584228122-basics" data-toggle="tab"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+          <li class=""><a href="#company-1487584228122-about" data-toggle="tab"><i class="fa fa-file-text" aria-hidden="true"></i></a></li>
+        </ul>
+        <div id="company-1487584228122-Content" class="tab-content">
+          <div class="tab-pane active in" id="company-1487584228122-basics">
 
-      <ul class="list-group" style="font-size:90%;">
+            <ul class="list-group" style="font-size:90%;">
               <li class="list-group-item">
                 <h4 class="list-group-item-heading">成立年份</h4>
                 <p class="list-group-item-text">2050</p>
-             </li>
+              </li>
               <li class="list-group-item">
                 <h4 class="list-group-item-heading">公司基地</h4>
+                <p class="list-group-item-text"> 地球同步轨道SSTG总部<br> 
+                </p>
+              </li>
+
+              <li class="list-group-item">
+                <h4 class="list-group-item-heading">公司类型</h4>
                 <p class="list-group-item-text">
-                  地球同步轨道SSTG总部<br>
-                  
-               </p>
-            </li>
+                   交通运输 <br> 
+                </p>
+              </li>
 
-            <li class="list-group-item">
-             <h4 class="list-group-item-heading">公司类型</h4>
-             <p class="list-group-item-text">
-                
-                   交通运输 <br>
-                  
-               </p>
-            </li>
-
-            
+              
               <li class="list-group-item">
                 <h4 class="list-group-item-heading">网站</h4>
                 <p class="list-group-item-text" style="overflow:hidden;text-overflow: ellipsis;">
                   www.sstglimited.com
-               </p>
-             </li>
-             
+                </p>
+              </li>
+               
+              <li class="list-group-item">
+                <h4 class="list-group-item-heading">添加</h4>
+                <p class="list-group-item-text">Ingram Zhao</p>
+              </li>
+              
+
+            </ul>
 
 
-             
-             <li class="list-group-item">
-              <h4 class="list-group-item-heading">添加</h4>
-              <p class="list-group-item-text">英格拉姆·赵</p>
-           </li>
-           
-
-           </ul>
-
-
-
-    </div>
-    <div class="tab-pane fade" id="company-1487584228122-about">
-      <p markdown="1"><p>SSTG公司自从成立起便依托强大的技术支持，巨额的资金投入，源源不断的优秀人才输送以及高效的企业管理机制，迅速在太阳系的交通运输业称霸一方。其在太阳系的交通运输市场占有率已达40%。集团名下有20家运输公司和17家飞行器制造商。</p>
+          </div>
+          <div class="tab-pane" id="company-1487584228122-about">
+            <p markdown="1"><p>SSTG公司自从成立起便依托强大的技术支持，巨额的资金投入，源源不断的优秀人才输送以及高效的企业管理机制，迅速在太阳系的交通运输业称霸一方。其在太阳系的交通运输市场占有率已达40%。集团名下有20家运输公司和17家飞行器制造商。创始人为 Ingram Zhao.</p>
 </p>
 
-   </div>
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
 
 
 
-
-</div>
-
-</div>
-</div>
-
-   
+  </div>
+  
+  
 
 
+  <div id="company-1487542664861-full" class="col-sm-4 grid-item" data-founded-date="2084 style="float:left;">
+     <a href="/companies.html"><span style="color:white;float:right;margin-top:-1.5em;" class="noselect"><i class="fa fa-close"></i></span></a>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+            <a href="#company-1487542664861-full" style="float:right;">
+           <span style="line-height: 30px;padding-left:0.5em;"><i class="fa fa-link"></i></span></a>
+
+        <h3 class="panel-title">柳杉木业 － Cryptomeria Wood</h3>
 
 
-<div class="mix col-sm-4 wow fadeIn" data-wow-delay="0.4s" data-founded-date="2084">
-<div class="panel panel-default">
-   <div class="panel-heading">
-    <h3 class="panel-title">
-   柳杉木业 － Cryptomeria Wood</h3>
-   </div>
+      </div>
 
-   <div class="panel-body">
-   <ul id="company-1487542664861" class="nav nav-tabs nav-justified">
-    <li class="active"><a href="#company-1487542664861-basics" data-toggle="tab"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
-    <li class=""><a href="#company-1487542664861-about" data-toggle="tab"><i class="fa fa-file-text" aria-hidden="true"></i></a></li>
-   </ul>
-   <div id="company-1487542664861-Content" class="tab-content">
-    <div class="tab-pane fade active in" id="company-1487542664861-basics">
+      <div class="panel-body">
+        <ul id="company-1487542664861" class="nav nav-tabs nav-justified">
+          <li class="active"><a href="#company-1487542664861-basics" data-toggle="tab"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+          <li class=""><a href="#company-1487542664861-about" data-toggle="tab"><i class="fa fa-file-text" aria-hidden="true"></i></a></li>
+        </ul>
+        <div id="company-1487542664861-Content" class="tab-content">
+          <div class="tab-pane active in" id="company-1487542664861-basics">
 
-      <ul class="list-group" style="font-size:90%;">
+            <ul class="list-group" style="font-size:90%;">
               <li class="list-group-item">
                 <h4 class="list-group-item-heading">成立年份</h4>
                 <p class="list-group-item-text">2084</p>
-             </li>
+              </li>
               <li class="list-group-item">
                 <h4 class="list-group-item-heading">公司基地</h4>
+                <p class="list-group-item-text"> 芬兰赫尔辛基<br> 
+                </p>
+              </li>
+
+              <li class="list-group-item">
+                <h4 class="list-group-item-heading">公司类型</h4>
                 <p class="list-group-item-text">
-                  芬兰赫尔辛基<br>
-                  
-               </p>
-            </li>
+                   太空木制品 <br> 
+                </p>
+              </li>
 
-            <li class="list-group-item">
-             <h4 class="list-group-item-heading">公司类型</h4>
-             <p class="list-group-item-text">
                 
-                   太空木制品 <br>
-                  
-               </p>
-            </li>
 
-            
+            </ul>
 
 
-             
-
-             
-
-           </ul>
-
-
-
-    </div>
-    <div class="tab-pane fade" id="company-1487542664861-about">
-      <p markdown="1"><p>表面从事木制品行业，木制奢侈品是该公司最大的正当收入来源。然而 2108 年爆出的“柳杉木业”走私案揭露了这家公司暗地里的走私链条，柳杉木业也遭到星际移民局的巨额罚款。</p>
+          </div>
+          <div class="tab-pane" id="company-1487542664861-about">
+            <p markdown="1"><p>表面从事木制品行业，木制奢侈品是该公司最大的正当收入来源。然而 2108 年爆出的“柳杉木业”走私案揭露了这家公司暗地里的走私链条，柳杉木业也遭到星际移民局的巨额罚款。</p>
 </p>
 
-   </div>
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
 
 
 
-
-</div>
-
-</div>
-</div>
-
-   
+  </div>
+  
+  
 
 
+  <div id="company-1487526020417-full" class="col-sm-4 grid-item" data-founded-date="2057 style="float:left;">
+     <a href="/companies.html"><span style="color:white;float:right;margin-top:-1.5em;" class="noselect"><i class="fa fa-close"></i></span></a>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+            <a href="#company-1487526020417-full" style="float:right;">
+           <span style="line-height: 30px;padding-left:0.5em;"><i class="fa fa-link"></i></span></a>
+
+        <h3 class="panel-title">艾娃火星 - Ava Mars</h3>
 
 
-<div class="mix col-sm-4 wow fadeIn" data-wow-delay="0.4s" data-founded-date="2057">
-<div class="panel panel-default">
-   <div class="panel-heading">
-    <h3 class="panel-title">
-   艾娃火星 - Ava Mars</h3>
-   </div>
+      </div>
 
-   <div class="panel-body">
-   <ul id="company-1487526020417" class="nav nav-tabs nav-justified">
-    <li class="active"><a href="#company-1487526020417-basics" data-toggle="tab"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
-    <li class=""><a href="#company-1487526020417-about" data-toggle="tab"><i class="fa fa-file-text" aria-hidden="true"></i></a></li>
-   </ul>
-   <div id="company-1487526020417-Content" class="tab-content">
-    <div class="tab-pane fade active in" id="company-1487526020417-basics">
+      <div class="panel-body">
+        <ul id="company-1487526020417" class="nav nav-tabs nav-justified">
+          <li class="active"><a href="#company-1487526020417-basics" data-toggle="tab"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+          <li class=""><a href="#company-1487526020417-about" data-toggle="tab"><i class="fa fa-file-text" aria-hidden="true"></i></a></li>
+        </ul>
+        <div id="company-1487526020417-Content" class="tab-content">
+          <div class="tab-pane active in" id="company-1487526020417-basics">
 
-      <ul class="list-group" style="font-size:90%;">
+            <ul class="list-group" style="font-size:90%;">
               <li class="list-group-item">
                 <h4 class="list-group-item-heading">成立年份</h4>
                 <p class="list-group-item-text">2057</p>
-             </li>
+              </li>
               <li class="list-group-item">
                 <h4 class="list-group-item-heading">公司基地</h4>
+                <p class="list-group-item-text"> 沙特阿拉伯<br> 
+                </p>
+              </li>
+
+              <li class="list-group-item">
+                <h4 class="list-group-item-heading">公司类型</h4>
                 <p class="list-group-item-text">
-                  沙特阿拉伯<br>
-                  
-               </p>
-            </li>
+                   太空矿业 <br> 
+                </p>
+              </li>
 
-            <li class="list-group-item">
-             <h4 class="list-group-item-heading">公司类型</h4>
-             <p class="list-group-item-text">
                 
-                   太空矿业 <br>
-                  
-               </p>
-            </li>
 
-            
+            </ul>
 
 
-             
-
-             
-
-           </ul>
-
-
-
-    </div>
-    <div class="tab-pane fade" id="company-1487526020417-about">
-      <p markdown="1"><p>艾娃火星公司是一家火星矿业公司。其前身天穹资源（Arc Resources Inc.）原本从事小行星采矿行业，在激烈的市场竞争中，当时的公司总裁 Ava 说服大家将重心从小行星采矿转移到火星采矿业，产业主要为火星表面建设服务。此后公司经历了高速发展时期，在并购了几家小型的火星矿业公司之后，改名为艾娃火星（Ava Mars），用来纪念英年早逝的 Ava。</p>
+          </div>
+          <div class="tab-pane" id="company-1487526020417-about">
+            <p markdown="1"><p>艾娃火星公司是一家火星矿业公司。其前身天穹资源（Arc Resources Inc.）原本从事小行星采矿行业，在激烈的市场竞争中，当时的公司总裁 Ava 说服大家将重心从小行星采矿转移到火星采矿业，产业主要为火星表面建设服务。此后公司经历了高速发展时期，在并购了几家小型的火星矿业公司之后，改名为艾娃火星（Ava Mars），用来纪念英年早逝的 Ava。</p>
 </p>
 
-   </div>
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
 
 
 
-
-</div>
-
-</div>
-</div>
-
-   
+  </div>
+  
+  
 
 
+  <div id="company-1487137522588-full" class="col-sm-4 grid-item" data-founded-date="2036 style="float:left;">
+     <a href="/companies.html"><span style="color:white;float:right;margin-top:-1.5em;" class="noselect"><i class="fa fa-close"></i></span></a>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+            <a href="#company-1487137522588-full" style="float:right;">
+           <span style="line-height: 30px;padding-left:0.5em;"><i class="fa fa-link"></i></span></a>
+
+        <h3 class="panel-title">柏林先锋</h3>
 
 
-<div class="mix col-sm-4 wow fadeIn" data-wow-delay="0.4s" data-founded-date="2036">
-<div class="panel panel-default">
-   <div class="panel-heading">
-    <h3 class="panel-title">
-   柏林先锋</h3>
-   </div>
+      </div>
 
-   <div class="panel-body">
-   <ul id="company-1487137522588" class="nav nav-tabs nav-justified">
-    <li class="active"><a href="#company-1487137522588-basics" data-toggle="tab"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
-    <li class=""><a href="#company-1487137522588-about" data-toggle="tab"><i class="fa fa-file-text" aria-hidden="true"></i></a></li>
-   </ul>
-   <div id="company-1487137522588-Content" class="tab-content">
-    <div class="tab-pane fade active in" id="company-1487137522588-basics">
+      <div class="panel-body">
+        <ul id="company-1487137522588" class="nav nav-tabs nav-justified">
+          <li class="active"><a href="#company-1487137522588-basics" data-toggle="tab"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+          <li class=""><a href="#company-1487137522588-about" data-toggle="tab"><i class="fa fa-file-text" aria-hidden="true"></i></a></li>
+        </ul>
+        <div id="company-1487137522588-Content" class="tab-content">
+          <div class="tab-pane active in" id="company-1487137522588-basics">
 
-      <ul class="list-group" style="font-size:90%;">
+            <ul class="list-group" style="font-size:90%;">
               <li class="list-group-item">
                 <h4 class="list-group-item-heading">成立年份</h4>
                 <p class="list-group-item-text">2036</p>
-             </li>
+              </li>
               <li class="list-group-item">
                 <h4 class="list-group-item-heading">公司基地</h4>
+                <p class="list-group-item-text"> 火星天狼城<br> 
+                </p>
+              </li>
+
+              <li class="list-group-item">
+                <h4 class="list-group-item-heading">公司类型</h4>
                 <p class="list-group-item-text">
-                  火星天狼城<br>
-                  
-               </p>
-            </li>
+                   生物科技 <br> 
+                </p>
+              </li>
 
-            <li class="list-group-item">
-             <h4 class="list-group-item-heading">公司类型</h4>
-             <p class="list-group-item-text">
                 
-                   生物科技 <br>
-                  
-               </p>
-            </li>
 
-            
+            </ul>
 
 
-             
-
-             
-
-           </ul>
-
-
-
-    </div>
-    <div class="tab-pane fade" id="company-1487137522588-about">
-      <p markdown="1"><p>柏林先锋，Berlin Pioneer，是一家专注与火星地球运输的生物审核的公司。这家公司在总部在柏林，但是在世界各地有多个办公室和研发中心。柏林先锋的创始人 Stefan Cline 在德国慕尼黑大学读书期间，设计了一套判断新物种对于现有生态影响的系统方案。之后火星移民的兴起，Stefan Cline 开始设计火星上生物基因改造的安全性问题。他提议在所有专门为火星设计的基因修改中，添加可以产生特定蛋白的基因，这样方便区分和检测这些火星专有生物。之后他成立了 Cline Genetics，这家公司后来更名 Berlin Pioneer，在之后的火星移民浪潮中，发展成为 22 世纪世界上最大的生</p>
+          </div>
+          <div class="tab-pane" id="company-1487137522588-about">
+            <p markdown="1"><p>柏林先锋，Berlin Pioneer，是一家专注与火星地球运输的生物审核的公司。这家公司在总部在柏林，但是在世界各地有多个办公室和研发中心。柏林先锋的创始人 Stefan Cline 在德国慕尼黑大学读书期间，设计了一套判断新物种对于现有生态影响的系统方案。之后火星移民的兴起，Stefan Cline 开始设计火星上生物基因改造的安全性问题。他提议在所有专门为火星设计的基因修改中，添加可以产生特定蛋白的基因，这样方便区分和检测这些火星专有生物。之后他成立了 Cline Genetics，这家公司后来更名 Berlin Pioneer，在之后的火星移民浪潮中，发展成为 22 世纪世界上最大的生</p>
 </p>
 
-   </div>
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
 
 
 
-
-</div>
-
-</div>
-</div>
-
-</div>
+  </div>
+  
+<!-- </div> -->
 
 
            </div>
@@ -729,11 +763,13 @@
     <!-- Javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+
+
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
     <script>window.jQuery || document.write('<script src="assets/js/jquery-1.11.0.min.js"><\/script>')</script>
 
-    <script src="assets/js/mixitup.min.js"></script>
+    <!-- <script src="assets/js/mixitup.min.js"></script>
 <script>
             var containerEl = document.querySelector('.company-container');
 
@@ -747,13 +783,22 @@
             });
 
 </script>
-
+ -->
     <script src="assets/js/bootstrap-select.min.js"></script>
 
     <script src="assets/js/validator.min.js"></script>
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/masonry.pkgd.min.js"></script>
+    <script>
+    $('.grid').masonry({
+  // set itemSelector so .grid-sizer is not used in layout
+  itemSelector: '.grid-item'
+   })
+    </script>
+
+
 
 
     </body>

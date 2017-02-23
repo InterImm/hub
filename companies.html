@@ -4,6 +4,25 @@ title: 未来星际企业列表 | 星际移民中心
 <!DOCTYPE html>
 <html lang="en">
 {% include landing/landing-head.html %}
+
+<style>
+div:target {
+   height: 100%;
+   width: 100%;
+   /*position: fixed; */
+   left: 0;
+   top: 60px;
+   padding-top: 2em;
+   background-color: rgb(0,0,0); /* Black fallback color */
+   background-color: rgba(0,0,0, 0.9); /* Black w/opacity */
+   overflow-x: hidden; /* Disable horizontal scroll */
+   transition: 0.1s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+   z-index: 8888;
+   }​
+   div::before {
+      content: "aaaa"
+   }
+</style>
 <body>
 
 
@@ -11,10 +30,11 @@ title: 未来星际企业列表 | 星际移民中心
 {% include header.html %}
 
 
+
     <section id="list" class="pad-xl">
       <div class="container">
         <div class="row">
-          <div class="col-sm-8 col-sm-offset-2 text-center margin-30 wow fadeIn" data-wow-delay="0.1s">
+          <div class="col-sm-8 col-sm-offset-2 text-center margin-30">
             <h2>星际企业列表</h2>
 
           </div>
@@ -23,10 +43,10 @@ title: 未来星际企业列表 | 星际移民中心
 
 
 
-        <div class="wow fadeInUp" data-wow-delay="0.3s">
-           <div class="row">
+        <div>
+           <div class="grid row">
 
-             {% include list.html %}
+             {% include list-plain.html %}
 
            </div>
         </div>
@@ -53,17 +73,28 @@ title: 未来星际企业列表 | 星际移民中心
     <!-- Javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+
+
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
     <script>window.jQuery || document.write('<script src="assets/js/jquery-1.11.0.min.js"><\/script>')</script>
 
-    {% include mixitupscript.html %}
+    <!-- {% include mixitupscript.html %} -->
     <script src="assets/js/bootstrap-select.min.js"></script>
 
     <script src="assets/js/validator.min.js"></script>
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/masonry.pkgd.min.js"></script>
+    <script>
+    $('.grid').masonry({
+  // set itemSelector so .grid-sizer is not used in layout
+  itemSelector: '.grid-item'
+   })
+    </script>
+
+
 
 
     </body>
