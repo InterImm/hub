@@ -47,18 +47,62 @@ div:target {
    height: 100%;
    width: 100%;
    /*position: fixed; */
-   left: 0;
-   top: 60px;
-   padding-top: 2em;
+   left: 0 !important;
+   top: 2em !important;
+   margin-bottom: 4em !important;
+   padding-top: 5em;
    background-color: rgb(0,0,0); /* Black fallback color */
-   background-color: rgba(0,0,0, 0.9); /* Black w/opacity */
+   background-color: rgba(0,0,0, 0.4); /* Black w/opacity */
    overflow-x: hidden; /* Disable horizontal scroll */
-   transition: 0.1s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+   /* transition: 0.1s; */ /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
    z-index: 8888;
+   float: left !important;
    }​
-   div::before {
-      content: "aaaa"
+
+   html,body {
+   	height:100%;
    }
+
+   .row-flex, .row-flex > div[class*='col-'] {
+       display: -webkit-box;
+       display: -moz-box;
+       display: -ms-flexbox;
+       display: -webkit-flex;
+       display: flex;
+       flex:1 1 auto;
+   }
+
+   .row-flex-wrap {
+   	-webkit-flex-flow: row wrap;
+       align-content: flex-start;
+       flex:0;
+   }
+
+   .row-flex > div[class*='col-'], .container-flex > div[class*='col-'] {
+   	 margin:-.2px; /* hack adjust for wrapping */
+   }
+
+   .container-flex > div[class*='col-'] div,.row-flex > div[class*='col-'] div {
+   	width:100%;
+   }
+
+
+   .flex-col {
+       display: flex;
+       display: -webkit-flex;
+       flex: 1 100%;
+   	flex-flow: column nowrap;
+   }
+
+   .flex-grow {
+   	display: flex;
+       -webkit-flex: 2;
+       flex: 2;
+   }
+
+
+}
+
 </style>
 <body>
 
@@ -100,8 +144,8 @@ div:target {
 
     <section id="list" class="pad-xl">
       <div class="container">
-        <div class="row">
-          <div class="col-sm-8 col-sm-offset-2 text-center margin-30">
+        <div class="row company-list-mansonry">
+          <div class="col-sm-12 col-sm-offset-0 text-center margin-0">
             <h2>星际企业列表</h2>
 
           </div>
@@ -110,8 +154,8 @@ div:target {
 
 
 
-        <div>
-           <div class="grid row">
+        <!-- <div> -->
+           <div class="row row-flex row-flex-wrap">
 
              <!-- <div class="company-container"> -->
   
@@ -119,8 +163,8 @@ div:target {
   
 
 
-  <div id="virgin-galactic-full" class="col-sm-4 grid-item" data-founded-date="2004 style="float:left;">
-     <a href="/companies.html"><span style="color:white;float:right;margin-top:-1.5em;" class="noselect"><i class="fa fa-close"></i></span></a>
+  <div id="virgin-galactic-full" class="col-sm-4 grid-item col-md-4" data-founded-date="2004">
+     <!-- <a href="/companies.html"><span style="color:white;float:right;margin-top:-1.5em;" class="noselect"><i class="fa fa-close"></i></span></a> -->
     <div class="panel panel-default">
       <div class="panel-heading">
             <a href="#virgin-galactic-full" style="float:right;">
@@ -189,8 +233,8 @@ div:target {
   
 
 
-  <div id="spacex-full" class="col-sm-4 grid-item" data-founded-date="2002 style="float:left;">
-     <a href="/companies.html"><span style="color:white;float:right;margin-top:-1.5em;" class="noselect"><i class="fa fa-close"></i></span></a>
+  <div id="spacex-full" class="col-sm-4 grid-item col-md-4" data-founded-date="2002">
+     <!-- <a href="/companies.html"><span style="color:white;float:right;margin-top:-1.5em;" class="noselect"><i class="fa fa-close"></i></span></a> -->
     <div class="panel panel-default">
       <div class="panel-heading">
             <a href="#spacex-full" style="float:right;">
@@ -261,8 +305,8 @@ div:target {
   
 
 
-  <div id="company-1487691821639-full" class="col-sm-4 grid-item" data-founded-date="2062 style="float:left;">
-     <a href="/companies.html"><span style="color:white;float:right;margin-top:-1.5em;" class="noselect"><i class="fa fa-close"></i></span></a>
+  <div id="company-1487691821639-full" class="col-sm-4 grid-item col-md-4" data-founded-date="2062">
+     <!-- <a href="/companies.html"><span style="color:white;float:right;margin-top:-1.5em;" class="noselect"><i class="fa fa-close"></i></span></a> -->
     <div class="panel panel-default">
       <div class="panel-heading">
             <a href="#company-1487691821639-full" style="float:right;">
@@ -329,8 +373,8 @@ div:target {
   
 
 
-  <div id="company-1487606741847-full" class="col-sm-4 grid-item" data-founded-date="2022 style="float:left;">
-     <a href="/companies.html"><span style="color:white;float:right;margin-top:-1.5em;" class="noselect"><i class="fa fa-close"></i></span></a>
+  <div id="company-1487606741847-full" class="col-sm-4 grid-item col-md-4" data-founded-date="2022">
+     <!-- <a href="/companies.html"><span style="color:white;float:right;margin-top:-1.5em;" class="noselect"><i class="fa fa-close"></i></span></a> -->
     <div class="panel panel-default">
       <div class="panel-heading">
             <a href="#company-1487606741847-full" style="float:right;">
@@ -392,8 +436,8 @@ div:target {
   
 
 
-  <div id="company-1487606587591-full" class="col-sm-4 grid-item" data-founded-date="2022 style="float:left;">
-     <a href="/companies.html"><span style="color:white;float:right;margin-top:-1.5em;" class="noselect"><i class="fa fa-close"></i></span></a>
+  <div id="company-1487606587591-full" class="col-sm-4 grid-item col-md-4" data-founded-date="2022">
+     <!-- <a href="/companies.html"><span style="color:white;float:right;margin-top:-1.5em;" class="noselect"><i class="fa fa-close"></i></span></a> -->
     <div class="panel panel-default">
       <div class="panel-heading">
             <a href="#company-1487606587591-full" style="float:right;">
@@ -455,8 +499,8 @@ div:target {
   
 
 
-  <div id="company-1487584228122-full" class="col-sm-4 grid-item" data-founded-date="2050 style="float:left;">
-     <a href="/companies.html"><span style="color:white;float:right;margin-top:-1.5em;" class="noselect"><i class="fa fa-close"></i></span></a>
+  <div id="company-1487584228122-full" class="col-sm-4 grid-item col-md-4" data-founded-date="2050">
+     <!-- <a href="/companies.html"><span style="color:white;float:right;margin-top:-1.5em;" class="noselect"><i class="fa fa-close"></i></span></a> -->
     <div class="panel panel-default">
       <div class="panel-heading">
             <a href="#company-1487584228122-full" style="float:right;">
@@ -530,8 +574,8 @@ div:target {
   
 
 
-  <div id="company-1487542664861-full" class="col-sm-4 grid-item" data-founded-date="2084 style="float:left;">
-     <a href="/companies.html"><span style="color:white;float:right;margin-top:-1.5em;" class="noselect"><i class="fa fa-close"></i></span></a>
+  <div id="company-1487542664861-full" class="col-sm-4 grid-item col-md-4" data-founded-date="2084">
+     <!-- <a href="/companies.html"><span style="color:white;float:right;margin-top:-1.5em;" class="noselect"><i class="fa fa-close"></i></span></a> -->
     <div class="panel panel-default">
       <div class="panel-heading">
             <a href="#company-1487542664861-full" style="float:right;">
@@ -593,8 +637,8 @@ div:target {
   
 
 
-  <div id="company-1487526020417-full" class="col-sm-4 grid-item" data-founded-date="2057 style="float:left;">
-     <a href="/companies.html"><span style="color:white;float:right;margin-top:-1.5em;" class="noselect"><i class="fa fa-close"></i></span></a>
+  <div id="company-1487526020417-full" class="col-sm-4 grid-item col-md-4" data-founded-date="2057">
+     <!-- <a href="/companies.html"><span style="color:white;float:right;margin-top:-1.5em;" class="noselect"><i class="fa fa-close"></i></span></a> -->
     <div class="panel panel-default">
       <div class="panel-heading">
             <a href="#company-1487526020417-full" style="float:right;">
@@ -656,8 +700,8 @@ div:target {
   
 
 
-  <div id="company-1487137522588-full" class="col-sm-4 grid-item" data-founded-date="2036 style="float:left;">
-     <a href="/companies.html"><span style="color:white;float:right;margin-top:-1.5em;" class="noselect"><i class="fa fa-close"></i></span></a>
+  <div id="company-1487137522588-full" class="col-sm-4 grid-item col-md-4" data-founded-date="2036">
+     <!-- <a href="/companies.html"><span style="color:white;float:right;margin-top:-1.5em;" class="noselect"><i class="fa fa-close"></i></span></a> -->
     <div class="panel panel-default">
       <div class="panel-heading">
             <a href="#company-1487137522588-full" style="float:right;">
@@ -720,7 +764,7 @@ div:target {
 
 
            </div>
-        </div>
+        <!-- </div> -->
       </div>
     </section>
 
@@ -794,7 +838,11 @@ div:target {
     <script>
     $('.grid').masonry({
   // set itemSelector so .grid-sizer is not used in layout
+  // columnWidth: '.grid-item',
+  // columnWidth: '.col-sm-4',
   itemSelector: '.grid-item'
+  // resize: false
+  // isResizable: false,
    })
     </script>
 

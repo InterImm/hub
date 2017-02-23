@@ -4,8 +4,8 @@
   {% assign companyitem = company[1] %}
 
 
-  <div id="{{ company[0] | slugify }}-full" class="col-sm-4 grid-item" data-founded-date="{{ companyitem.founded }} style="float:left;">
-     <a href="/companies.html"><span style="color:white;float:right;margin-top:-1.5em;" class="noselect"><i class="fa fa-close"></i></span></a>
+  <div id="{{ company[0] | slugify }}-full" class="col-sm-4 grid-item col-md-4" data-founded-date="{{ companyitem.founded }}">
+     <!-- <a href="/companies.html"><span style="color:white;float:right;margin-top:-1.5em;" class="noselect"><i class="fa fa-close"></i></span></a> -->
     <div class="panel panel-default">
       <div class="panel-heading">
             <a href="#{{ company[0] | slugify }}-full" style="float:right;">
