@@ -1,0 +1,44 @@
+name: CI Add New Company
+
+on:
+  push:
+    branches:
+      - gh-pages
+  schedule:
+    - cron:  '0 2/2 * * *'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout current repo
+        uses: actions/checkout@v2
+      - name: Get current directory and files
+        run: |
+          pwd
+          ls
+      - uses: actions/setup-python@v1
+        with:
+          python-version: '3.7' # Version range or exact version of a Python version to use, using SemVer's version range syntax
+          architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
+      - name: Install Python Requirements
+        run: |
+          python --version
+          pip install -r assets/scripts/requirements.txt
+      - name: Download Records
+        run: |
+          python assets/scripts/add_new_company.py
+          ls _data/companies/
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git pull
+          git status
+          git add .
+          git commit -F _data/companies/ || echo "Nothing to update"
+          git status
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
