@@ -48,6 +48,7 @@ jobs:
           title: ${{ env.COMPANY_NAME }}
           body: ${{ env.COMPANY_BODY }}
           token: ${{ secrets.GITHUB_TOKEN }}
+          branch-suffix: short-commit-hash
       - name: Check PR outputs
         run: |
           echo "Pull Request Number - ${{ env.PULL_REQUEST_NUMBER }}"
