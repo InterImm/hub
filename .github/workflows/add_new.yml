@@ -36,7 +36,8 @@ jobs:
           git pull
           git status
           git add .
-          git commit -F _data/companies/ || echo "Nothing to update"
+          commit_message=$(git diff --name-only --staged | tail -1)
+          git commit -F $commit_message || echo "Nothing to update"
           git status
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v2
