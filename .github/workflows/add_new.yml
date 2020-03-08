@@ -29,7 +29,7 @@ jobs:
           pip install -r assets/scripts/requirements.txt
       - name: Download Records
         run: |
-          python assets/scripts/add_new_company.py
+          python assets/scripts/add_new_company.py --token ${{ secrets.TYPEFORM_TOKEN }}
           ls _data/companies/
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
