@@ -11,6 +11,8 @@ from ruamel.yaml.representer import RoundTripRepresenter
 logging.basicConfig()
 logger = logging.getLogger("interimm.hub.add")
 
+history_file = "assets/scripts/add_new_company.history"
+
 
 # Add representer to ruamel.yaml for OrderedDict
 class MyRepresenter(RoundTripRepresenter):
@@ -99,7 +101,7 @@ class Company():
                     fp
                 )
             logger.info(f"Added a new company {self.data.get('_id')}")
-            res = {"status": "added"}
+            res = {"status": "added", "_id": self.data.get('_id')}
 
         return res
 
@@ -126,11 +128,20 @@ def main():
 
     logger.info(tf_json.get("total_items"))
 
+    with open(history_file, "r") as fp:
+        pr_history = fp.readlines()
+    pr_history = [i.strip() for i in pr_history]
+
+    logger.info(f"PR History: {pr_history}")
+
     for comp in tf_json.get("items"):
         comp_obj = Company(typeform_item=comp)
-        comp_save = comp_obj.save()
-        if comp_save.get("status") == "added":
-            break
+        if comp_obj.data.get("_id") not in pr_history:
+            comp_save = comp_obj.save()
+            if comp_save.get("status") == "added":
+                with open(history_file, "a") as fp:
+                    fp.write(f"{comp_save.get('_id')}\n")
+                break
 
 
 if __name__ == "__main__":

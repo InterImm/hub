@@ -35,6 +35,9 @@ jobs:
           git config --local user.name "GitHub Action"
           git pull
           git status
+          git add assets/scripts/add_new_company.history
+          git commit -m "update pr history"
+          git push
           git add .
           commit_message=$(git diff --name-only --staged | tail -1)
           echo "::set-env name=COMPANY_NAME::$(cat $commit_message | grep name)"
