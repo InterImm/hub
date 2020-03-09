@@ -36,7 +36,7 @@ jobs:
           git pull
           git status
           git add assets/scripts/add_new_company.history
-          git commit -m "update pr history"
+          git commit -m "update pr history" || echo "Nothing to update"
           git push
           git add .
           commit_message=$(git diff --name-only --staged | tail -1)
