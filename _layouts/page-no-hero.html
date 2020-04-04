@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {%- include head.html -%}
+
+  <body>
+
+    {%- include header.html -%}
+
+
+    <main class="main--content" aria-label="Content">
+    <div class="columns">
+      <div class="column is-12">
+        <div class="content is-medium">
+          <article class="post">
+
+
+            <div class="post-content">
+              {{ content }}
+            </div>
+
+          </article>
+
+
+          {% include utterances-comments.html %}
+
+        </div>
+      </div>
+    </div>
+    </main>
+
+    {%- include footer.html -%}
+
+  </body>
+
+</html>
