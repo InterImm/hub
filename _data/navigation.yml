@@ -1,0 +1,19 @@
+# Site navigation links
+main:
+
+- title: 企业列表
+  url: /companies/
+  excerpt: "星际企业列表"
+- title: "添加企业"
+  url: /add/
+  excerpt: "添加星际企业"
+- title: "星际移民中心"
+  url: https://interimm.org
+  excerpt: "星际移民中心"
+  subnav:
+    - title: "星际移民之书"
+      url: https://book.interimm.org
+      excerpt: "星际移民的历史"
+- title: 关于
+  url: /about/
+  excerpt: "关于未来星际企业"

@@ -1,0 +1,19 @@
+---
+---
+[
+  {% for post in site.companies %}
+    {
+      "type"         : "company",
+      "id"           : "{{ post._id }}",
+      "name"         : {% if post.name[0] %}{{ post.name[0] | jsonify  }}{% else %}{{ post.name | jsonify  }}{% endif %},
+      "author"       : {% if post.author[0] %}{{ post.author[0] | jsonify  }}{% else %}{{ post.author | jsonify  }}{% endif %},
+      "base"         : {% if post.base[0] %}{{ post.base[0] | jsonify  }}{% else %}{{ post.base | jsonify  }}{% endif %},
+      "url"          : "{{ site.baseurl }}{{ post.url }}",
+      "category"     : {{ post.category | jsonify  }},
+      "date"         : {{ post.date | jsonify  }},
+      "about"        : "{{ post.about | replace: '$', ' ' | replace: '\', ' ' | replace: '_', ' ' | strip_html | strip_newlines | escape }}",
+      "founded"      : {{ post.founded | jsonify }}
+    }
+  {% unless forloop.last %},{% endunless %}
+  {% endfor %}
+]

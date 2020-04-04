@@ -1,0 +1,189 @@
+---
+title: 未来星际企业 | 星际移民中心
+---
+<!DOCTYPE html>
+<html lang="en">
+
+{% include landing/landing-head.html %}
+
+<body>
+
+
+
+   {% include landing/landing-nav.html %}
+
+
+    {% include landing/landing-splash.html %}
+
+<div class="wrapper container" id="stars-bg">
+   <canvas id="stars"></canvas>
+   <div id="dunes"></div>
+    <section id="list" class="pad-xl" style="background-image: assets/explorer.svg;>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8 col-sm-offset-2 text-center margin-30 wow fadeIn" data-wow-delay="0.6s">
+            <h2 id="landing--title" class="landing--section--title">精选星际企业</h2>
+            <a href="#add" class="scroll"><span class="label label-default" style="font-size:110%;">创建自己的星际企业</span></a>
+            <a href="{{ "/companies.html" | prepend: site.baseurl }}"><span class="label label-default" style="font-size:110%;background-color:#fdf8b5;">全部星际企业列表</span></a>
+          </div>
+        </div>
+
+
+
+
+        <div class="wow fadeInUp" data-wow-delay="1s">
+           <div class="wrapper container">
+             <div class="row">
+                <div class="company-container">
+
+                   {% include list-showcase-selected.html %}
+                   {% include list-showcase.html %}
+               </div>
+
+
+            </div>
+            </div>
+        </div>
+      </div>
+    </section>
+</div>
+
+<!-- Add your company -->
+<!-- <hr class="line black"> -->
+
+    <section id="add" class="pad-lg light-gray-bg">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-10 col-sm-offset-1 text-center" style="color:#f14444;">
+            <!-- <i class="fa fa-puzzle-piece fa-3x margin-40 fa-section-title"></i> -->
+            <h2 class="black">添加你的星际企业</h2>
+
+
+            <div class="panel panel-default">
+               <div class="alert alert-info alert-dismissable">
+                  <p class="black">
+               It's great to fantasize, but it's another thing when you have to put it together, when the nuts have to fit the bolts.
+               <br>
+               &mdash;&mdash; Dr. Edward Weiler, Nasa Space Science Administrator
+                 </p>
+               </div>
+              <div class="panel-body">
+               <p class="black">
+                  <ol class="list-group black" style="border-bottom: 1px solid #e6e9ed;">
+               <li class="list-group-item"><a href="http://book.interimm.org/" target="_blank"><span class="label label-default">《星际移民之书》</span></a>中出现的企业列表：<a href="http://book.interimm.org/profession/companies.html" target="_blank"><span class="label label-default">公司列表</span></a>
+
+               </li>
+                <li class="list-group-item">必须是太空文明相关的企业，例如火星上的生物工程企业；
+                  <a href="#collapseListGroup0" class="collapsed" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseListGroup0"><i class="glyphicon glyphicon-th-list"></i>点击获得行业灵感</a>
+                  <a href="#collapseListGroup2" class="collapsed" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseListGroup2"><i class="glyphicon glyphicon-th-list"></i>点击查看火星基础建设</a>
+
+                        <div class="panel-collapse collapse alert alert-info info-dismissable" role="tabpanel" id="collapseListGroup0" aria-labelledby="collapseListGroupHeading0" aria-expanded="false" style="height: 0px;padding:1em;margin-top:1em;">
+                                            <iframe id="embed_dom" name="embed_dom" frameborder="0" style="border:1px solid #000;display:block;width:100%; height:500px;" src="https://www.processon.com/embed/544d18d00cf2fa24a909aa74"></iframe>
+                                            <a href="{{ "/assets/images/space-professions.png" | prepend: site.baseurl }}" target="_blank" style="margin-top:1em;"><span class="label label-default">下载图片</span></a>
+                       </div>
+
+                       <div class="panel-collapse collapse alert alert-info info-dismissable" role="tabpanel" id="collapseListGroup2" aria-labelledby="collapseListGroupHeading2" aria-expanded="false" style="height: 0px;padding:1em;margin-top:1em;">
+                                           <img src="{{ "/assets/images/MarsDevelopment-Extended.svg" | prepend: site.baseurl }}" class="img-responsive" alt="火星基础建设">
+                      </div>
+
+                </li>
+                <li class="list-group-item">必须构建出完整的历史，包括创立时间、总部、业务内容甚至网站等等。</li>
+                <li class="list-group-item">企业创立时间的选择可以参考我们的未来历史：<a href="http://book.interimm.org/" target="_blank"><span class="label label-default">《星际移民之书》</span></a>或者<a href="http://timeline.interimm.org/" target="_blank"><span class="label label-default">星际移民时间线</span></a>；<a href="#collapseListGroup1" class="collapsed" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseListGroup1"><i class="glyphicon glyphicon-th-list"></i>点击查看重要历史事件</a>
+
+                      <div class="panel-collapse collapse alert alert-info info-dismissable" role="tabpanel" id="collapseListGroup1" aria-labelledby="collapseListGroupHeading1" aria-expanded="false" style="height: 0px;padding:1em;margin-top:1em;">
+
+                        {% include selected-events-interimm.html %}
+
+            </div>
+
+                </li>
+                 <li class="list-group-item">企业创立地点可以选择太阳系内任意，但是需要与历史进程吻合。火星地点选择可以参考我们的<a href="http://interimm.org/toolbox.html#mars-cities" target="_blank"><span class="label label-default">火星城市地图</span></a>。</li>
+              </li>
+
+              <li class="list-group-item">其他可能用到的工具：<a href="http://interimm.org/toolbox.html" target="_blank"><span class="label label-default">太阳系常用数据</span></a>
+                <a href="http://interimm.org/toolbox.html#mars-p" target="_blank"><span class="label label-default">火星常用数据</span></a>
+
+                <a href="http://interimm.org/mars-clock/index.html" target="_blank"><span class="label label-default">火星地球时间在线转换</span></a>
+
+
+
+                <a href="http://interimm.org/mars-clock/cal-doc.html" target="_blank"><span class="label label-default">火星历法说明</span></a>
+                <a href="http://interimm.org/mars-clock/timing-doc.html" target="_blank"><span class="label label-default">火星时区说明</span></a>
+
+                <a href="http://interimm.org/mars-clock/timezones.html" target="_blank"><span class="label label-default">火星常见地点所在时区</span></a>
+
+                <a href="http://interimm.org/institutes.html" target="_blank"><span class="label label-default">火星机构设置</span></a>
+
+                <a href="http://exoplanets.interimm.org/" target="_blank"><span class="label label-default">系外行星</span></a>
+
+
+
+
+
+
+                。
+             </li>
+
+                <li class="list-group-item">如果发现自己添加的内容没有出现在网站上，可以去 <a href="https://github.com/InterImm/hub/issues" target="_blank"><span class="label label-default">GitHub issues</span></a> 查看或者询问原因。</li>
+             </ol>
+               </p>
+              </div>
+            </div>
+
+
+            <div class="row">
+
+              {% include new-company.html %}
+
+            </div><!--End Form row-->
+
+
+
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+    {% include footer.html %}
+
+
+
+    <!-- Javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+    <script>window.jQuery || document.write('<script src="assets/js/jquery-1.11.0.min.js"><\/script>')</script>
+
+    {% include mixitupscript.html %}
+
+
+
+    <script src="assets/js/validator.min.js"></script>
+    <script src="assets/js/wow.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/bootstrap-select.min.js"></script>
+
+    <script>
+    $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+    </script>
+
+    <script src="assets/js/stars-bg.js"></script>
+
+
+
+    </body>
+</html>

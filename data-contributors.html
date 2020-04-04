@@ -1,0 +1,52 @@
+---
+layout: page
+title: Dataset Contributors
+exclude: true
+---
+
+{% comment%}
+Here we generate all the contributors.
+{% endcomment%}
+
+{% assign rawtags = "" %}
+{% for post in site.flora %}
+{% for cont in post.contributors %}
+    {% assign tcontributors = cont.name | join:'|' | append:'|' %}
+    {% assign rawtags = rawtags | append:tcontributors %}
+{% endfor %}
+{% endfor %}
+
+{% assign rawtags = rawtags | split:'|' | sort %}
+{% assign tags = "" %}
+
+{% for tag in rawtags %}
+{% if tag != "" %}
+
+{% if tags == "" %}
+{% assign tags = tag | split:'|' %}
+{% endif %}
+
+{% unless tags contains tag %}
+{% assign tags = tags | join:'|' | append:'|' | append:tag | split:'|' %}
+{% endunless %}
+{% endif %}
+{% endfor %}
+
+
+<div class="posts">
+
+
+<div class="field is-grouped is-grouped-multiline">
+
+{% for tag in tags %}
+  <div class="control">
+    <div class="tags has-addons">
+      <span class="tag is-dark"></span>
+      <span class="tag is-success">{{ tag }}</span>
+    </div>
+  </div>
+{% endfor %}
+
+</div>
+
+</div>

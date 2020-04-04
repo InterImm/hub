@@ -1,0 +1,11 @@
+# Staticman
+allowedFields: ['author', 'email', 'name', 'founded', 'base', 'category', 'link','about']
+branch: gh-pages
+commitMessage: "又有一个新的太空公司成立了！"
+filename: "company-{@timestamp}"
+format: yml
+moderation: true
+path: "_data/companies"
+requiredFields: ['email', 'name', 'founded' , 'base' ,'category','about']
+transforms:
+  email: ""

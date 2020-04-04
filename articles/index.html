@@ -1,0 +1,130 @@
+---
+layout: page
+title: Articles
+description: The story of your dataset
+exclude: true
+---
+
+{% comment%}
+Here we generate all the tags.
+{% endcomment%}
+
+{% assign rawtags = "" %}
+{% for post in site.articles %}
+{% assign ttags = post.tags | join:'|' | append:'|' %}
+{% assign rawtags = rawtags | append:ttags %}
+{% endfor %}
+
+{% assign rawtags = rawtags | split:'|' | sort | reverse %}
+
+{% assign tags = "" %}
+
+{% for tag in rawtags %}
+{% if tag != "" %}
+
+{% if tags == "" %}
+{% assign tags = tag | split:'|' %}
+{% endif %}
+
+{% unless tags contains tag %}
+{% assign tags = tags | join:'|' | append:'|' | append:tag | split:'|' %}
+{% endunless %}
+{% endif %}
+{% endfor %}
+
+
+<div class="posts">
+<div class="box">
+<div class="tags">
+{% for tag in tags %}
+<span class="tag">
+<a href="#{{ tag | slugify }}" class="codinfox-tag-mark"> #{{ tag }} </a></span>
+{% endfor %}
+</div>
+</div>
+
+{% for tag in tags %}
+<h2 id="{{ tag | slugify }}">{{ tag }}</h2>
+<ul class="codinfox-category-list">
+  {% for post in site.articles reversed %}
+  {% if post.tags contains tag %}
+  <article class="post-item">
+      <p>
+        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>  — <strong><a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></strong>
+        <span style="float: right;">
+        {% if post.tags %}
+        [{% for tag in post.tags %}
+        <a class="codinfox-tag-mark" href="{{ site.baseurl }}/articles/#{{ tag | slugify }}">#{{ tag }}</a>
+        {% endfor %}]
+        {% endif %}
+        </span>
+
+         {% if post.summary %}
+           <div style="margin-left:2em;">
+           <span style="display:block;font-size:90%;">
+            <i class="far fa-star"></i> Summary: {{ post.summary }}</span>
+           </div>
+         {% endif %}
+         {% if post.authors %}
+         <div style="margin-left:2em;"><span style="display:block;font-size:90%;">
+            <i class="fa fa-paperclip" aria-hidden="true"></i> Authors:</span>
+            {% for author in post.authors %}
+               {% assign author_db = site.data.authors[author.id] %}
+               <span style="display:block;font-size:90%;padding-left:1em;"> - {{ author_db.name }}</span>
+            {% endfor %}
+         </div>
+         {% endif %}
+         {% if post.dataset %}
+           <div style="margin-left:2em;"><span style="display:block;font-size:90%;">
+            <i class="fa fa-paperclip" aria-hidden="true"></i> Dataset:</span>
+               {% for dataset in post.dataset %}
+                 {% if dataset.id %}
+                    <span style="display:block;font-size:90%;padding-left:1em;"> - <a href="{{ site.url }}{{ site.baseurl }}/flora/{{ dataset.id }}">{{ dataset.id }}</a></span>
+                 {% endif %}
+              {% endfor %}
+           </div>
+        {% endif %}
+           {% if post.references %}
+           <div style="margin-left:2em;"><span style="display:block;font-size:90%;">
+        <i class="fa fa-paperclip" aria-hidden="true"></i> References:</span>
+              {% for reference in post.references %}
+                 {% if reference.link %}
+                    <span style="display:block;font-size:90%;padding-left:1em;"> - <a href="{{ reference.link }}">{{ reference.name }}</a></span>
+                    {% else %}
+                    <span style="display:block;font-size:90%;padding-left:1em;"> - {{ reference.name }}</span>
+                 {% endif %}
+              {% endfor %}
+           </div>
+        {% endif %}
+
+
+         {% if post.tags != null %}
+           <div style="margin-left:2em;">
+           <span style="display:block;font-size:90%;"><i class="fa fa-hashtag" aria-hidden="true"></i> Tags: {% for tag in post.tags %}
+              <a class="codinfox-tag-mark" href="{{ site.baseurl }}/articles/#{{ tag | slugify }}">#{{ tag }}</a>
+              {% endfor %}
+           </span>
+           </div>
+           {% endif %}
+
+           {% if post.status != null %}
+         <div style="margin-left:2em;">
+         <span style="display:block;font-size:90%;"><i class="fas fa-tasks" aria-hidden="true"></i> Status:
+         {% if post.status == 'Done' or post.status == 'done' or post.status == 'Finished' or post.status == 'finished' or post.status == '100%%' %}
+         <i class="fas fa-check has-text-success"></i>
+         {% else %}
+         {{ post.status }}
+         {% endif %}
+         </span>
+         </div>
+         {% endif %}
+
+
+      </p>
+  </article>
+  {% endif %}
+  {% endfor %}
+</ul>
+{% endfor %}
+
+</div>

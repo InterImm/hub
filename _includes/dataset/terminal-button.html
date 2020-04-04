@@ -1,0 +1,26 @@
+<button class="button is-primary modal-button" style="position: fixed;bottom: 0;right: 0;" data-target="#myModal" aria-haspopup="true">
+  <i class="fas fa-terminal"></i>
+</button>
+
+<div class="modal" id="myModal">
+  <div class="modal-background"></div>
+  <div class="modal-content" style="width:100%;">
+    {% include dataset/terminal-content.html %}
+  </div>
+  <button class="modal-close is-large" aria-label="close"></button>
+</div>
+
+
+<script>
+document.querySelectorAll('.modal-button').forEach(function(el) {
+    el.addEventListener('click', function() {
+      var target = document.querySelector(el.getAttribute('data-target'));
+
+      target.classList.add('is-active');
+
+      target.querySelector('.modal-close').addEventListener('click',   function() {
+          target.classList.remove('is-active');
+       });
+    });
+  });
+</script>
