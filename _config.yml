@@ -4,7 +4,7 @@ author: "星际移民中心"
 email: admin@interimm.org
 description: > # this means to ignore newlines until "twitter_username:"
   在这里脑洞出你自己的未来星际企业
-baseurl: ''
+baseurl: '/hub'
 # social links
 twitter_username: jekyllrb
 github_username:  jekyll
