@@ -18,7 +18,7 @@ var options = {
     },
     "done": function(counter){
       con = document.querySelector('div.posts').innerHTML
-      document.querySelector('div.posts').innerHTML = '<div class="notification is-info has-text-centered" id="query-summary">All '+ counter +' items with the keyword "'+ keywords +'" are highlighted <a class="is-pulled-right is-primary button" href="'+url_main+'">Clear</a></div>' + con;
+      document.querySelector('div.posts').innerHTML = '<div class="notification is-info has-text-centered" id="query-summary">已高亮 '+ counter +' 个企业分类 "'+ keywords +'" are highlighted <a class="is-pulled-right is-primary button" href="'+url_main+'">Clear</a></div>' + con;
         // counter is a counter indicating the total number of all marks
     },
     "debug": false,

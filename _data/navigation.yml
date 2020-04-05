@@ -14,6 +14,9 @@ main:
     - title: "星际移民之书"
       url: https://book.interimm.org
       excerpt: "星际移民的历史"
-- title: 关于
-  url: /about/
-  excerpt: "关于未来星际企业"
+    - title: "火星地图"
+      url: http://interimm.org/mars-map/
+      excerpt: "互动火星地图"
+    - title: "其他工具"
+      url: http://interimm.org/archives
+      excerpt: "星际移民中心制作的星际文明工具"
