@@ -1,0 +1,6 @@
+<script>
+
+var data = {{ include.data }};
+var layout = {{ include.layout }}
+Plotly.newPlot('{{ include.target }}', data, Object.assign({}, layout, {displaylogo: false}));
+</script>

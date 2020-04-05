@@ -1,0 +1,10 @@
+{% if page.comments == true or page.collection == 'companies'  %}
+<div id="comments" class="is-divider" data-content="COMMENTS"></div>
+<script src="https://utteranc.es/client.js"
+      repo="InterImm/hub"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+</script>
+{% endif %}

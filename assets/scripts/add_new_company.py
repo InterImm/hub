@@ -106,6 +106,28 @@ class Company():
         return res
 
 
+def generate_pages():
+    pages_path = "_companies"
+    data_companies_path = "_data/companies"
+    all_companies = os.listdir(data_companies_path)
+    all_companies = [i for i in all_companies if i.endswith("ml")]
+    for company in all_companies:
+        company_data_file = os.path.join(
+            data_companies_path,
+            company
+        )
+        page_file = os.path.join(
+            pages_path,
+            os.path.splitext(company)[0] + ".md"
+        )
+        # logger.info(f"Reading file {company_data_file}")
+        print(f"Reading file {company_data_file}")
+        with open(company_data_file, 'r') as original:
+            data = original.read()
+        logger.info(f"Writing file {page_file}")
+        with open(page_file, 'w') as modified:
+            modified.write("---\n" + data + "\n---")
+
 def main():
 
     parser = argparse.ArgumentParser(description='Process some integers.')
@@ -143,9 +165,13 @@ def main():
                     fp.write(f"{comp_save.get('_id')}\n")
                 break
 
+    logger.info("Generating Pages")
+    generate_pages()
+
 
 if __name__ == "__main__":
 
-    main()
+    # main()
+    generate_pages()
 
     print("End of Game")

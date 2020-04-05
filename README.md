@@ -1,1 +1,2 @@
-# jekyll-company-directory
+# dataherb.github.io
+Herb Index

@@ -1,0 +1,22 @@
+# Site navigation links
+main:
+
+- title: 企业列表
+  url: /companies/
+  excerpt: "星际企业列表"
+- title: "添加企业"
+  url: /add/
+  excerpt: "添加星际企业"
+- title: "星际移民中心"
+  url: https://interimm.org
+  excerpt: "星际移民中心"
+  subnav:
+    - title: "星际移民之书"
+      url: https://book.interimm.org
+      excerpt: "星际移民的历史"
+    - title: "火星地图"
+      url: http://interimm.org/mars-map/
+      excerpt: "互动火星地图"
+    - title: "其他工具"
+      url: http://interimm.org/archives
+      excerpt: "星际移民中心制作的星际文明工具"

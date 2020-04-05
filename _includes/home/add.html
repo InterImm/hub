@@ -1,0 +1,25 @@
+<div class="tile is-ancestor">
+  <div class="tile is-vertical is-6">
+    <div class="tile is-parent">
+      <article class="tile is-child notification is-primary">
+        <a href="{{ "/companies/" | relative_url }}" style="text-decoration: none;"><p class="title">浏览星际企业</p></a>
+        <p class="subtitle">精选的 {{ site.data.companies.size }} 个星际企业的数据
+        </p>
+        <div class="content">
+          <a href="{{ "/companies/" | relative_url }}" class="button is-light is-warning"><i class="fas fa-list"></i> <span> 数据库</span></a>
+        </div>
+      </article>
+    </div>
+  </div>
+  <div class="tile is-vertical is-6">
+    <div class="tile is-parent">
+      <article class="tile is-child notification is-primary">
+        <a href="{{ "/add/" | relative_url }}" style="text-decoration: none;"><p class="title">添加星际企业</p></a>
+        <p class="subtitle">添加你的星际企业，贡献开放数据</p>
+        <div class="content">
+          <a href="{{ "/add/" | relative_url }}" class="button is-light is-danger"><i class="fas fa-puzzle-piece"></i>添加企业</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>

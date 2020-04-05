@@ -1,0 +1,13 @@
+---
+_id: tgwcdsjo8m7kqwpkftgwafhs0kc642qp
+author: MagicKyaw
+email: 1355455605@qq.com
+name: Kyaw基金
+founded: '2020-03-23'
+base: 火星南河城
+category: 投资金融
+link: http://quantumfundsonline.com/
+about: Kyaw基金是太阳系著名的大规模对冲基金，中国金融家Kyaw·刘旗下经营的四个对冲基金之一。Kyaw基金是高风险基金，主要借款在星系范围内投资于股票、债券、外汇和科研产品。Kyaw基金没有在地球登记注册，而是在火星南河城离岸注册。它主要采取私募方式筹集资金。刘为之取名"Kyaw"，是源于刘的姓名的中文读音。刘认为，现在正处于星系开发探测的起步阶段，需要大规模的融资来支持星系开发探测工程，这会是一个很好地推动星际交流和学科大发现的契机。
+date: '2020-03-23'
+
+---

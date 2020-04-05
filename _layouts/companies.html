@@ -1,0 +1,102 @@
+---
+layout: companies-default
+---
+
+
+
+<article class="post">
+
+<header class="post-header">
+  <h1 class="has-text-centered is-size-1" itemprop="name headline">{{ page.name }}</h1>
+  <h2 class="post-title has-text-centered is-size-2" itemprop="name headline"></h2>
+  <p class="post-meta has-text-centered">
+    <time class="dt-published" datetime="{{ page.founded | date_to_xmlschema }}" itemprop="datePublished">
+      {{ page.founded }}
+    </time>
+    {% if page.category %}
+     • <span style="font-style: regular;">{</span>{% for cate in page.category %}
+     <span style="padding-right: 0.2em;padding-left: 0.2em;">
+       <a href="{{ site.url }}{{ site.baseurl }}/companies/?keywords={{ cate | slugify }}">⸢{{ cate }}⸥</a>
+     </span>
+     {% endfor %}
+     }
+    {% endif %}
+  </p>
+</header>
+
+<article class="message is-success is-small">
+  <div class="message-body">
+    本条目由 {{page.author}} 提供。
+  </div>
+</article>
+
+<div class="is-divider" data-content="星际企业数据卡"></div>
+
+{{ page }}
+
+<article class="message is-info">
+  <div class="message-header">
+    <p>基本数据</p>
+  </div>
+  <div class="message-body">
+    <ul class="metadata-list">
+    {% if page.name %}
+      <li><span class="metadata-key">企业名称：</span> {{ page.name }}</li>
+    {% endif %}
+    {% if page.founded %}
+      <li><span class="metadata-key">成立时间：</span> {{ page.founded }}</li>
+    {% endif %}
+    {% if page.base %}
+      <li><span class="metadata-key">企业位置：</span> {{ page.base }}</li>
+    {% endif %}
+    {% if page.category %}
+      <li>
+        <span class="metadata-key">企业类型：</span>
+          {{ page.category }}
+      </li>
+    {% endif %}
+    {% if page.link %}
+      <li><span class="metadata-key">企业网站：</span> <a href="{{ page.link }}">{{ page.link }}</a></li>
+    {% endif %}
+    </ul>
+  </div>
+</article>
+
+<article class="message is-success">
+  <div class="message-header">
+    <p>企业简介</p>
+  </div>
+  <div class="message-body">
+    {% if page.about %}
+    <div>{{ page.about }}</div>
+    {% endif %}
+  </div>
+</article>
+
+<div class="post-content e-content" itemprop="articleBody">
+  {{ content }}
+</div>
+
+<div class="is-divider" data-content="分享"></div>
+
+<div class="has-text-centered">
+<div class="social-share"></div>
+</div>
+
+<a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
+
+  {% include pagination.html %}
+
+</article>
+
+
+
+
+{% include home/typeform-chat.html %}
+
+<!--  css & js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="{{site.baseurl}}/assets/sharejs/css/share.min.css">
+<script src="{{site.baseurl}}/assets/sharejs/js/share.min.js"></script>
+
+{% include utterances-comments.html %}
