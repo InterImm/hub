@@ -4,12 +4,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {% seo title=false %}
   <title>{{page.name}} | {{site.title}} | 星际移民中心</title>
-  <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
-  <link rel="stylesheet" href="{{ "/assets/bulma/bulma.css" | relative_url }}">
-  <link rel="stylesheet" href="{{ "/assets/bulma/bulma-divider.min.css" | relative_url }}">
-  <link rel="stylesheet" href="/assets/bulmawatch/lux/bulmaswatch.min.css">
-  <link rel="stylesheet" href="{{ "/assets/fontawesome/web-fonts-with-css/css/fontawesome-all.min.css" | relative_url }}">
-  <link rel="stylesheet" href="{{ "/assets/code/base16-solarized.light.css" | relative_url }}">
+  <link rel="stylesheet" href="{{site.baseurl}}/assets/main.css">
+  <link rel="stylesheet" href="{{site.baseurl}}/assets/bulma/bulma.css">
+  <link rel="stylesheet" href="{{site.baseurl}}/assets/bulma/bulma-divider.min.css">
+  <link rel="stylesheet" href="{{site.baseurl}}/assets/bulmawatch/lux/bulmaswatch.min.css">
+  <link rel="stylesheet" href="{{site.baseurl}}/assets/fontawesome/web-fonts-with-css/css/fontawesome-all.min.css">
+  <link rel="stylesheet" href="{{site.baseurl}}/assets/code/base16-solarized.light.css">
 
 
   <link rel="apple-touch-icon" sizes="57x57" href="{{site.baseurl}}/assets/favicon/apple-icon-57x57.png">
@@ -33,13 +33,13 @@
 
 
   {% if include.plotly == true %}
-  <script src="{{ "/assets/js/plotly-latest.min.js" | relative_url }}">
+  <script src="{{site.baseurl}}/assets/js/plotly-latest.min.js">
   </script>
   {% endif %}
 
   {% if page.mermaid %}
-  <script src="{{ "/assets/mermaid/mermaid.min.js" | relative_url }}"></script>
-  <link rel="stylesheet" href="{{ "/assets/mermaid/mermaid.css" | relative_url }}" />
+  <script src="{{site.baseurl}}/assets/mermaid/mermaid.min.js"></script>
+  <link rel="stylesheet" href="{{site.baseurl}}/assets/mermaid/mermaid.css"/>
   {% endif %}
 
 
