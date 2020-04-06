@@ -171,7 +171,7 @@ def main():
 
 if __name__ == "__main__":
 
-    # main()
-    generate_pages()
+    main()
+    # generate_pages()
 
     print("End of Game")
