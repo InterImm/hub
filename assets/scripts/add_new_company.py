@@ -74,9 +74,11 @@ class Company():
                 company["name"] = answer.get("text")
             elif answer.get("field", {}).get("id") == "cl3YofBO7KKp":
                 company["founded"] = parser.parse(answer.get("date")).date().isoformat()
-            elif answer.get("field", {}).get("id") == "nLbk9JnRJIsI":
+            # elif answer.get("field", {}).get("id") == "nLbk9JnRJIsI":
+            elif answer.get("field", {}).get("id") == "DWG3enUbr43q":
                 company["base"] = answer.get("text")
-            elif answer.get("field", {}).get("id") == "GWLVKGnm0ZzG":
+            # elif answer.get("field", {}).get("id") == "GWLVKGnm0ZzG":
+            elif answer.get("field", {}).get("id") == "UvFtAxPNbDI6":
                 company["category"] = answer.get("text")
             elif answer.get("field", {}).get("id") == "OdHc2WjMQne3":
                 company["link"] = answer.get("url")
