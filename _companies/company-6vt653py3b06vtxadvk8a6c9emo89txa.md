@@ -1,0 +1,13 @@
+---
+_id: 6vt653py3b06vtxadvk8a6c9emo89txa
+author: InRInal
+name: 莱茵科技
+founded: '2040-12-31'
+base: 太空城市星夜城：2042 年成立
+category: 生物科技
+link: https://woxinnigegui.com
+about: 研究一切真理
+email: woxinnigegui@qq.com
+date: '2020-04-19'
+
+---
