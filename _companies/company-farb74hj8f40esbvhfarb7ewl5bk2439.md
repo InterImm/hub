@@ -1,0 +1,12 @@
+---
+_id: farb74hj8f40esbvhfarb7ewl5bk2439
+author: 石锐涵先生
+name: 星际关系咨询事务集团
+founded: '2020-08-09'
+base: 火星南河城(Procyon City)：2123 年成立；伊希地城市圈
+category: 咨询智库
+about: 文科学者所创立的星际关系研究中心，旨在提供更好的咨询服务
+email: shiruihan10712@foxmail.com
+date: '2020-04-28'
+
+---
