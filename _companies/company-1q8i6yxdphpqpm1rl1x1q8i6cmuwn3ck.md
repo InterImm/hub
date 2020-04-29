@@ -1,0 +1,13 @@
+---
+_id: 1q8i6yxdphpqpm1rl1x1q8i6cmuwn3ck
+author: 张舟元
+name: 远航集团
+founded: '2026-10-24'
+base: 火星星坠城(Bolide City)：2165 年成立；子午线城市圈；围绕行星地质大学（Planetary Geology University）建成。
+category: 太空探索旅游
+link: https://www.voyage.com.cn
+about: 火星最大的太空旅游探索公司，旗下有多个子公司，覆盖了太空建筑、小行星开发等行业，其开发的远航系列超光速亚轨道太空飞船占据了火星旅游业的大部分市场份额。后来与火星轨道旅游局合并为银河系轨道旅游局太阳系分局——太阳系轨道旅游局。
+email: 3534583961@qq.com
+date: '2020-04-29'
+
+---
