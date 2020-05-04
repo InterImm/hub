@@ -1,0 +1,13 @@
+---
+_id: 1qqyqcgey1qqy8r9h6zr15aiompbe8r9
+author: 白银雷
+name: 无尽宇宙
+founded: '2020-05-04'
+base: 太空城市星夜城：2042 年成立
+category: 休闲娱乐
+link: https://www.无尽宇宙.com
+about: 光的灵魂
+email: woonlooi@gmail.com
+date: '2020-05-04'
+
+---
