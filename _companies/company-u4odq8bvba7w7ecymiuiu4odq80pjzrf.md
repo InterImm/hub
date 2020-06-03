@@ -1,0 +1,12 @@
+---
+_id: u4odq8bvba7w7ecymiuiu4odq80pjzrf
+author: 神崎千華
+name: 艾琳虚空财团
+founded: '2020-06-03'
+base: 火星视界城(Horizon City)：2148 年成立；子午线城市圈；城内的视界星港是火星最大的星港
+category: 投资金融
+about: 任何行为与物品均有投资的价值
+email: 2420166133@qq.com
+date: '2020-06-03'
+
+---
