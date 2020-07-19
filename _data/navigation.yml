@@ -20,3 +20,25 @@ main:
     - title: "其他工具"
       url: http://interimm.org/archives
       excerpt: "星际移民中心制作的星际文明工具"
+
+main_en:
+
+- title: List
+  url: /hub/companies/
+  excerpt: "List"
+- title: "Add New"
+  url: /hub/add/
+  excerpt: "Add New Company"
+- title: "InterImm"
+  url: https://interimm.org/en
+  excerpt: "Interplanetary Immigration Center"
+  subnav:
+    - title: "The Book of History"
+      url: https://book.interimm.org
+      excerpt: "The Book of Interplanetary Immigration"
+    - title: "Map of Mars"
+      url: http://interimm.org/mars-map/
+      excerpt: "Interactive Map of Mars"
+    - title: "Other Tools"
+      url: http://interimm.org/archives
+      excerpt: "Tools made for interplanetary civilizations"

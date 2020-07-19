@@ -1,9 +1,12 @@
 title: 未来星际企业
+title_en: Future Interplanetary Companies
 title_fancy:
 author: "星际移民中心"
 email: admin@interimm.org
 description: > # this means to ignore newlines until "twitter_username:"
   在这里脑洞出你自己的未来星际企业
+description_en: >
+  Imagine a future with your idea in it
 baseurl: '/hub'
 # social links
 twitter_username: jekyllrb
