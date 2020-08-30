@@ -1,0 +1,12 @@
+---
+_id: x4ucburi5nu12bfr2022cx4ucbue74ds
+author: LI
+name: 银河矿业有限公司
+founded: '2023-06-09'
+base: 太空城市星夜城：2042 年成立
+category: 能源矿产
+about: 星际采矿
+email: 1023710732@qq.com
+date: '2020-08-30'
+
+---
