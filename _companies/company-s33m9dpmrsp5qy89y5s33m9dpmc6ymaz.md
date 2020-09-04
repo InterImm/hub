@@ -1,0 +1,12 @@
+---
+_id: s33m9dpmrsp5qy89y5s33m9dpmc6ymaz
+author: Ivy_C
+name: 星辰通讯社
+founded: '2051-07-19'
+base: 太空城市星夜城：2042 年成立
+category: 新闻媒体
+about: 简称星辰社，鹊语旗下新闻通讯社。主要负责两大太空城与十一大火星城的新闻信息采集、发布。在地球各国（地区）亦设有办事处。
+email: ivyc_here@foxmail.com
+date: '2020-09-04'
+
+---
