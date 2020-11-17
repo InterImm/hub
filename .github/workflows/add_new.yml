@@ -40,9 +40,7 @@ jobs:
           git push
           git add .
           commit_message=$(git diff --name-only --staged | tail -1)
-          echo "::set-env name=COMPANY_NAME::$(cat $commit_message | grep name)"
-          echo "::set-env name=COMPANY_BODY::$(cat $commit_message)"
-          git commit -F $commit_message || echo "Nothing to update"
+          git commit -F "COMPANY_NAME::$(cat $commit_message | grep name)" || echo "Nothing to update"
           git status
       - name: Create Pull Request
         id: cpr
