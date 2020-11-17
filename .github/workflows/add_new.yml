@@ -40,7 +40,9 @@ jobs:
           git push
           git add .
           commit_message=$(git diff --name-only --staged | tail -1)
-          git commit -F "COMPANY_NAME::$(cat $commit_message | grep name)" || echo "Nothing to update"
+          echo "COMPANY_NAME=$(cat $commit_message | grep name)" >> $GITHUB_ENV
+          echo "COMPANY_BODY=$(cat $commit_message)" >> $GITHUB_ENV
+          git commit -F $commit_message || echo "Nothing to update"
           git status
       - name: Create Pull Request
         id: cpr
