@@ -48,8 +48,8 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@v2
         with:
-          title: ${{ env.COMPANY_NAME }}
-          body: ${{ env.COMPANY_BODY }}
+          title: $COMPANY_NAME
+          body: $COMPANY_BODY
           token: ${{ secrets.GITHUB_TOKEN }}
           branch-suffix: short-commit-hash
       - name: Check PR outputs
