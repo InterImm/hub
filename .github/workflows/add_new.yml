@@ -46,7 +46,7 @@ jobs:
           git status
       - name: Create Pull Request
         id: cpr
-        uses: peter-evans/create-pull-request@v2
+        uses: peter-evans/create-pull-request@v3
         with:
           title: $COMPANY_NAME
           body: $COMPANY_BODY
