@@ -42,7 +42,7 @@ jobs:
           commit_message=$(git diff --name-only --staged | tail -1)
           echo "COMPANY_NAME=$(cat $commit_message | grep name)" >> $GITHUB_ENV
           echo "COMPANY_BODY=$(cat $commit_message)" >> $GITHUB_ENV
-          git commit -F $COMPANY_NAME || echo "Nothing to update"
+          git commit -F "new company" || echo "Nothing to update"
           git status
       - name: Create Pull Request
         id: cpr
