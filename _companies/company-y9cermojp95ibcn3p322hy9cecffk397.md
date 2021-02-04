@@ -1,0 +1,12 @@
+---
+_id: y9cermojp95ibcn3p322hy9cecffk397
+author: Kai HCH
+name: Cyberpunk Fight Against the God
+founded: '2077-06-30'
+base: 火星视界城(Horizon City)：2148 年成立；子午线城市圈；城内的视界星港是火星最大的星港
+category: 军事
+about: 在2076年成立，先致力于高新技术研究开发，后发展成为太空安保、武器及设施研发公司，并迅速发展。2144年，非法介入了一场恐怖分子袭击事件，剿灭其全部后，董事会决定与多家太空企业进行合作，进行行星、恒星级武器开发，同时地下部分开始进行枪火走私。
+email: 2423990661@qq.com
+date: '2021-02-04'
+
+---
