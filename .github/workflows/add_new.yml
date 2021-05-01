@@ -6,6 +6,12 @@ on:
       - gh-pages
   schedule:
     - cron:  '0 7/1 * * *'
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Why'
+        required: false
+        default: 'Because I want to check if there are new records'
 
 jobs:
   build:
@@ -48,8 +54,8 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@v3
         with:
-          title: $COMPANY_NAME
-          body: $COMPANY_BODY
+          title: New Company Request
+          body: "A new company has been requested. Check the files changed to see the details."
           token: ${{ secrets.GITHUB_TOKEN }}
           branch-suffix: short-commit-hash
       - name: Check PR outputs
