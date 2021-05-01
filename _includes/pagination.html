@@ -4,12 +4,12 @@
       </div>
       <div class="column is-2 is-pulled-left">
       {% if page.previous %}
-        <a href="{{ site.url }}{{ page.previous.url }}" class="is-pulled-left" title="{{ page.previous.title }}"><button class="button is-primary is-pulled-left">上一条</button> </a>
+        <a href="{{ site.url | prepend: site.baseurl }}{{ page.previous.url }}" class="is-pulled-left" title="{{ page.previous.title }}"><button class="button is-primary is-pulled-left">上一条</button> </a>
       {% endif %}
       </div>
       <div class="column is-2 is-pulled-right">
       {% if page.next %}
-        <a href="{{ site.url }}{{ page.next.url }}" class="is-pulled-right" title="{{ page.next.title }}"><button class="button is-primary is-pulled-right">下一条</button></a>
+        <a href="{{ site.url | prepend: site.baseurl }}{{ page.next.url }}" class="is-pulled-right" title="{{ page.next.title }}"><button class="button is-primary is-pulled-right">下一条</button></a>
       {% endif %}
     </div>
     <div class="column is-4">
