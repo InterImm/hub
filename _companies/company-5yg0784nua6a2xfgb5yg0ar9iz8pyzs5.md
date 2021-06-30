@@ -1,0 +1,13 @@
+---
+_id: 5yg0784nua6a2xfgb5yg0ar9iz8pyzs5
+author: Raistlin
+name: Meoogo
+founded: '2022-05-12'
+base: 地球
+category: 互联网
+link: https://www.meoogo.com/
+about: 白手起家的公司，其创始团队极其神秘。
+email: 605412854@qq.com
+date: '2021-06-30'
+
+---
