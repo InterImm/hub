@@ -1,0 +1,57 @@
+{% assign companiesraw = (site.companies | sort: 'date' ) | reverse %}
+{% assign companies = companiesraw limit: 6 %}
+{% for company in companies limit: 6 %}
+{% assign companyitem = company %}
+
+<div class="column is-half">
+<div class="card" style="box-shadow: none;">
+   <div class="card-content">
+      <div class="media">
+         <div class="media-content has-text-centered">
+            <a class="post-link" href="{{ companyitem.url | prepend: site.baseurl }}"><p class="title is-4">{{ companyitem.name }}</p></a>
+         </div>
+      </div>
+      <div class="is-divider" style="border-top:.1rem dashed #dbdbdb57 !important;margin: 1rem 0 !important;"></div>
+      <div class="content">
+         <article class="message is-info">
+            <div class="message-body">
+               <ul class="metadata-list">
+                  {% if companyitem.name %}
+                  <li><span class="metadata-key">企业名称：</span> {{ companyitem.name }}</li>
+                  {% endif %}
+                  {% if companyitem.founded %}
+                  <li><span class="metadata-key">成立时间：</span> {{ companyitem.founded }}</li>
+                  {% endif %}
+                  {% if companyitem.base %}
+                  <li><span class="metadata-key">企业位置：</span> {{ companyitem.base }}</li>
+                  {% endif %}
+                  {% if companyitem.category %}
+                  <li>
+                     <span class="metadata-key">企业类型：</span>
+                     {{ companyitem.category }}
+                  </li>
+                  {% endif %}
+                  {% if companyitem.link %}
+                  <li><span class="metadata-key">企业网站：</span> <a
+                        href="{{ companyitem.link }}">{{ companyitem.link }}</a></li>
+                  {% endif %}
+               </ul>
+            </div>
+         </article>
+         <div class="is-divider" style="border-top:.1rem dashed #dbdbdb57 !important;margin: 1rem 0 !important;"></div>
+         <article class="message is-success">
+            <div class="message-body">
+               {% if companyitem.about %}
+               <div>{{ companyitem.about }}</div>
+               {% endif %}
+            </div>
+         </article>
+
+         <div class="is-divider" style="border-top:.1rem dashed #dbdbdb57 !important;margin: 1rem 0 !important;"></div>
+
+         <span><small>本条目由 {{companyitem.author}} 提供。{{companyitem.date}}</small></span>
+      </div>
+   </div>
+</div>
+</div>
+   {% endfor %}
