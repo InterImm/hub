@@ -1,0 +1,13 @@
+---
+_id: 9icd97pd46t0dv49icd6eftprcznj1g7
+author: Ivy_C
+name: 玖凤医疗
+founded: '1929-03-14'
+base: 地球
+category: 医疗技术
+about: 前身为1929年于上海挂牌成立的  私立玖鳳醫療集團 ，除对病人的救治工作外，还负责进口西方药物、出口中药材和用科学原理解释中药药方并完善中医理论。于Rebirth
+  Initiative成立后被收购。其非盈利部分与███大学、██医疗集团合并改组为RI直属医疗部。其盈利部分改名为 玖凤医疗 ，主要负责救护、传染病研究与预防，同时还涉足药物研发领域。
+email: ivyc_here@foxmail.com
+date: '2021-08-22'
+
+---
