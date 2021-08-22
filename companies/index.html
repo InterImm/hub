@@ -33,70 +33,92 @@ Here we generate all the tags.
 {% endfor %}
 
 <div class="posts">
-<div class="box">
-<div class="tags">
-{% for tag in tags %}
-<span class="tag">
-<a href="#{{ tag | slugify }}" class="codinfox-tag-mark"> ⸢{{ tag }}⸥ </a></span>
-{% endfor %}
-<span class="tag">
-<a href="#其他" class="codinfox-tag-mark"> ⸢其他⸥ </a></span>
-</div>
-</div>
+  <div class="box">
+    <div class="tags">
+      {% for tag in tags %}
+      <span class="tag">
+        <a href="#{{ tag | slugify }}" class="codinfox-tag-mark"> ⸢{{ tag }}⸥ </a></span>
+      {% endfor %}
+      <span class="tag">
+        <a href="#其他" class="codinfox-tag-mark"> ⸢其他⸥ </a></span>
+    </div>
+  </div>
 
-{% assign posts_with_tags = "" | split: ',' %}
+  {% assign posts_with_tags = "" | split: ',' %}
 
-{% for tag in tags %}
-<h2 id="{{ tag | slugify }}">⸢{{ tag }}⸥</h2>
-<ul class="codinfox-category-list">
-  {% for post in site.companies %}
-  {% if post.category contains tag %}
-  {% assign posts_with_tags = posts_with_tags | push: post %}
-  <article class="post-item">
-        <p>- <strong><a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.name }}</a></strong>
+
+  {% for tag in tags %}
+
+  <h2 id="{{ tag | slugify }}">⸢{{ tag }}⸥</h2>
+  <div class="columns is-multiline is-mobile">
+    {% for post in site.companies %}
+    {% if post.category contains tag %}
+    {% assign posts_with_tags = posts_with_tags | push: post %}
+
+    {% include companies/company-card.html %}
+
+    {% endif %}
+    {% endfor %}
+  </div>
+  {% endfor %}
+
+
+
+  {% for tag in tags %}
+  <h2 id="{{ tag | slugify }}">⸢{{ tag }}⸥</h2>
+  <ul class="codinfox-category-list">
+    {% for post in site.companies %}
+    {% if post.category contains tag %}
+    {% assign posts_with_tags = posts_with_tags | push: post %}
+    <article class="post-item">
+      <p>- <strong><a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.name }}</a></strong>
         <span style="float: right;">
           {% if post.category != null %}
-             { {% for category in post.category %}
-                <a class="keywords-mark" href="{{ site.baseurl }}/companies/?keywords={{ category | slugify }}">⸢{{ category }}⸥</a>
-                {% endfor %} }
+          { {% for category in post.category %}
+          <a class="keywords-mark"
+            href="{{ site.baseurl }}/companies/?keywords={{ category | slugify }}">⸢{{ category }}⸥</a>
+          {% endfor %} }
           {% endif %}
-        {% if post.tags %}
-        {% for tag in post.tags %}
-        <a class="codinfox-tag-mark" href="https://github.com/{{ post.repository }}" style="font-size: 80%;">{{ post.repository }}</a>
-        {% endfor %}
-        {% else %}
-        <a class="codinfox-tag-mark" href="{{ site.baseurl }}/companies/#{{ tag | slugify }}">#其他</a>
-        {% endif %}
-        <div style="clear: both;"></div>
-        <div class="is-divider" style="border-top:.1rem solid #dbdbdb57 !important;margin: 1rem 0 !important;"></div>
+          {% if post.tags %}
+          {% for tag in post.tags %}
+          <a class="codinfox-tag-mark" href="https://github.com/{{ post.repository }}"
+            style="font-size: 80%;">{{ post.repository }}</a>
+          {% endfor %}
+          {% else %}
+          <a class="codinfox-tag-mark" href="{{ site.baseurl }}/companies/#{{ tag | slugify }}">#其他</a>
+          {% endif %}
+          <div style="clear: both;"></div>
+          <div class="is-divider" style="border-top:.1rem solid #dbdbdb57 !important;margin: 1rem 0 !important;"></div>
         </span>
       </p>
-  </article>
-  {% endif %}
+    </article>
+    {% endif %}
+    {% endfor %}
+  </ul>
   {% endfor %}
-</ul>
-{% endfor %}
 
-<h2 id="{{ tag | slugify }}">#其他</h2>
-<ul class="codinfox-category-list">
-  {% for post in site.companies %}
-  {% if posts_with_tags contains post %}
-  {% else %}
-  <article class="post-item">
-        <p><span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>  — <strong><a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.name }}</a></strong>
+  <h2 id="{{ tag | slugify }}">#其他</h2>
+  <ul class="codinfox-category-list">
+    {% for post in site.companies %}
+    {% if posts_with_tags contains post %}
+    {% else %}
+    <article class="post-item">
+      <p><span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span> — <strong><a class="post-link"
+            href="{{ post.url | prepend: site.baseurl }}">{{ post.name }}</a></strong>
         <span style="float: right;">
           {% if post.category != null %}
-             { {% for category in post.category %}
-                <a class="keywords-mark" href="{{ site.baseurl }}/companies/?keywords={{ category | slugify }}">⸢{{ category }}⸥</a>
-                {% endfor %} }
+          { {% for category in post.category %}
+          <a class="keywords-mark"
+            href="{{ site.baseurl }}/companies/?keywords={{ category | slugify }}">⸢{{ category }}⸥</a>
+          {% endfor %} }
           {% endif %}
-        <a class="codinfox-tag-mark" href="{{ site.baseurl }}/companies/#{{ tag | slugify }}">#其他</a>
+          <a class="codinfox-tag-mark" href="{{ site.baseurl }}/companies/#{{ tag | slugify }}">#其他</a>
         </span>
       </p>
-  </article>
-  {% endif %}
-  {% endfor %}
-</ul>
+    </article>
+    {% endif %}
+    {% endfor %}
+  </ul>
 
 </div>
 

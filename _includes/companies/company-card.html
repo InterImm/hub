@@ -1,0 +1,45 @@
+<div class="column is-one-third">
+    <div class="card">
+        <div class="card-content">
+            <div class="media">
+                <div class="media-content">
+                    <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">
+                        <p class="title is-4">{{ post.name }}  <i class="fas fa-link"></i> </p>
+                    </a> <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">
+                    </a>
+                    <p class="subtitle is-6">@{{ post.author }}</p>
+                </div>
+            </div>
+
+            <div class="content">
+                <div>
+                    {{ post.about | markdown | truncate: 50 }}
+                </div>
+
+                {% if post.category != null %}
+                <div style="border-top: 1px solid #eeeeee;margin: 0.5em auto 0.2em auto; padding: 0.5em 0 0.5em 0;">
+                    <strong>分类</strong>：
+                    { {% for category in post.category %}
+                    <a class="keywords-mark"
+                        href="{{ site.baseurl }}/companies/?keywords={{ category | slugify }}">⸢{{ category }}⸥</a>
+                    {% endfor %} }
+                </div>
+                {% endif %}
+
+                <!-- {% if post.tags %}
+                <div style="border-top: 1px solid #eeeeee;margin: 1em auto 1em auto; padding: 1em 0 1em 0;">
+                    {% for tag in post.tags %}
+                    <a class="codinfox-tag-mark" href="https://github.com/{{ post.repository }}"
+                        style="font-size: 80%;">{{ post.repository }}</a>
+                    {% endfor %}
+                </div>
+                    {% else %}
+                    <a class="codinfox-tag-mark" href="{{ site.baseurl }}/companies/#{{ tag | slugify }}">#其他</a>
+                </div>
+                {% endif %} -->
+
+                <time datetime="2016-1-1"><strong>成立时间</strong>：{{ post.founded }}</time>
+            </div>
+        </div>
+    </div>
+</div>
