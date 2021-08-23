@@ -1,0 +1,20 @@
+---
+_id: j83o7m6t2aic988wkj83o7qfv79cw1qx
+author: Stanok Bohmivic, General of Syldavian Astrokrachzy
+name: Syldavian Sprodj Space Strategy Agency - 西尔达维亚斯波罗吉太空战略局
+founded: '1955-05-26'
+base: 地球
+category: 军事
+link: https://www.ssssa.gov
+about: "由西尔达维亚政府创建的的太空战略机构，在穆斯卡十二世签署《西尔达维亚国家太空战略法案》后成立，隶属于西尔达维亚宇航部门。其主要负责在战略层面上快速推进西尔达维亚在太空的发展，并协同其他科研机构共同发展本国宇航事业。在西尔达维亚太空军成立后，其失去了大部分存在的意义，转而成为一个半科研机构，并于2026年解散。\n\
+  A space strategy agency which was created by the Syldavian government after King\
+  \ Muskar XII signed the Syldavian National Space Strategy Act, affiliated to the\
+  \ Syldavian Astronautical Administration. It is mainly responsible for the rapid\
+  \ development of Syldavia in space at the strategic level, and in collaboration\
+  \ with other scientific research institutions to develop our own space industry.\
+  \ After the establishment of the Syldavian Astrokrachzy, it lost most of its meaning\
+  \ and became a semi-scientific institution, which was disbanded in 2026."
+email: g7richard@outlook.com
+date: '2021-08-23'
+
+---
