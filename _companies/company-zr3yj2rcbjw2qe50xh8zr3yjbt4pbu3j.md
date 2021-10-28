@@ -1,0 +1,12 @@
+---
+_id: zr3yj2rcbjw2qe50xh8zr3yjbt4pbu3j
+author: Rui
+name: 寰宇科技
+founded: '2249-10-01'
+base: 火星视界城(Horizon City)：2148 年成立；子午线城市圈；城内的视界星港是火星最大的星港
+category: 科研
+about: 注重于研发新型飞船发动机，主要研发方向为曲率驱动引擎与粒子引擎。
+email: 6399339@qq.com
+date: '2021-10-28'
+
+---
