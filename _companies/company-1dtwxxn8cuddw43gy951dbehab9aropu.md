@@ -1,0 +1,13 @@
+---
+_id: 1dtwxxn8cuddw43gy951dbehab9aropu
+author: Ivy_C
+name: 飞鸽 - Pigeon
+founded: '2144-11-03'
+base: 火星南河城(Procyon City)：2123 年成立；伊希地城市圈
+category: 通讯
+about: Twitter™子公司，旨在开发符合火星用户使用习惯的社交软件。2144年成立于南河城，2145年发布了 Twitter for Martians 。2047年发布的特连(
+  TwiLink )以页面简洁、延迟低、丢包率小等优点斩获当年 Google Play Store 火星地区社交软件榜榜首。
+email: ivyc_here@foxmail.com
+date: '2021-11-09'
+
+---
