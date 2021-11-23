@@ -1,0 +1,12 @@
+---
+_id: v9skpt54nczqp9crk7fdyv9skpt5fw7g
+author: 盛丽
+name: 胜利法律咨询中心
+founded: '2022-07-22'
+base: 火星天狼城(Betelgeuse City)：2123 年成立；伊希地城市圈
+category: 咨询智库
+about: 为火线居民提供便利的纠纷解决服务
+email: 1679362031@qq.com
+date: '2021-11-23'
+
+---
