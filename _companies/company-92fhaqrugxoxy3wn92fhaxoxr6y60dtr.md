@@ -1,0 +1,12 @@
+---
+_id: 92fhaqrugxoxy3wn92fhaxoxr6y60dtr
+author: Ivy_C
+name: 奇点城第一器官培育基地
+founded: '2166-08-22'
+base: 火星奇点城(Singularity City)：2145 年成立；子午线城市圈；安逸的生活环境
+category: 生物科技
+about: 奇点城管理局设立的第一批人体器官培育基地之一，一定程度上缓解了奇点城医疗领域器官供需差异大的问题。可以在至多十天内完成多数人体器官的培养。
+email: ivyc_here@foxmail.com
+date: '2022-01-01'
+
+---
