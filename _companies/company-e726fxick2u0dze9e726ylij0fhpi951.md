@@ -1,0 +1,13 @@
+---
+_id: e726fxick2u0dze9e726ylij0fhpi951
+author: w
+name: 维斯那拉
+founded: '2038-01-01'
+base: 火星天狼城(Betelgeuse City)：2123 年成立；伊希地城市圈
+category: 食品
+link: http://www.weisinala.com.cn
+about: 时属维斯集团，随着移民浪潮的兴起诞生，是一家新兴宇宙食品公司
+email: 2126691525@qq.com
+date: '2023-01-01'
+
+---
