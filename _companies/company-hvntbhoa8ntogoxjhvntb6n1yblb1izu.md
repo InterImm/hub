@@ -1,0 +1,13 @@
+---
+_id: hvntbhoa8ntogoxjhvntb6n1yblb1izu
+author: '-'
+name: 星际解密 -InterplanetaryLeaks
+founded: '2102-06-30'
+base: 地球
+category: 互联网
+link: https://interplanetaryleaks.org
+about: 前身是维基解密（WikiLeaks），其创始人因对UPI不满而创立，曾多次揭露UPI黑幕，此后揭露对象逐渐扩散至整个星际企业，被星辰通讯社、星际移民局、联合行星（UPI）以及多个星际企业定性为“星际恐怖组织”，现创始人宣布“在那些星际企业和星际机构停止他们的走私、垄断、贪污、逃税之前，我们仍将继续揭露他们不法行为”，目前星际解密的数据库隐藏在地球南极洲，并正在考虑将数据库迁往泰坦。
+email: SRW-rw@outlook.com
+date: '2023-01-05'
+
+---
