@@ -1,0 +1,13 @@
+---
+_id: dlegyi1he6b1tdi7zrbdlegyi85m606k
+author: '4379'
+name: '4379'
+founded: '2022-01-01'
+base: 火星星坠城(Bolide City)：2165 年成立；子午线城市圈；围绕行星地质大学（Planetary Geology University）建成。
+category: 建筑业
+link: https://www.540876923@qq.com
+about: 其开发的太空旅馆系列亚轨道飞船在 20 世纪 20 年代的亚轨道旅游热潮中占据了大部分市场份额。后并入轨道旅游局。
+email: www.540876923@qq.com
+date: '2021-12-28'
+
+---
