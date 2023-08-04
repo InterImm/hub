@@ -1,7 +1,7 @@
 ---
 _id: r0m40we81345xkcsk2r0m403o1d2f0xy
-author: 快连 - QuiLink
-name: Ivy_C
+author: Ivy_C
+name: 快连 - QuiLink
 founded: '2127-04-06'
 base: 火星南河城(Procyon City)：2123 年成立；伊希地城市圈
 category: 互联网
