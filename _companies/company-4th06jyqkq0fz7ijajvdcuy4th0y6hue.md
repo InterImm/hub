@@ -1,0 +1,14 @@
+---
+_id: 4th06jyqkq0fz7ijajvdcuy4th0y6hue
+author: Traveler.No1
+name: 群星矿业
+founded: '2030-01-01'
+base: 火星川陀城(Trantor City)：2155 年成立；希腊城市圈；矿业和资源产业
+category: 能源矿产
+link: https://gatherstar.com.cn
+about: 
+  时属群星集团子公司，其主要开发太阳系内与系外的一切不可再生资源并进行合理的利用，在21世纪中叶曾一度占据太阳系环行星轨道的大部分星体资源（包括星球碎片，陨冰，小行星，流星体等微、小、中星体资源），且在各类行星地表进行了大规模的矿产勘探与预测，并占有很大的市场竞争力与交易信誉，为人类进军星系矿产资源启到了“领路人”作用。
+email: Pacifickle@outlook.com
+date: '2024-04-26'
+
+---
