@@ -1,0 +1,14 @@
+---
+_id: 1cig3q7o494ae1x2wvb1ciiid6pt42r8
+author: Traveler.No1
+name: 群星清泉
+founded: '2030-03-01'
+base: 火星川陀城(Trantor City)：2155 年成立；希腊城市圈；矿业和资源产业
+category: 食品
+link: https://www.gatherstar.com.cn
+about: 
+  时属群星集团子公司，旨在合理开采行星地表与地下及山脉，冰盖等可利用，可饮用的并富含对人体有利矿元素的水资源。其开发的“火星地表”矿泉水在21世纪40年代占据了大部分市场份额，并赢得良好市场信誉。
+email: Pacifickle@outlook.com
+date: '2024-04-27'
+
+---
