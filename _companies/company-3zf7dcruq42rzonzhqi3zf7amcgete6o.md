@@ -1,0 +1,12 @@
+---
+_id: 3zf7dcruq42rzonzhqi3zf7amcgete6o
+author: suuitosika
+name: 萌思学会-MSI
+founded: '0001-01-01'
+base: 地球
+category: 咨询智库
+about: 对已有技术和已知理论的使用进行可行性验证，保存与研究实验性科技，提供对危险科技可控使用与安全操作方法的咨询。
+email: 996183315@qq.com
+date: '2024-08-19'
+
+---
