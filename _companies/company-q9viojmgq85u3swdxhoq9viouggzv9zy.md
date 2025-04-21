@@ -1,0 +1,22 @@
+---
+_id: q9viojmgq85u3swdxhoq9viouggzv9zy
+author: BLUED-WHALES
+name: 星门科技（Stargate Technologies）
+founded: '2115-04-08'
+base: 欧罗巴
+category: 科研
+about: "星门科技（Stargate Technologies）\n历史：2115年由中美欧联合体成立的超光速研发机构，2231年实现首次人工虫洞载人跳跃。目前运营着太阳系内38座星门和3条跨恒星系走廊。\n\
+  文化：极端保密制度，所有工程师植入记忆加密芯片。总部设在欧罗巴(官方所宣称的),实际上位于柯伊伯带某未知坐标的移动空间站。\n技术：\n\n民用级：实现1-10光年瞬时跃迁（误差半径≤1000公里）\n\
+  \n军用级：可展开直径5公里的战斗星门投送舰队\n\n实验级：正在测试平行宇宙观测门\n争议：2278年\"半人马座迷航事件\"导致300名乘客时间流不同步，引发时空伦理大讨论。\n
+  \nHistory: Established in 2115 by international consortium, achieved first manned
+  wormhole jump in 2231. Operates 38 solar system stargates and 3 interstellar corridors.\n
+  Culture: Extreme secrecy with memory-encrypted brain implants. Official claimed
+  that headquarters on mobile station around orbit of the Europa ,but actually in
+  unkown location of the Kuiper Belt.\nTech:\n\nCivilian: 1-10 lightyear instant jump
+  (≤1000km error)\n\nMilitary: 5km combat gates for fleet deployment\n\nExperimental:
+  Parallel universe observation gates\nControversy: 2278 Centaurus Stranding Incident
+  caused 300 passengers to desynchronize timelines, sparking ethics debates."
+email: Pacifickle@outlook.com
+date: '2025-04-21'
+
+---
