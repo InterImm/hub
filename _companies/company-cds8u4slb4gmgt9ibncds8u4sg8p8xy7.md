@@ -1,0 +1,13 @@
+---
+_id: cds8u4slb4gmgt9ibncds8u4sg8p8xy7
+author: 晨星熠熠
+name: 晨星扬升星际联盟
+founded: '2003-12-03'
+base: 火星亚特兰帝斯城(Atlantis City)：2250 年成立；亚马逊城市圈
+category: 太空探索旅游
+link: http://morningstarlove.com
+about: 晨星是一个发源地为地球的现代团体，致力于灵性的积极发展，本着为众生的体验而服务的宗旨，用爱的能量进行创造。
+email: 1959594284@qq.com
+date: '2023-12-12'
+
+---
