@@ -1,0 +1,12 @@
+---
+_id: tg1nvneumlxwi0c9uo6vtg1nvwbjq64u
+author: suuitosika
+name: 萌思学会
+founded: '2025-06-10'
+base: 地球
+category: 咨询智库
+about: 解析网络信息背后的意图，提供危险科技的保存与评估服务，确保互相毁灭、双输结局的可执行性。
+email: 996183315@qq.com
+date: '2025-06-09'
+
+---
