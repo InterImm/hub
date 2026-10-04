@@ -40,7 +40,7 @@
       noJobs: "目前没有可匹配的职位。",
       foundTitle: "登记企业", foundLede: "填写登记表，移民中心为你签发登记证书。登记处审核通过后，你的企业就会出现在登记册上，之后你可以在企业办公室里自己经营它。",
       fName: "企业名称", fNameEn: "英文名（可选）", fSeat: "所在地", fTrade: "行业", fAbout: "这家企业做什么？", fFounder: "创始人（显示在登记册上的名字）", fLink: "网站（可选）",
-      sampleName: "红灯笼茶馆", sampleAbout: "在端点城温室里种茶，在南河城西区的纸灯笼下奉茶。从第一个无尘的小时开到末班电车。",
+      choose: "请选择",
       submit: "提交登记", submitting: "正在递交……",
       certKicker: "星际移民中心", certTitle: "企业登记证书", certThis: "兹证明", certBody: (seat, region, trade) => `已列入企业登记册，住所设于${seat}（${region}），经营${trade}。`,
       regKey: "登记号", founded: "成立", founder: "创始人", issued: "签发于", registrar: "伊希地办公室 登记官",
@@ -104,7 +104,7 @@
       noJobs: "No openings match right now.",
       foundTitle: "Register a company", foundLede: "Fill in the filing and the Center issues your certificate. Once the registrar approves it, your company is on the register and you run it from your Company Office.",
       fName: "Company name", fNameEn: "English name (optional)", fSeat: "Seat", fTrade: "Trade", fAbout: "What does it do?", fFounder: "Founder (the name shown on the register)", fLink: "Website (optional)",
-      sampleName: "红灯笼茶馆", sampleAbout: "Tea grown in Terminus greenhouses, served under paper lanterns on Nanhe's west side. Open from the first dust-free hour until the last tram.",
+      choose: "Choose one",
       submit: "Submit for registration", submitting: "Filing…",
       certKicker: "Interplanetary Immigration Center", certTitle: "Certificate of Registration", certThis: "This certifies that", certBody: (seat, region, trade) => `is entered on the Company Register with its seat in ${seat}, ${region}, to carry on the trade of ${trade}.`,
       regKey: "Register key", founded: "Founded", founder: "Founder", issued: "Issued", registrar: "Registrar, Isidis office",
@@ -402,13 +402,13 @@
       <div class="found">
         <form id="foundForm" novalidate>
           ${HUB.desk ? "" : `<p class="notice-box">${esc(T.deskClosed)}</p>`}
-          <label class="field" for="fName">${esc(T.fName)}<input id="fName" maxlength="60" required value="${esc(T.sampleName)}"></label>
-          <label class="field" for="fNameEn">${esc(T.fNameEn)}<input id="fNameEn" maxlength="80" value="Red Lantern Teahouse"></label>
+          <label class="field" for="fName">${esc(T.fName)}<input id="fName" maxlength="60" required></label>
+          <label class="field" for="fNameEn">${esc(T.fNameEn)}<input id="fNameEn" maxlength="80"></label>
           <div class="two">
-            <label class="field" for="fSeat">${esc(T.fSeat)}<select id="fSeat">${seats.map(p => `<option value="${p.k}">${esc(p.cn)} ${esc(p.en)}</option>`).join("")}</select></label>
-            <label class="field" for="fTrade">${esc(T.fTrade)}<select id="fTrade">${TRADES.map(t => `<option value="${t}">${esc(t)}${lang === "en" ? " · " + esc(TRADE_EN[t]) : ""}</option>`).join("")}</select></label>
+            <label class="field" for="fSeat">${esc(T.fSeat)}<select id="fSeat" required><option value="" disabled selected>${esc(T.choose)}</option>${seats.map(p => `<option value="${p.k}">${esc(p.cn)} ${esc(p.en)}</option>`).join("")}</select></label>
+            <label class="field" for="fTrade">${esc(T.fTrade)}<select id="fTrade" required><option value="" disabled selected>${esc(T.choose)}</option>${TRADES.map(t => `<option value="${t}">${esc(t)}${lang === "en" ? " · " + esc(TRADE_EN[t]) : ""}</option>`).join("")}</select></label>
           </div>
-          <label class="field" for="fAbout">${esc(T.fAbout)}<textarea id="fAbout" maxlength="600" required>${esc(T.sampleAbout)}</textarea></label>
+          <label class="field" for="fAbout">${esc(T.fAbout)}<textarea id="fAbout" maxlength="600" required></textarea></label>
           <div class="two">
             <label class="field" for="fFounder">${esc(T.fFounder)}<input id="fFounder" maxlength="40" required autocomplete="nickname"></label>
             <label class="field" for="fLink">${esc(T.fLink)}<input id="fLink" maxlength="200" inputmode="url" placeholder="https://"></label>
@@ -419,13 +419,12 @@
         </form>
         <div class="result"><div class="cert" id="cert"></div><div id="codePanel"></div></div>
       </div>`;
-    $("#fTrade").value = "食品";
     ["fName", "fNameEn", "fSeat", "fTrade", "fFounder"].forEach(id => $("#" + id).addEventListener("input", renderCert));
     $("#foundForm").addEventListener("submit", fileCompany);
     renderCert();
   }
   function renderCert() {
-    const seat = PLACES.find(p => p.k === $("#fSeat").value) || PLACES[0];
+    const seat = PLACES.find(p => p.k === $("#fSeat").value);
     const s = signal();
     const name = $("#fName").value.trim() || "—", nameEn = $("#fNameEn").value.trim();
     const founder = $("#fFounder").value.trim() || "—";
@@ -434,7 +433,7 @@
       <p class="cert-title">${esc(T.certTitle)}</p>
       <p class="muted small">${esc(T.certThis)}</p>
       <p class="cert-name">${esc(name)}${nameEn ? `<br><span style="font-size:0.62em">${esc(nameEn)}</span>` : ""}</p>
-      <p class="cert-body">${esc(T.certBody(pname(seat), seat.region[lang === "en" ? 1 : 0], tradeName($("#fTrade").value)))}</p>
+      <p class="cert-body">${esc(T.certBody(seat ? pname(seat) : "—", seat ? seat.region[lang === "en" ? 1 : 0] : "—", $("#fTrade").value ? tradeName($("#fTrade").value) : "—"))}</p>
       <div class="cert-grid">
         <div><span>${esc(T.regKey)}</span><b>${esc(filed ? filed.key : "—")}</b></div>
         <div><span>${esc(T.founded)}</span><b>Sol ${fmtNum(Math.floor(s.msd))}</b></div>
@@ -457,7 +456,7 @@
     e.preventDefault();
     const err = $("#fileErr"); err.textContent = "";
     const body = { name: $("#fName").value, name_en: $("#fNameEn").value, seat: $("#fSeat").value, trade: $("#fTrade").value, about: $("#fAbout").value, founder: $("#fFounder").value, link: $("#fLink").value, contact: $("#fContact").value };
-    if (!body.name.trim() || !body.about.trim() || !body.founder.trim()) { err.textContent = T.errors.missing; return; }
+    if (!body.name.trim() || !body.about.trim() || !body.founder.trim() || !body.seat || !body.trade) { err.textContent = T.errors.missing; return; }
     const btn = $("#fileBtn"); btn.disabled = true; btn.textContent = T.submitting;
     try {
       const out = await desk("/register", body);
@@ -633,7 +632,7 @@
     </div>`;
   }
   const change = (kind, what) => { changes.push(`${T.ch[kind]}: ${what}`); renderOffice(); };
-  const sel = (id, vals, cur) => `<select id="${id}">${vals.map(v => `<option value="${v}" ${v === cur ? "selected" : ""}>${esc(T[v])}</option>`).join("")}</select>`;
+  const sel = (id, vals) => `<select id="${id}" required><option value="" disabled selected>${esc(T.choose)}</option>${vals.map(v => `<option value="${v}">${esc(T[v])}</option>`).join("")}</select>`;
   function renderDrawer() {
     const m = $("#officeMain"), d = draft;
     if (drawer === "jobs") {
@@ -646,15 +645,17 @@
         <form class="panel add-form" id="jobForm" novalidate><h3>${esc(T.postJob)}</h3>
           <label class="field" for="jTitle">${esc(T.jTitle)}<input id="jTitle" maxlength="60" ${full ? "disabled" : ""}></label>
           <label class="field" for="jPerk">${esc(T.jPerk)}<input id="jPerk" maxlength="140" ${full ? "disabled" : ""}></label>
-          <div class="two"><label class="field" for="jSkill">${esc(T.jSkill)}${sel("jSkill", ["tech", "craft", "data", "people"], "people")}</label><label class="field" for="jPlace">${esc(T.jPlace)}${sel("jPlace", ["city", "frontier", "orbit"], "city")}</label></div>
-          <div class="two"><label class="field" for="jRisk">${esc(T.jRisk)}${sel("jRisk", ["low", "mid", "high"], "mid")}</label><label class="field" for="jPay">${esc(T.jPay)}<input id="jPay" type="number" min="50" max="500" value="180" ${full ? "disabled" : ""}></label></div>
+          <div class="two"><label class="field" for="jSkill">${esc(T.jSkill)}${sel("jSkill", ["tech", "craft", "data", "people"])}</label><label class="field" for="jPlace">${esc(T.jPlace)}${sel("jPlace", ["city", "frontier", "orbit"])}</label></div>
+          <div class="two"><label class="field" for="jRisk">${esc(T.jRisk)}${sel("jRisk", ["low", "mid", "high"])}</label><label class="field" for="jPay">${esc(T.jPay)}<input id="jPay" type="number" min="50" max="500" placeholder="50–500" ${full ? "disabled" : ""}></label></div>
           <div class="row"><button class="btn btn-primary" type="submit" ${full ? "disabled" : ""}>${esc(T.addJob)}</button>${full ? `<span class="small muted">${esc(T.jobsFull(LIMIT.jobs))}</span>` : ""}</div>
         </form>`;
       $$("[data-renew]", m).forEach(b => b.addEventListener("click", () => { const j = d.jobs[+b.dataset.renew]; j.renew = true; change("renewJob", j.title); }));
       $$("[data-close]", m).forEach(b => b.addEventListener("click", () => { const [j] = d.jobs.splice(+b.dataset.close, 1); change("closeJob", j.title); }));
       $("#jobForm").addEventListener("submit", e => {
         e.preventDefault(); const t = $("#jTitle").value.trim(); if (!t) return $("#jTitle").focus();
-        d.jobs.push({ title: t, perk: $("#jPerk").value.trim(), skill: $("#jSkill").value, place: $("#jPlace").value, risk: $("#jRisk").value, pay: +$("#jPay").value || 180 });
+        const empty = ["jSkill", "jPlace", "jRisk", "jPay"].find(id => !$("#" + id).value);
+        if (empty) return $("#" + empty).focus();
+        d.jobs.push({ title: t, perk: $("#jPerk").value.trim(), skill: $("#jSkill").value, place: $("#jPlace").value, risk: $("#jRisk").value, pay: +$("#jPay").value });
         change("addJob", t);
       });
     } else if (drawer === "ads") {
