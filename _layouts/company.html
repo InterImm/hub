@@ -56,10 +56,11 @@
     <article class="doc-main prose">
       <p>{{ page.about | escape | newline_to_br }}</p>
 
-      {%- if page.jobs and page.jobs.size > 0 %}
       <h2>招聘 Openings</h2>
+      <p class="small muted" data-no-jobs>这家企业还没有发布具体职位。招聘会上看到的“开放申请”是按访客的回答生成的，不代表企业正在招这个岗位。<br>This company has not posted any jobs yet. Open applications at the job fair are written from the visitor's answers.</p>
+      {%- if page.jobs and page.jobs.size > 0 %}
       {%- for j in page.jobs %}
-      <div class="record-item" data-expires="{{ j.expires | escape }}">
+      <div class="record-item job" data-expires="{{ j.expires | escape }}">
         <h3>{{ j.title | escape }}</h3>
         {%- if j.perk %}<p>{{ j.perk | escape }}</p>{% endif %}
         <p class="mono small muted">{{ j.pay | escape }} cr/sol · {{ j.posted | escape }} → {{ j.expires | escape }}</p>
@@ -97,6 +98,8 @@
     document.querySelectorAll("[data-expires]").forEach(function (el) {
       if (el.dataset.expires && el.dataset.expires < today) el.hidden = true;
     });
+    var live = document.querySelector(".record-item.job:not([hidden])"), note = document.querySelector("[data-no-jobs]");
+    if (live && note) note.hidden = true;
   })();
 </script>
 </body>

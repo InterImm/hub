@@ -33,7 +33,7 @@
       start: "入职", pay: "薪酬", contract: "合同", perSol: "信用点 / 火星日",
       cLow: "两个火星年，可续约", cMid: "一个火星年，含外勤补贴", cHigh: "按考察任务计，含风险津贴",
       letterWait: d => `您的回复需要 ${d} 才能抵达我们这里。我们会等。`,
-      hr: "人事部", posted: "公司发布的职位", openAppChip: "开放申请",
+      hr: "人事部", posted: "公司发布的职位", openAppChip: "开放申请", openAppNote: "这家企业还没有发布具体职位。这封信是招聘会按你的回答生成的开放申请，不代表企业正在招这个岗位。",
       passTitle: "登机牌", passCrew: "船员铺位", passEco: "丽科航运 · 经济舱", earthPort: "地球轨道港",
       passenger: "旅客", departs: "出发", transit: "航程", seat: "座位", days: "天", arrival: "抵达时信号延迟",
       alsoHiring: "也在招人", ratherHire: "想当老板？去登记一家企业",
@@ -97,7 +97,7 @@
       start: "Start", pay: "Pay", contract: "Contract", perSol: "credits per sol",
       cLow: "Two Mars years, renewable", cMid: "One Mars year, field allowance", cHigh: "Per expedition, hazard bonus",
       letterWait: d => `Your reply will take ${d} to reach us. We will wait.`,
-      hr: "Personnel office", posted: "Posted by the company", openAppChip: "Open application",
+      hr: "Personnel office", posted: "Posted by the company", openAppChip: "Open application", openAppNote: "This company has not posted any jobs yet. The job fair wrote this open application from your answers; it does not mean the company is hiring for this role.",
       passTitle: "Boarding pass", passCrew: "crew berth", passEco: "Ricky Space economy", earthPort: "Earth orbit port",
       passenger: "Passenger", departs: "Departs", transit: "Transit", seat: "Seat", days: "days", arrival: "Signal on arrival",
       alsoHiring: "Also hiring", ratherHire: "Rather hire than be hired? Register a company",
@@ -334,8 +334,9 @@
         <p>${esc(T.letterWait(fmtDelay(s.delayMin)))}</p>
         <div class="row" style="justify-content:space-between">
           <span class="sig">${esc(c.author || T.hr)}</span>
-          <span class="chip ${job.posted ? "live" : "dashed"}">${esc(job.posted ? T.posted : T.openAppChip)}</span>
+          <span class="chip ${job.posted ? "live" : "dashed"}" ${job.posted ? "" : `title="${esc(T.openAppNote)}"`}>${esc(job.posted ? T.posted : T.openAppChip)}</span>
         </div>
+        ${job.posted ? "" : `<p class="small muted" style="margin:0.8rem 0 0">${esc(T.openAppNote)}</p>`}
       </article>
       <article class="pass" aria-label="${esc(T.passTitle)}">
         <div class="pass-main">
