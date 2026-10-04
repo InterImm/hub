@@ -1,7 +1,6 @@
 ---
 _id: vgwsng7isbcuh2kzbrao1vgwsng74w79
 author: Hesper Young
-email: 2214229882@qq.com
 name: 黄昏星-The evening star
 founded: '2104-06-24'
 base: 火星南河城

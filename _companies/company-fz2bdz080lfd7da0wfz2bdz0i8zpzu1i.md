@@ -7,7 +7,6 @@ base: 火星奇点城(Singularity City)：2145 年成立；子午线城市圈；
 category: 休闲娱乐
 link: https://www.happiness.com
 about: .居民可将自己的幸福时刻汇聚于此，欢迎光临~
-email: 3507484204@qq.com
 date: '2020-08-30'
 
 ---

@@ -7,7 +7,6 @@ base: 火星天狼城(Betelgeuse City)：2123 年成立；伊希地城市圈
 category: 休闲娱乐
 link: https://www.chenaiyuxing.com.cn
 about: 致力于2138年之后火星新型食品研发
-email: 358193739@qq.com
 date: '2022-03-07'
 
 ---

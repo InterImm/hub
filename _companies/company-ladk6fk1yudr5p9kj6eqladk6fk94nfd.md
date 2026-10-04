@@ -7,7 +7,6 @@ base: 火星星坠城(Bolide City)：2165 年成立；子午线城市圈；围�
 category: 科研
 link: https://flcws-f.github.io/BlingStarStarryInstitute/
 about: 星耀星空研究所，收集星空资料，帮助更多的人认识更多的星。
-email: flcws_f@163.com
 date: '2023-06-03'
 
 ---

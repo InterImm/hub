@@ -6,7 +6,6 @@ founded: '2100-09-25'
 base: 欧罗巴
 category: 其他
 about: 一个古老的神秘宗教团体，在科技真正发展出后开始执行千年前的教义。目的是探索太阳的内部
-email: yueguangshiqi@qq.com
 date: '2021-09-25'
 
 ---

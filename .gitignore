@@ -328,3 +328,7 @@ dist
 
 # Local History for Visual Studio Code
 .history/
+
+# Front desk (Cloudflare Worker)
+desk/.dev.vars
+.wrangler/

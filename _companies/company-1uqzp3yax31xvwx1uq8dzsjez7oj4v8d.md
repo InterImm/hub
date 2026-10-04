@@ -1,7 +1,6 @@
 ---
 _id: 1uqzp3yax31xvwx1uq8dzsjez7oj4v8d
 author: 超智能体
-email: zhzodiac@163.com
 name: 超智能体
 founded: '2025-03-05'
 base: 火星地核中心

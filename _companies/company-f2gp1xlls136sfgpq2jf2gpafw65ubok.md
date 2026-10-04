@@ -1,7 +1,6 @@
 ---
 _id: f2gp1xlls136sfgpq2jf2gpafw65ubok
 author: 林致
-email: chunglikie0607@gmail.com
 name: 新河星 - Glamour Foostar
 founded: '2020-03-10'
 base: 火星大学城

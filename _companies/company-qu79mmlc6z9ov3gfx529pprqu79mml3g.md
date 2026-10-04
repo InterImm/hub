@@ -1,7 +1,6 @@
 ---
 _id: qu79mmlc6z9ov3gfx529pprqu79mml3g
 author: 愚人教皇
-email: nicholas1367961609@gmail.com
 name: 星环 - Star Ring
 founded: '2269-03-14'
 base: 太阳系

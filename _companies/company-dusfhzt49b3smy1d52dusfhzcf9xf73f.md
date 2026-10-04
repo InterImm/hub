@@ -7,7 +7,6 @@ base: 火星星坠城(Bolide City)：2165 年成立；子午线城市圈；围�
 category: 科研
 about: "行星地质大学“产学研一体”计划建设工程项目，由行星地质大学牵头、图灵数据（Turing Big Data）公司全资资助的大数据研究机构。\n行星地质大学终身教授、图灵数据公司科技顾问——Karl
   Hoffman任图灵数据研究院首任院长。"
-email: kangjia2016@hotmail.com
 date: '2023-05-10'
 
 ---

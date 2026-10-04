@@ -1,7 +1,6 @@
 ---
 _id: crxhs2gtbjdlr93vwn9zcrxhgoedz0nd
 author: 文斌
-email: 113029678@qq.com
 name: V PARTY SPACE
 founded: '2040-02-14'
 base: 火星南高地

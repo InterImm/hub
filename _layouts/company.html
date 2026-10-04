@@ -1,0 +1,103 @@
+{%- comment -%}
+  One company's record on the register. Text comes from founders, so every value is escaped.
+  The edit-code hash (`seal`) is never printed.
+{%- endcomment -%}
+{%- assign name = page.name -%}{%- if page.name.first -%}{%- assign name = page.name.first -%}{%- endif -%}
+{%- assign base = page.base -%}{%- if page.base.first -%}{%- assign base = page.base | join: "；" -%}{%- endif -%}
+{%- assign category = page.category -%}{%- if page.category.first -%}{%- assign category = page.category | join: "、" -%}{%- endif -%}
+{%- assign href = page.link -%}{%- unless href contains "://" -%}{%- assign href = href | prepend: "http://" -%}{%- endunless -%}
+{%- assign key = page.path | split: "/" | last | remove: ".md" -%}
+{%- assign v = site.time | date: "%Y%m%d%H%M" -%}
+<!doctype html>
+<html lang="zh-CN" class="js">
+<head>
+<meta charset="utf-8">
+<script>document.documentElement.classList.add("js");(function(m){if(m)document.documentElement.dataset.theme=m[1]})(document.cookie.match(/(?:^|; )interimm-theme=(light|dark)/))</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>{{ name | strip_html | escape }} | 星际企业中心</title>
+<meta name="description" content="{{ page.about | strip_html | strip_newlines | truncate: 150 | escape }}">
+<link rel="icon" href="https://interimm.org/assets/img/favicon.ico">
+<link rel="stylesheet" href="https://interimm.org/kit/interimm.css">
+<link rel="stylesheet" href="{{ site.baseurl }}/assets/hub/hub.css?v={{ v }}">
+<script src="https://interimm.org/kit/interimm.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">跳到正文</a>
+<header class="site-header" data-interimm-header data-lang="cn" data-current="archives-hub" data-lang-en="https://interimm.org/hub/en/">
+  <div class="wrap header-inner">
+    <a class="brand" href="https://interimm.org/"><span class="brand-name">InterImm</span></a>
+  </div>
+</header>
+
+<main id="main">
+  <header class="page-hero space company-hero">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="位置"><a href="{{ site.baseurl }}/">星际企业中心</a> / <a href="{{ site.baseurl }}/#registry">企业登记册</a></nav>
+      <p class="kicker">企业登记 · Company record</p>
+      <h1>{{ name | escape }}</h1>
+      {%- if page.name_en %}<p class="lede">{{ page.name_en | escape }}</p>{% endif %}
+    </div>
+  </header>
+
+  <div class="wrap doc-grid company-record">
+    <aside class="doc-side">
+      <dl class="meta-list">
+        {%- if page.founded %}<div><dt>成立 Founded</dt><dd class="mono">{{ page.founded | escape }}</dd></div>{% endif %}
+        {%- if base %}<div><dt>所在地 Seat</dt><dd>{{ base | escape }}</dd></div>{% endif %}
+        {%- if category %}<div><dt>行业 Trade</dt><dd>{{ category | escape }}</dd></div>{% endif %}
+        {%- if page.author %}<div><dt>登记人 Filed by</dt><dd>{{ page.author | escape }}</dd></div>{% endif %}
+        {%- if page.link %}<div><dt>网站 Website</dt><dd><a class="text-link" href="{{ href | escape }}" rel="nofollow noopener">{{ page.link | remove: "https://" | remove: "http://" | truncate: 40 | escape }}</a></dd></div>{% endif %}
+        <div><dt>登记号 Register key</dt><dd class="mono small">{{ key }}</dd></div>
+      </dl>
+      <p><a class="btn btn-ghost" href="{{ site.baseurl }}/?co={{ key }}#office">{% if page.seal %}企业办公室 Company Office{% else %}认领此企业 Claim this company{% endif %}</a></p>
+    </aside>
+
+    <article class="doc-main prose">
+      <p>{{ page.about | escape | newline_to_br }}</p>
+
+      {%- if page.jobs and page.jobs.size > 0 %}
+      <h2>招聘 Openings</h2>
+      {%- for j in page.jobs %}
+      <div class="record-item" data-expires="{{ j.expires | escape }}">
+        <h3>{{ j.title | escape }}</h3>
+        {%- if j.perk %}<p>{{ j.perk | escape }}</p>{% endif %}
+        <p class="mono small muted">{{ j.pay | escape }} cr/sol · {{ j.posted | escape }} → {{ j.expires | escape }}</p>
+      </div>
+      {%- endfor %}
+      {%- endif %}
+
+      {%- if page.ads and page.ads.size > 0 %}
+      <h2>广告 Ads</h2>
+      {%- for a in page.ads %}
+      <div class="record-item" data-expires="{{ a.expires | escape }}">
+        <h3>{{ a.headline | escape }}</h3>
+        {%- if a.body %}<p>{{ a.body | escape }}</p>{% endif %}
+      </div>
+      {%- endfor %}
+      {%- endif %}
+
+      {%- if page.notices and page.notices.size > 0 %}
+      <h2>公告 Notices</h2>
+      <ul>
+      {%- for n in page.notices %}<li><span class="mono small muted">{{ n.date | escape }}</span> {{ n.text | escape }}</li>{% endfor %}
+      </ul>
+      {%- endif %}
+    </article>
+  </div>
+</main>
+
+<footer class="site-footer" data-interimm-footer>
+  <div class="wrap"><p class="footer-legal"><span>InterImm · Interplanetary Immigration Center</span></p></div>
+</footer>
+<script>
+  // Pages rebuild only when the register changes, so hide posts that ran out since.
+  (function () {
+    var today = new Date().toISOString().slice(0, 10);
+    document.querySelectorAll("[data-expires]").forEach(function (el) {
+      if (el.dataset.expires && el.dataset.expires < today) el.hidden = true;
+    });
+  })();
+</script>
+</body>
+</html>

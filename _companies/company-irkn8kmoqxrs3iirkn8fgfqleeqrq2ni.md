@@ -7,7 +7,6 @@ base: 火星视界城(Horizon City)：2148 年成立；子午线城市圈；城�
 category: 运输
 link: https://xiaoxuexpress.xiaoxu.net
 about: 晓旭星际物流运输有限公司（xiaoxu's Transgalaxies Express）是一家民营物流运输企业，承担火地间民用物品的运输，于火星殖民早期成立。
-email: bi4new@qq.com
 date: '2024-10-31'
 
 ---

@@ -1,7 +1,6 @@
 ---
 _id: w0jv4nnulads0zbmw0jv4n7j2rv48yjb
 author: 景书
-email: 1544875366@qq.com
 name: 祝融
 founded: '2027-03-26'
 base: 火星参宿城

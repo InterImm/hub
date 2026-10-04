@@ -8,6 +8,11 @@ description: > # this means to ignore newlines until "twitter_username:"
 description_en: >
   Imagine a future with your idea in it
 baseurl: '/hub'
+
+# Front desk (Cloudflare Worker in desk/, see desk/README.md). Leave desk_url empty until it is
+# deployed; the page then shows the desks but says registration is not open yet.
+desk_url: ""
+turnstile_sitekey: ""
 # social links
 twitter_username: jekyllrb
 github_username:  jekyll
@@ -28,7 +33,7 @@ rss: rss
 # - username: jekyll2
 #   instance: example.com
 
-google_analytics: UA-158106645-1
+google_analytics:
 
 show_excerpts: false # set to true to show excerpts on the homepage
 
@@ -128,7 +133,7 @@ defaults:
       path: ""
       type: "companies"
     values:
-      layout: companies
+      layout: company
       read_time: false
       author_profile: false
       share: false
@@ -216,4 +221,4 @@ compress_html:
   ignore:
     envs: development
 
-exclude: [old]
+exclude: [old, desk, node_modules, README.md, Gemfile, Gemfile.lock]

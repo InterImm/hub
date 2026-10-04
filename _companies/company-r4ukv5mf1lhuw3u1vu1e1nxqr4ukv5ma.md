@@ -1,7 +1,6 @@
 ---
 _id: r4ukv5mf1lhuw3u1vu1e1nxqr4ukv5ma
 author: bluebird89
-email: liboming88@yeah.net
 name: 渺渺微尘 Wander dust
 founded: '2020-03-26'
 base: 火星蛮荒城
