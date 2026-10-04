@@ -11,8 +11,8 @@ baseurl: '/hub'
 
 # Front desk (Cloudflare Worker in desk/, see desk/README.md). Leave desk_url empty until it is
 # deployed; the page then shows the desks but says registration is not open yet.
-desk_url: ""
-turnstile_sitekey: ""
+desk_url: "https://desk.interimm.org"
+turnstile_sitekey: "0x4AAAAAAFNeYSMJzUA7HWaV"
 # social links
 twitter_username: jekyllrb
 github_username:  jekyll
