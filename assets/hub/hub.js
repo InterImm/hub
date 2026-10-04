@@ -51,6 +51,10 @@
       officeTitle: "企业办公室", officeLede: "创始人在这里经营自己的企业：发布招聘（出现在招聘会上）、刊登广告（出现在分类广告栏）、发布公告（出现在公报上）。",
       loginTitle: "进入你的办公室", loginKey: "登记号", loginCode: "编辑码", remember: "在这台设备上记住我", enter: "进入",
       loginHelp: "登记号在登记证书上，也在登记册里每家企业的详情中。",
+      lostCode: `忘了编辑码？写信给登记处 ${REGISTRAR}，附上登记号。我们会通过你登记时留下的私人联系方式核实身份，再签发新码，旧码随即作废。`,
+      fContact: "私人联系方式（可选）", fContactHint: "邮箱或微信号。只有登记处能看到，不会出现在网站或代码库里。忘了编辑码时，我们靠它确认是你。",
+      saveImage: "保存证书图片", imageHint: "长按或右键即可保存这张图片。它带着你的编辑码，请勿分享。", codeOnCert: "编辑码 · 请勿外传",
+      contactChange: "私人联系方式",
       noCode: k => `这家企业还没有编辑码。2026 年以前登记的企业，请写信给登记处 ${REGISTRAR}，附上登记号 ${k} 和当初登记时用的称呼，我们核实后会签发编辑码。`,
       signOut: "退出", pendingReview: "等待审核", registered: "已登记",
       jobsDrawer: "招聘", adsDrawer: "广告", noticesDrawer: "公告", profileDrawer: "资料",
@@ -111,6 +115,10 @@
       officeTitle: "Company Office", officeLede: "Founders run their company here: post jobs for the job fair, place ads in the classifieds, and file notices for the gazette.",
       loginTitle: "Enter your office", loginKey: "Register key", loginCode: "Edit code", remember: "Remember me on this device", enter: "Enter",
       loginHelp: "The register key is on your certificate, and on each company's entry in the register.",
+      lostCode: `Lost your edit code? Write to the registrar at ${REGISTRAR} with your register key. We check it is you through the private contact you left, then issue a new code; the old one stops working.`,
+      fContact: "Private contact (optional)", fContactHint: "Email or WeChat ID. Only the registrar sees it; it never appears on the site or in the repository. If you lose your edit code, this is how we know it is you.",
+      saveImage: "Save certificate image", imageHint: "Long-press or right-click to save this image. It carries your edit code, so keep it private.", codeOnCert: "Edit code · keep private",
+      contactChange: "Private contact",
       noCode: k => `This company has no edit code yet. If you registered it before 2026, write to the registrar at ${REGISTRAR} with the register key ${k} and the name you filed under; we issue a code once we have checked.`,
       signOut: "Sign out", pendingReview: "Awaiting review", registered: "Registered",
       jobsDrawer: "Jobs", adsDrawer: "Ads", noticesDrawer: "Notices", profileDrawer: "Profile",
@@ -405,6 +413,7 @@
             <label class="field" for="fFounder">${esc(T.fFounder)}<input id="fFounder" maxlength="40" required autocomplete="nickname"></label>
             <label class="field" for="fLink">${esc(T.fLink)}<input id="fLink" maxlength="200" inputmode="url" placeholder="https://"></label>
           </div>
+          <label class="field" for="fContact">${esc(T.fContact)}<input id="fContact" maxlength="100" autocomplete="email" spellcheck="false"><span class="small muted">${esc(T.fContactHint)}</span></label>
           <div class="row"><button class="btn btn-primary" type="submit" id="fileBtn">${esc(T.submit)}</button></div>
           <p class="small muted" id="fileErr" role="alert"></p>
         </form>
@@ -447,7 +456,7 @@
   async function fileCompany(e) {
     e.preventDefault();
     const err = $("#fileErr"); err.textContent = "";
-    const body = { name: $("#fName").value, name_en: $("#fNameEn").value, seat: $("#fSeat").value, trade: $("#fTrade").value, about: $("#fAbout").value, founder: $("#fFounder").value, link: $("#fLink").value };
+    const body = { name: $("#fName").value, name_en: $("#fNameEn").value, seat: $("#fSeat").value, trade: $("#fTrade").value, about: $("#fAbout").value, founder: $("#fFounder").value, link: $("#fLink").value, contact: $("#fContact").value };
     if (!body.name.trim() || !body.about.trim() || !body.founder.trim()) { err.textContent = T.errors.missing; return; }
     const btn = $("#fileBtn"); btn.disabled = true; btn.textContent = T.submitting;
     try {
@@ -458,16 +467,70 @@
           <p><b>${esc(T.codeTitle)}</b></p>
           <p class="code" id="theCode">${esc(out.code)}</p>
           <p class="small">${esc(T.codeHelp)}</p>
-          <div class="row"><button class="btn btn-ghost btn-sm" type="button" id="copyCode">${esc(T.copy)}</button><button class="btn btn-primary btn-sm" type="button" id="toOffice">${esc(T.openOffice)}</button></div>
+          <div class="row"><button class="btn btn-ghost btn-sm" type="button" id="copyCode">${esc(T.copy)}</button><a class="btn btn-ghost btn-sm" id="saveCert" download="interimm-${esc(out.key)}.png">${esc(T.saveImage)}</a><button class="btn btn-primary btn-sm" type="button" id="toOffice">${esc(T.openOffice)}</button></div>
+          <figure class="cert-image"><img id="certImg" alt="${esc(T.certTitle)}"><figcaption class="small muted">${esc(T.imageHint)}</figcaption></figure>
         </div>
         <p class="notice-box" style="margin-top:1rem">${esc(T.filedPending)}</p>`;
       $("#copyCode").addEventListener("click", ev => copy(out.code, ev.currentTarget));
+      try { const png = certImage(out); $("#certImg").src = png; $("#saveCert").href = png; } catch { $("#saveCert").hidden = true; $("#certImg").closest("figure").hidden = true; }
       $("#toOffice").addEventListener("click", () => { session = { key: out.key, code: out.code, company: null, pending: true }; loadOffice(true); showTab("office", true); });
       $("#foundForm").querySelectorAll("input,select,textarea,button").forEach(x => (x.disabled = true));
     } catch (ex) {
       err.textContent = errText(ex);
       btn.disabled = false; btn.textContent = T.submit;
     }
+  }
+  // The certificate as a picture, edit code included, so founders have something to keep.
+  // Plain canvas drawing: WeChat's browser can save an <img> by long-press but not a download.
+  function certImage(out) {
+    const W = 900, H = 1240, c = document.createElement("canvas");
+    c.width = W; c.height = H;
+    const g = c.getContext("2d"), paper = "#f3eee3", ink = "#1f1c17", red = "#a8432f", grey = "#6d665b";
+    const serif = '"Noto Serif SC", "Songti SC", "SimSun", Georgia, serif', mono = '"JetBrains Mono", Menlo, Consolas, monospace';
+    g.fillStyle = paper; g.fillRect(0, 0, W, H);
+    g.strokeStyle = ink; g.lineWidth = 3; g.strokeRect(36, 36, W - 72, H - 72);
+    g.lineWidth = 1; g.strokeRect(48, 48, W - 96, H - 96);
+    g.textAlign = "center"; g.textBaseline = "alphabetic";
+    const line = (t, y, font, color) => { g.font = font; g.fillStyle = color || ink; g.fillText(t, W / 2, y); };
+    const wrap = (t, y, font, maxW, lh) => {
+      g.font = font; g.fillStyle = ink;
+      const words = /[\u3000-\u9fff]/.test(t) ? Array.from(t) : t.split(/(?<= )/);
+      let cur = "";
+      for (const w of words) { if (g.measureText(cur + w).width > maxW && cur && !/^[，。、；：！？）」』,.;:!?)]/.test(w)) { g.fillText(cur.trim(), W / 2, y); y += lh; cur = w; } else cur += w; }
+      if (cur) { g.fillText(cur.trim(), W / 2, y); y += lh; }
+      return y;
+    };
+    const seat = PLACES.find(p => p.k === $("#fSeat").value) || PLACES[0];
+    const name = $("#fName").value.trim(), nameEn = $("#fNameEn").value.trim(), founder = $("#fFounder").value.trim();
+    line(T.certKicker.toUpperCase(), 130, `600 22px ${serif}`, red);
+    line(T.certTitle, 200, `700 52px ${serif}`);
+    line(T.certThis, 262, `24px ${serif}`, grey);
+    let y = wrap(name, 340, `700 58px ${serif}`, W - 200, 70);
+    if (nameEn) y = wrap(nameEn, y - 6, `italic 30px ${serif}`, W - 200, 40);
+    y = wrap(T.certBody(pname(seat), seat.region[lang === "en" ? 1 : 0], tradeName($("#fTrade").value)), y + 24, `26px ${serif}`, W - 220, 40);
+    y += 30;
+    const rows = [[T.regKey, out.key], [T.founded, "Sol " + fmtNum(Math.floor(signal().msd))], [T.founder, founder], [T.issued, fmtDate(storyDate())]];
+    g.textAlign = "left";
+    for (const [k, v] of rows) {
+      g.font = `20px ${serif}`; g.fillStyle = grey; g.fillText(k, 130, y);
+      g.font = `600 24px ${mono}`; g.fillStyle = ink; g.textAlign = "right"; g.fillText(v, W - 130, y); g.textAlign = "left";
+      g.strokeStyle = "#cfc6b5"; g.beginPath(); g.moveTo(130, y + 14); g.lineTo(W - 130, y + 14); g.stroke();
+      y += 52;
+    }
+    g.textAlign = "center";
+    y += 30;
+    g.strokeStyle = red; g.lineWidth = 2; g.setLineDash([10, 6]); g.strokeRect(110, y, W - 220, 150); g.setLineDash([]);
+    line(T.codeOnCert, y + 44, `600 22px ${serif}`, red);
+    line(out.code, y + 112, `700 46px ${mono}`);
+    // the registrar's seal
+    const sx = W - 180, sy = H - 160;
+    g.strokeStyle = red; g.fillStyle = red; g.lineWidth = 3;
+    g.beginPath(); g.arc(sx, sy, 80, 0, Math.PI * 2); g.stroke();
+    g.lineWidth = 1.5; g.beginPath(); g.arc(sx, sy, 54, 0, Math.PI * 2); g.stroke();
+    g.font = `600 22px ${serif}`; g.fillText("REG.", sx, sy - 4); g.font = `700 26px ${serif}`; g.fillText(String(NOW_YEAR), sx, sy + 28);
+    g.textAlign = "left"; g.fillStyle = grey; g.font = `22px ${serif}`;
+    g.fillText(T.registrar, 110, H - 150); g.fillText("interimm.org/hub", 110, H - 116);
+    return c.toDataURL("image/png");
   }
   function copy(text, btn) {
     const done = () => { btn.textContent = T.copied; setTimeout(() => (btn.textContent = T.copy), 1600); };
@@ -485,6 +548,7 @@
       jobs: (company.jobs || []).filter(j => !j.expires || j.expires >= today()).map(j => ({ ...j })),
       ads: (company.ads || []).filter(a => !a.expires || a.expires >= today()).map(a => ({ ...a })),
       notices: (company.notices || []).map(n => ({ ...n })),
+      contact: session.contact || "",
     };
     changes = [];
   }
@@ -493,7 +557,7 @@
     $("#office").setAttribute("aria-busy", "true");
     try {
       const out = await desk("/verify", { key: session.key, code: session.code });
-      session.company = out.company; session.pending = out.pending;
+      session.company = out.company; session.pending = out.pending; session.contact = out.contact || "";
       startDraft(out.company);
     } catch (ex) {
       if (!fromFiling) { const msg = errText(ex); session = null; store.set("hub-office", null); renderOffice(msg); return; }
@@ -519,6 +583,7 @@
           <label class="check" for="lRemember"><input type="checkbox" id="lRemember"> ${esc(T.remember)}</label>
           <div class="row"><button class="btn btn-primary" type="submit" id="lBtn">${esc(T.enter)}</button></div>
           <p class="small muted">${esc(T.loginHelp)}</p>
+          <p class="small muted">${esc(T.lostCode)}</p>
           <p class="small" role="alert" id="lErr" style="color:var(--accent)">${esc(error || "")}</p>
         </form>`;
       $("#loginForm").addEventListener("submit", async e => {
@@ -629,11 +694,14 @@
           <label class="field" for="pEn">${esc(T.fNameEn)}<input id="pEn" maxlength="80" value="${esc(d.profile.name_en)}"></label>
           <label class="field" for="pAbout">${esc(T.fAbout)}<textarea id="pAbout" maxlength="600">${esc(d.profile.about)}</textarea></label>
           <label class="field" for="pLink">${esc(T.fLink)}<input id="pLink" maxlength="200" value="${esc(d.profile.link)}"></label>
+          <label class="field" for="pContact">${esc(T.contactChange)}<input id="pContact" maxlength="100" spellcheck="false" value="${esc(d.contact)}"><span class="small muted">${esc(T.fContactHint)}</span></label>
           <div class="row"><button class="btn btn-primary" type="submit">${esc(T.saveProfile)}</button></div>
         </form>`;
       $("#profForm").addEventListener("submit", e => {
         e.preventDefault();
         Object.assign(d.profile, { name: $("#pN").value.trim() || d.profile.name, name_en: $("#pEn").value.trim(), about: $("#pAbout").value.trim(), link: $("#pLink").value.trim() });
+        const contact = $("#pContact").value.trim();
+        if (contact !== d.contact) { d.contact = contact; d.contactChanged = true; }
         d.profileChanged = true; change("profile", d.profile.name);
       });
     }
@@ -648,9 +716,10 @@
     const strip = ({ title, perk, skill, place, risk, pay, id, renew, headline, body, text }) => ({ title, perk, skill, place, risk, pay, id, renew, headline, body, text });
     const body = { key: session.key, code: session.code, jobs: draft.jobs.map(strip), ads: draft.ads.map(strip), notices: draft.notices.map(strip) };
     if (draft.profileChanged) body.profile = draft.profile;
+    if (draft.contactChanged) body.contact = draft.contact;
     try {
       const out = await desk("/update", body);
-      session.company = out.company; startDraft(out.company);
+      session.company = out.company; session.contact = out.contact || ""; startDraft(out.company);
       toast(T.saved);
       // reflect the change on this page straight away, before Pages rebuilds
       const i = REG.findIndex(c => c.key === session.key);

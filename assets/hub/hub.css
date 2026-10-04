@@ -186,3 +186,6 @@
   .letter { padding: 1.2rem; }
 }
 .company-hero h1 { font-size: clamp(1.8rem, 4.5vw, 2.8rem); overflow-wrap: anywhere; }
+.cert-image { margin: 1rem 0 0; }
+.cert-image img { display: block; width: 100%; max-width: 360px; height: auto; border: 1px solid var(--border); }
+.cert-image figcaption { margin-top: 0.4rem; }

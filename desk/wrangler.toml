@@ -16,3 +16,9 @@ ALLOWED_ORIGINS = "https://interimm.org,https://www.interimm.org"
 #   GITHUB_TOKEN      fine-grained token for InterImm/hub: Contents, Pull requests and Issues read/write
 #   TURNSTILE_SECRET  secret key of the Turnstile widget for interimm.org
 #   ADMIN_KEY         any long random string; the registrar uses it to issue new edit codes
+
+# Founders' private contacts (optional; only the registrar can read them). Create the namespace with
+# `npx wrangler kv namespace create CONTACTS`, then uncomment these lines and paste the id it prints.
+# [[kv_namespaces]]
+# binding = "CONTACTS"
+# id = ""

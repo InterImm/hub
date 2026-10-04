@@ -166,3 +166,26 @@ test("edit codes are easy to read back", () => {
   assert.equal(normalizeCode(c.toLowerCase().replace(/-/g, " ")), c.replace(/-/g, ""));
   assert.equal(normalizeCode("o0il-1"), "00111");
 });
+
+test("a private contact is kept in KV, never in the public file, and only the registrar can read it", async () => {
+  const kv = new Map();
+  env.CONTACTS = { get: async k => kv.get(k) ?? null, put: async (k, v) => void kv.set(k, v), delete: async k => void kv.delete(k) };
+  try {
+    const r = await call("/register", { ...filing, contact: "wechat: lantern42" });
+    assert.equal(r.data.contact, true);
+    assert.ok(!files[`register/${r.data.key}`][`_companies/${r.data.key}.md`].text.includes("lantern42"));
+    merge(r.data.key);
+    const v = await call("/verify", { key: r.data.key, code: r.data.code });
+    assert.equal(v.data.contact, "wechat: lantern42");
+    const u = await call("/update", { key: r.data.key, code: r.data.code, contact: "tea@example.org" });
+    assert.equal(u.data.contact, "tea@example.org");
+    assert.ok(!files["gh-pages"][`_companies/${r.data.key}.md`].text.includes("example.org"));
+    assert.equal((await call("/admin/contact", { key: r.data.key })).status, 401);
+    const a = await call("/admin/contact", { key: r.data.key }, { Authorization: "Bearer registrar-key" });
+    assert.equal(a.data.contact, "tea@example.org");
+    await call("/update", { key: r.data.key, code: r.data.code, contact: "" });
+    assert.equal(kv.size, 0);
+  } finally {
+    delete env.CONTACTS;
+  }
+});

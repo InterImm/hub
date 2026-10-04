@@ -18,7 +18,7 @@ import { parse, stringify } from "yaml";
 export const STORY_OFFSET_DAYS = 70491; // InterImm story date = Earth date + 70,491 days (year 2219 in 2026)
 export const POST_DAYS = 31; // a job or ad runs ~30 sols
 export const CAPS = { jobs: 3, ads: 2, notices: 5 };
-const LIMITS = { name: 60, name_en: 80, about: 600, link: 200, founder: 40, title: 60, perk: 140, headline: 40, body: 160, notice: 120 };
+const LIMITS = { name: 60, name_en: 80, about: 600, link: 200, founder: 40, title: 60, perk: 140, headline: 40, body: 160, notice: 120, contact: 100 };
 const SKILLS = ["tech", "craft", "data", "people"];
 const PLACES = ["city", "frontier", "orbit"];
 const RISKS = ["low", "mid", "high"];
@@ -59,6 +59,7 @@ export default {
       if (request.method !== "POST") throw new DeskError(404, "not_found");
       const body = await readJson(request);
       if (url.pathname === "/admin/reset") return json(await adminReset(body, request, env), 200, cors);
+      if (url.pathname === "/admin/contact") return json(await adminContact(body, request, env), 200, cors);
       if (!cors["Access-Control-Allow-Origin"]) throw new DeskError(403, "origin", "This desk only serves interimm.org pages.");
       await checkTurnstile(body.turnstile, request, env);
       if (url.pathname === "/register") return json(await register(body, env), 200, cors);
@@ -84,6 +85,7 @@ export async function register(body, env) {
   const about = text(body.about, LIMITS.about, true, "about");
   const founder = text(body.founder, LIMITS.founder, true, "founder");
   const link = optionalLink(body.link);
+  const contact = text(body.contact, LIMITS.contact);
 
   const key = "company-" + randomString(20, "abcdefghijklmnopqrstuvwxyz0123456789");
   const code = newCode();
@@ -131,28 +133,34 @@ export async function register(body, env) {
     },
   });
   try { await gh(`/issues/${pr.number}/labels`, { method: "POST", body: { labels: ["new-company"] } }); } catch {}
-  return { ok: true, key, code, pending: true, review: pr.number };
+  const contactKept = contact ? await putContact(env, key, contact) : false;
+  return { ok: true, key, code, pending: true, review: pr.number, contact: contactKept };
 }
 
 export async function verify(body, env) {
   const key = companyKey(body.key);
   const doc = await readCompany(env, key, { allowPending: true });
   await checkSeal(key, body.code, doc.front);
-  return { ok: true, key, pending: doc.pending, company: publicRecord(doc.front) };
+  return { ok: true, key, pending: doc.pending, company: publicRecord(doc.front), contact: await getContact(env, key) };
 }
 
 export async function update(body, env) {
   const key = companyKey(body.key);
+  const contact = body.contact === undefined ? undefined : text(body.contact, LIMITS.contact);
   for (let attempt = 0; ; attempt++) {
     const doc = await readCompany(env, key);
     await checkSeal(key, body.code, doc.front);
+    if (contact !== undefined && attempt === 0) await putContact(env, key, contact);
+    if (!["profile", "jobs", "ads", "notices"].some(f => body[f] !== undefined)) {
+      return { ok: true, key, company: publicRecord(doc.front), contact: await getContact(env, key) };
+    }
     const front = applyUpdate(doc.front, body, new Date());
     try {
       await github(env)(`/contents/${companyPath(key)}`, {
         method: "PUT",
         body: { message: `Office update: ${plainName(front.name)} (${key})`, content: b64encode(serialize(front, doc.rest)), sha: doc.sha, branch: env.GITHUB_BRANCH, committer: committer(env) },
       });
-      return { ok: true, key, company: publicRecord(front) };
+      return { ok: true, key, company: publicRecord(front), contact: await getContact(env, key) };
     } catch (e) {
       if (e.ghStatus === 409 && attempt === 0) continue; // someone else saved first: re-read and apply again
       throw e;
@@ -160,9 +168,14 @@ export async function update(body, env) {
   }
 }
 
+export async function adminContact(body, request, env) {
+  checkAdmin(request, env);
+  const key = companyKey(body.key);
+  return { ok: true, key, contact: await getContact(env, key) };
+}
+
 export async function adminReset(body, request, env) {
-  const given = (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
-  if (!env.ADMIN_KEY || !given || !safeEqual(given, env.ADMIN_KEY)) throw new DeskError(401, "admin", "Wrong registrar key.");
+  checkAdmin(request, env);
   const key = companyKey(body.key);
   const doc = await readCompany(env, key);
   const code = newCode();
@@ -171,7 +184,29 @@ export async function adminReset(body, request, env) {
     method: "PUT",
     body: { message: `New edit code for ${plainName(doc.front.name)} (${key})`, content: b64encode(serialize(doc.front, doc.rest)), sha: doc.sha, branch: env.GITHUB_BRANCH, committer: committer(env) },
   });
-  return { ok: true, key, code };
+  return { ok: true, key, code, contact: await getContact(env, key) };
+}
+
+function checkAdmin(request, env) {
+  const given = (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
+  if (!env.ADMIN_KEY || !given || !safeEqual(given, env.ADMIN_KEY)) throw new DeskError(401, "admin", "Wrong registrar key.");
+}
+
+/* ---------------- private contacts ---------------- */
+
+// A way for the registrar to check who is asking for a new edit code. Kept in Workers KV
+// (binding CONTACTS), never in the public repository. Without the binding, contacts are not kept.
+async function putContact(env, key, contact) {
+  if (!env.CONTACTS) return false;
+  if (contact) await env.CONTACTS.put(key, JSON.stringify({ contact, at: new Date().toISOString() }));
+  else await env.CONTACTS.delete(key);
+  return Boolean(contact);
+}
+async function getContact(env, key) {
+  if (!env.CONTACTS) return null;
+  const v = await env.CONTACTS.get(key);
+  if (!v) return null;
+  try { return JSON.parse(v).contact || null; } catch { return null; }
 }
 
 /* ---------------- the update rules ---------------- */
