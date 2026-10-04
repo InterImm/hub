@@ -20,7 +20,7 @@
       desks: "服务台", desk1: "服务台 1", desk2: "服务台 2", desk3: "服务台 3", desk4: "服务台 4",
       fairTab: "招聘会", foundTab: "登记企业", officeTab: "企业办公室", registryTab: "企业登记册",
       fairTitle: "2219 年星际招聘会", fairLede: "回答三个问题，移民中心为你匹配一个职位，写好录用信，并订好你的船票。",
-      yourName: "你的名字（印在船票上）", defaultName: "林薇",
+      yourName: "你的名字（印在船票上）", defaultName: "新移民",
       q1: "你擅长什么？", q2: "你想在哪里醒来？", q3: "你愿意冒多大风险？",
       tech: "机器", techS: "修理、驾驶、让一切运转", craft: "种植与制作", craftS: "植物、食物、看得见摸得着的东西",
       data: "数字与信号", dataS: "数据、网络、金融", people: "人与故事", peopleS: "教书、照护、讲述",
@@ -84,7 +84,7 @@
       desks: "Desks", desk1: "DESK 1", desk2: "DESK 2", desk3: "DESK 3", desk4: "DESK 4",
       fairTab: "Job fair", foundTab: "Register a company", officeTab: "Company Office", registryTab: "The register",
       fairTitle: "Job fair, 2219", fairLede: "Answer three questions. The Center matches you to an opening, writes your offer and books your passage.",
-      yourName: "Your name, as it should appear on the pass", defaultName: "Lin Wei",
+      yourName: "Your name, as it should appear on the pass", defaultName: "Newcomer",
       q1: "What are you good at?", q2: "Where do you want to wake up?", q3: "How much risk will you take?",
       tech: "Machines", techS: "Fixing, flying, keeping things running", craft: "Growing and making", craftS: "Plants, food, things you can hold",
       data: "Numbers and signals", dataS: "Data, networks, money", people: "People and stories", peopleS: "Teaching, caring, telling",
@@ -373,7 +373,7 @@
       <div class="desk-head"><h2>${esc(T.fairTitle)}</h2><p class="muted">${esc(T.fairLede)}</p></div>
       <div class="fair">
         <div class="quiz">
-          <label class="field" for="pName">${esc(T.yourName)}<input id="pName" maxlength="28" autocomplete="name" value="${esc(store.get("hub-name", T.defaultName))}"></label>
+          <label class="field" for="pName">${esc(T.yourName)}<input id="pName" maxlength="28" autocomplete="name" placeholder="${esc(T.defaultName)}" value="${esc(store.get("hub-name", ""))}"></label>
           <div class="q" data-q="skill"><div class="q-title"><span class="mono">01</span><h3>${esc(T.q1)}</h3></div><div class="opts">${["tech", "craft", "data", "people"].map(v => opt(v)).join("")}</div></div>
           <div class="q" data-q="place"><div class="q-title"><span class="mono">02</span><h3>${esc(T.q2)}</h3></div><div class="opts">${["city", "frontier", "orbit"].map(v => opt(v)).join("")}</div></div>
           <div class="q" data-q="risk"><div class="q-title"><span class="mono">03</span><h3>${esc(T.q3)}</h3></div><div class="opts">${["low", "mid", "high"].map(v => opt(v)).join("")}</div></div>
@@ -390,7 +390,7 @@
     });
     $("#matchBtn").addEventListener("click", () => match(false));
     $("#luckyBtn").addEventListener("click", () => match(true));
-    $("#pName").addEventListener("change", () => { store.set("hub-name", $("#pName").value.trim()); if (lastOffer) renderOffer(lastOffer.job, lastOffer.others); });
+    $("#pName").addEventListener("input", () => { store.set("hub-name", $("#pName").value.trim()); if (lastOffer) renderOffer(lastOffer.job, lastOffer.others); });
   }
 
   /* ================= desk 2: register ================= */
