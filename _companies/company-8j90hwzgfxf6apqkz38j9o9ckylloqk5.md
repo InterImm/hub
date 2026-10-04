@@ -1,7 +1,6 @@
 ---
 _id: 8j90hwzgfxf6apqkz38j9o9ckylloqk5
 author: Aipoter
-email: 1182026036@qq.com
 name: 深空资源开发公司
 founded: '2037-07-17'
 base: 火星端点城南侧

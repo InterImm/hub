@@ -1,7 +1,6 @@
 ---
 _id: vbv0hvy1zno60ej7gm5shvbv0hvkgkaj
 author: 狼偏
-email: 1752116931@qq.com
 name: 生命图画-TPL
 founded: '2020-08-13'
 base: 火星川陀城

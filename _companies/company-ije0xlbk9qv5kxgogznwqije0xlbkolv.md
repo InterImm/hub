@@ -19,7 +19,6 @@ about: "由光圈实验室(Aperture Laboratories)又名光圈科技(Aperture Sci
   \ Fixtures)成立,主业:浴帘制造商.\n1956年:光圈夹具(Aperture Fixtures)转型为光圈实验室(Aperture Laboratories),主业:科研与浴帘制造商.\n\
   1971年:建造北极光号(Borealis),并在同年失踪,主业:科研与军火.\n1988年:找到北极光号(Borealis),公司变为北极光实验室(Borealis\
   \ Laboratories),在月球建立新设施,主业:科研,军火与浴帘制造商.\n\n目前公司几乎由GLaDOS独裁."
-email: 122506548@qq.com
 date: '2022-07-02'
 
 ---

@@ -1,0 +1,70 @@
+{%- assign lang = page.lang | default: "cn" -%}
+{%- assign v = site.time | date: "%Y%m%d%H%M" -%}
+<!doctype html>
+<html lang="{% if lang == 'en' %}en{% else %}zh-CN{% endif %}" class="js">
+<head>
+<meta charset="utf-8">
+<script>document.documentElement.classList.add("js");(function(m){if(m)document.documentElement.dataset.theme=m[1]})(document.cookie.match(/(?:^|; )interimm-theme=(light|dark)/))</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>{% if lang == 'en' %}Company Hub | InterImm{% else %}星际企业中心 | 星际移民中心{% endif %}</title>
+<meta name="description" content="{% if lang == 'en' %}The Interplanetary Immigration Center's company register: find work on Mars, register your own company and run it from your Company Office.{% else %}星际移民中心企业登记处：在火星找工作，登记你自己的星际企业，并在企业办公室里发布招聘和广告。{% endif %}">
+<link rel="icon" href="https://interimm.org/assets/img/favicon.ico">
+<link rel="stylesheet" href="https://interimm.org/kit/interimm.css">
+<link rel="stylesheet" href="{{ site.baseurl }}/assets/hub/hub.css?v={{ v }}">
+<script src="https://interimm.org/kit/interimm.js" defer></script>
+{%- if site.turnstile_sitekey != "" %}
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+{%- endif %}
+<script>
+  window.HUB = {
+    lang: {{ lang | jsonify }},
+    base: {{ site.baseurl | jsonify }},
+    desk: {{ site.desk_url | jsonify }},
+    sitekey: {{ site.turnstile_sitekey | jsonify }}
+  };
+</script>
+<script src="{{ site.baseurl }}/assets/hub/hub.js?v={{ v }}" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">{% if lang == 'en' %}Skip to content{% else %}跳到正文{% endif %}</a>
+
+<header class="site-header" data-interimm-header data-lang="{{ lang }}" data-current="archives-hub"
+  data-lang-cn="https://interimm.org/hub/" data-lang-en="https://interimm.org/hub/en/">
+  <div class="wrap header-inner">
+    <a class="brand" href="https://interimm.org/{% if lang == 'en' %}en/{% endif %}"><span class="brand-name">InterImm</span></a>
+  </div>
+</header>
+
+<main id="main">
+  <header class="page-hero space">
+    <div class="wrap">
+      <p class="kicker" data-t="heroKicker"></p>
+      <h1 data-t="heroTitle"></h1>
+      <p class="lede" data-t="heroLede"></p>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <nav class="hub-tabs" role="tablist" data-t-label="desks">
+      <button class="hub-tab" role="tab" id="tab-fair" aria-controls="fair" aria-selected="true"><span class="n mono" data-t="desk1"></span><span class="t" data-t="fairTab"></span></button>
+      <button class="hub-tab" role="tab" id="tab-found" aria-controls="found" aria-selected="false"><span class="n mono" data-t="desk2"></span><span class="t" data-t="foundTab"></span></button>
+      <button class="hub-tab" role="tab" id="tab-office" aria-controls="office" aria-selected="false"><span class="n mono" data-t="desk3"></span><span class="t" data-t="officeTab"></span></button>
+      <button class="hub-tab" role="tab" id="tab-registry" aria-controls="registry" aria-selected="false"><span class="n mono" data-t="desk4"></span><span class="t" data-t="registryTab"></span></button>
+    </nav>
+
+    <section class="desk" id="fair" role="tabpanel" aria-labelledby="tab-fair"></section>
+    <section class="desk" id="found" role="tabpanel" aria-labelledby="tab-found" hidden></section>
+    <section class="desk" id="office" role="tabpanel" aria-labelledby="tab-office" hidden></section>
+    <section class="desk" id="registry" role="tabpanel" aria-labelledby="tab-registry" hidden></section>
+    <noscript><p class="desk">{% if lang == 'en' %}The hub needs JavaScript. The full register is also at <a href="{{ site.baseurl }}/api/hub.json">api/hub.json</a>.{% else %}企业中心需要启用 JavaScript。完整登记册也可在 <a href="{{ site.baseurl }}/api/hub.json">api/hub.json</a> 查看。{% endif %}</p></noscript>
+  </div>
+  <div id="ts" class="hub-ts" aria-live="polite"></div>
+</main>
+
+<footer class="site-footer" data-interimm-footer>
+  <div class="wrap"><p class="footer-legal"><span>InterImm · Interplanetary Immigration Center</span></p></div>
+</footer>
+<div class="hub-toast" id="toast" role="status" hidden></div>
+</body>
+</html>

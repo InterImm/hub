@@ -1,7 +1,6 @@
 ---
 _id: tgwcdsjo8m7kqwpkftgwafhs0kc642qp
 author: MagicKyaw
-email: 1355455605@qq.com
 name: Kyaw基金
 founded: '2020-03-23'
 base: 火星南河城

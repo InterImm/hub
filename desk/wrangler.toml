@@ -1,0 +1,24 @@
+# Cloudflare Worker for the hub's front desk. Setup steps: desk/README.md.
+name = "interimm-front-desk"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+
+# workers.dev addresses are blocked in mainland China, so the desk lives on interimm.org.
+workers_dev = false
+routes = [{ pattern = "desk.interimm.org", custom_domain = true }]
+
+[vars]
+GITHUB_REPO = "InterImm/hub"
+GITHUB_BRANCH = "gh-pages"
+ALLOWED_ORIGINS = "https://interimm.org,https://www.interimm.org"
+
+# Secrets (set with `npx wrangler secret put NAME`, never committed):
+#   GITHUB_TOKEN      fine-grained token for InterImm/hub: Contents, Pull requests and Issues read/write
+#   TURNSTILE_SECRET  secret key of the Turnstile widget for interimm.org
+#   ADMIN_KEY         any long random string; the registrar uses it to issue new edit codes
+
+# Founders' private contacts (only the registrar can read them). Created with
+# `npx wrangler kv namespace create CONTACTS`.
+[[kv_namespaces]]
+binding = "CONTACTS"
+id = "41e36679f72b4ce2bba34558cb130973"

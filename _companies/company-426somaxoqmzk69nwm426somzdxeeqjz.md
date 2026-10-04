@@ -1,7 +1,6 @@
 ---
 _id: 426somaxoqmzk69nwm426somzdxeeqjz
 author: MagicKyaw
-email: 1355455605@qq.com
 name: Magic基金
 founded: '2020-03-23'
 base: 火星南河城

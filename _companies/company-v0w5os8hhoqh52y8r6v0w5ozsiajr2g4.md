@@ -6,7 +6,6 @@ founded: '2021-01-14'
 base: 月球
 category: 能源矿产
 about: some energy from the sun turn to something on the moon
-email: 962018024@qq.com
 date: '2021-01-14'
 
 ---

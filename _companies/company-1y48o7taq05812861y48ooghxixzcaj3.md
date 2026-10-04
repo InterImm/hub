@@ -1,7 +1,6 @@
 ---
 _id: 1y48o7taq05812861y48ooghxixzcaj3
 author: Octopus
-email: 1311931211@qq.com
 name: 宇涵医院
 founded: '2032-12-11'
 base: 天狼域

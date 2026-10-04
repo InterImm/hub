@@ -1,7 +1,6 @@
 ---
 _id: gatcj0dijfvze83kgatcqgzvt7jj3vhl
 author: 颜缎日
-email: xxy20070803@163.com
 name: 颜缎小行星房地产开发与租售有限公司
 founded: '2020-03-05'
 base: 小行星带α扇形区

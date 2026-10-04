@@ -6,7 +6,6 @@ founded: '2028-10-01'
 base: 月球
 category: 科研
 about: T于2028/10/1创建的科技公司，旨在开发各种新型科技。
-email: dtj163163@163.com
 date: '2020-04-10'
 
 ---

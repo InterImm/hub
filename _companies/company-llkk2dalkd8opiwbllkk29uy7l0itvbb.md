@@ -1,7 +1,6 @@
 ---
 _id: llkk2dalkd8opiwbllkk29uy7l0itvbb
 author: 5年模拟3年摸鱼
-email: 2582674882@qq.com
 name: 星汉考试组织 - Galaxy Education Organization
 founded: '2167-05-31'
 base: 火星星坠城

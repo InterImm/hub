@@ -17,7 +17,6 @@ about: "深空酿造厂（Voidcraft Brewery）\n历史：2120年诞生于月球�
   bubbles requiring magnetic opening)\nMarket: 900 million liters annual output, 40%
   supplied to space station entertainment zones. Flagship \"Event Horizon\" Stout
   is UN Space Day official drink."
-email: Pacifickle@outlook.com
 date: '2025-04-21'
 
 ---

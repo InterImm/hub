@@ -1,7 +1,6 @@
 ---
 _id: bckuju9txlg4kgbj3y6oe86bckuju9tx
 author: Nck
-email: nhuang817@iCloud.com
 name: 杭黄
 founded: '2220-02-22'
 base: 楼兰城

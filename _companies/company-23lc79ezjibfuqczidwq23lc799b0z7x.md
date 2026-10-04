@@ -1,7 +1,6 @@
 ---
 _id: 23lc79ezjibfuqczidwq23lc799b0z7x
 author: Apocalypse
-email: 2247761119@qq.com
 name: ESCHATOLOGY
 founded: '2020-02-25'
 base: Wills street

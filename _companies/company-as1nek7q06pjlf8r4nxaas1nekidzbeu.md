@@ -6,7 +6,6 @@ founded: '2035-01-01'
 base: 火星楼兰城(Kroran City)：2250 年成立；亚马逊城市圈
 category: 农业
 about: 新型农业产品研发，开启火星居民饮食习惯大变化的时代
-email: DADANXIAOPAN@163.com
 date: '2022-07-28'
 
 ---

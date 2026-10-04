@@ -1,0 +1,28 @@
+---
+layout: null
+---
+{%- comment -%}
+  The register as the hub page reads it. Fields are passed through as they are in the
+  company files (name, base and category can be a string or a list); hub.js normalises them.
+  Never add `seal` here.
+{%- endcomment -%}
+{"generated": {{ site.time | date_to_xmlschema | jsonify }}, "companies": [
+{%- for c in site.companies -%}
+{"key": {{ c.path | split: "/" | last | remove: ".md" | jsonify }},
+ "url": {{ c.url | prepend: site.baseurl | jsonify }},
+ "name": {{ c.name | jsonify }},
+ "name_en": {{ c.name_en | jsonify }},
+ "founded": {{ c.founded | jsonify }},
+ "base": {{ c.base | jsonify }},
+ "category": {{ c.category | jsonify }},
+ "about": {{ c.about | jsonify }},
+ "link": {{ c.link | jsonify }},
+ "author": {{ c.author | jsonify }},
+ "date": {{ c.date | date: "%Y-%m-%d" | jsonify }},
+ "updated": {{ c.updated | jsonify }},
+ "office": {% if c.seal %}true{% else %}false{% endif %},
+ "jobs": {{ c.jobs | jsonify }},
+ "ads": {{ c.ads | jsonify }},
+ "notices": {{ c.notices | jsonify }}}{% unless forloop.last %},{% endunless %}
+{% endfor -%}
+]}
