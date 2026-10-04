@@ -42,7 +42,7 @@ interimm.org's DNS is already on Cloudflare, which the custom domain below needs
    npx wrangler secret put GITHUB_TOKEN       # the token from step 2
    npx wrangler secret put TURNSTILE_SECRET   # the secret from step 1
    npx wrangler secret put ADMIN_KEY          # any long random string, e.g. `openssl rand -hex 24`
-   npx wrangler kv namespace create CONTACTS  # then uncomment [[kv_namespaces]] in wrangler.toml and paste the id
+   npx wrangler kv namespace create CONTACTS  # only for a new account: put the id it prints in wrangler.toml
    npx wrangler deploy                        # also creates desk.interimm.org
    ```
    `curl https://desk.interimm.org/` should answer `{"ok":true,...}`.
