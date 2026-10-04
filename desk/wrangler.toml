@@ -17,8 +17,8 @@ ALLOWED_ORIGINS = "https://interimm.org,https://www.interimm.org"
 #   TURNSTILE_SECRET  secret key of the Turnstile widget for interimm.org
 #   ADMIN_KEY         any long random string; the registrar uses it to issue new edit codes
 
-# Founders' private contacts (optional; only the registrar can read them). Create the namespace with
-# `npx wrangler kv namespace create CONTACTS`, then uncomment these lines and paste the id it prints.
+# Founders' private contacts (only the registrar can read them). Created with
+# `npx wrangler kv namespace create CONTACTS`.
 [[kv_namespaces]]
 binding = "CONTACTS"
 id = "41e36679f72b4ce2bba34558cb130973"
