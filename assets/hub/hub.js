@@ -20,14 +20,14 @@
       desks: "服务台", desk1: "服务台 1", desk2: "服务台 2", desk3: "服务台 3", desk4: "服务台 4",
       fairTab: "招聘会", foundTab: "登记企业", officeTab: "企业办公室", registryTab: "企业登记册",
       fairTitle: "2219 年星际招聘会", fairLede: "回答三个问题，移民中心为你匹配一个职位，写好录用信，并订好你的船票。",
-      yourName: "你的名字（印在船票上）", defaultName: "新移民",
+      yourName: "你的名字（印在船票上）", 
       q1: "你擅长什么？", q2: "你想在哪里醒来？", q3: "你愿意冒多大风险？",
       tech: "机器", techS: "修理、驾驶、让一切运转", craft: "种植与制作", craftS: "植物、食物、看得见摸得着的东西",
       data: "数字与信号", dataS: "数据、网络、金融", people: "人与故事", peopleS: "教书、照护、讲述",
       city: "热闹的城市", cityS: "南河城的街道、电车和喧闹", frontier: "边疆穹顶", frontierS: "沙尘、安静、望得很远", orbit: "天上", orbitS: "在轨道上或在航行中",
       low: "稳定合同", lowS: "固定工时，密封走廊", mid: "偶尔沾点沙", midS: "时不时出外勤", high: "什么都行", highS: "只要有故事可讲",
       match: "为我匹配", lucky: "随便来一个",
-      letterDear: n => `${n}，您好：`,
+      letterDear: n => n ? `${n}，您好：` : "您好：",
       letterBody: (t, city) => `我们很高兴向您提供<strong>${t}</strong>一职，工作地点为本公司${city}办公室。`,
       openApp: "我们一直欢迎这个方向的人才，请把这封信当作邀请。",
       start: "入职", pay: "薪酬", contract: "合同", perSol: "信用点 / 火星日",
@@ -84,14 +84,14 @@
       desks: "Desks", desk1: "DESK 1", desk2: "DESK 2", desk3: "DESK 3", desk4: "DESK 4",
       fairTab: "Job fair", foundTab: "Register a company", officeTab: "Company Office", registryTab: "The register",
       fairTitle: "Job fair, 2219", fairLede: "Answer three questions. The Center matches you to an opening, writes your offer and books your passage.",
-      yourName: "Your name, as it should appear on the pass", defaultName: "Newcomer",
+      yourName: "Your name, as it should appear on the pass", 
       q1: "What are you good at?", q2: "Where do you want to wake up?", q3: "How much risk will you take?",
       tech: "Machines", techS: "Fixing, flying, keeping things running", craft: "Growing and making", craftS: "Plants, food, things you can hold",
       data: "Numbers and signals", dataS: "Data, networks, money", people: "People and stories", peopleS: "Teaching, caring, telling",
       city: "A busy city", cityS: "Nanhe streets, trams, noise", frontier: "A frontier dome", frontierS: "Dust, quiet, a long view", orbit: "Up above", orbitS: "In orbit or in transit",
       low: "A steady contract", lowS: "Fixed hours, sealed corridors", mid: "Some dust on my boots", midS: "Field days now and then", high: "Anything", highS: "If it pays in stories",
       match: "Match me", lucky: "Surprise me",
-      letterDear: n => `Dear ${n},`,
+      letterDear: n => n ? `Dear ${n},` : "Hello,",
       letterBody: (t, city) => `We are pleased to offer you the position of <strong>${t}</strong> at our ${city} office.`,
       openApp: "We are always glad to hear from people like you; take this letter as an invitation.",
       start: "Start", pay: "Pay", contract: "Contract", perSol: "credits per sol",
@@ -310,7 +310,7 @@
   }
   function renderOffer(job, others) {
     const c = job.c, p = c.place;
-    const name = $("#pName").value.trim() || T.defaultName;
+    const name = $("#pName").value.trim();
     const d = storyDate(), s = signal(d);
     const start = Math.floor(s.msd) + 30 + Math.round(s.au * 40);
     const transit = Math.round(120 + s.au * 60);
@@ -346,7 +346,7 @@
             <div style="text-align:right"><div class="code">${esc(p.code)}</div><div class="city">${esc(pname(p))}</div></div>
           </div>
           <div class="pass-grid">
-            <div><span>${esc(T.passenger)}</span><b>${esc(name.toUpperCase())}</b></div>
+            <div><span>${esc(T.passenger)}</span><b>${esc(name.toUpperCase() || "—")}</b></div>
             <div><span>${esc(T.departs)}</span><b>${fmtDate(launch)}</b></div>
             <div><span>${esc(T.transit)}</span><b>${transit} ${esc(T.days)}</b></div>
             <div><span>${esc(T.seat)}</span><b>${seat}</b></div>
@@ -373,7 +373,7 @@
       <div class="desk-head"><h2>${esc(T.fairTitle)}</h2><p class="muted">${esc(T.fairLede)}</p></div>
       <div class="fair">
         <div class="quiz">
-          <label class="field" for="pName">${esc(T.yourName)}<input id="pName" maxlength="28" autocomplete="name" placeholder="${esc(T.defaultName)}" value="${esc(store.get("hub-name", ""))}"></label>
+          <label class="field" for="pName">${esc(T.yourName)}<input id="pName" maxlength="28" autocomplete="name" value="${esc(store.get("hub-name", ""))}"></label>
           <div class="q" data-q="skill"><div class="q-title"><span class="mono">01</span><h3>${esc(T.q1)}</h3></div><div class="opts">${["tech", "craft", "data", "people"].map(v => opt(v)).join("")}</div></div>
           <div class="q" data-q="place"><div class="q-title"><span class="mono">02</span><h3>${esc(T.q2)}</h3></div><div class="opts">${["city", "frontier", "orbit"].map(v => opt(v)).join("")}</div></div>
           <div class="q" data-q="risk"><div class="q-title"><span class="mono">03</span><h3>${esc(T.q3)}</h3></div><div class="opts">${["low", "mid", "high"].map(v => opt(v)).join("")}</div></div>
