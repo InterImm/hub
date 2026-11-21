@@ -10,11 +10,12 @@ routes = [{ pattern = "desk.interimm.org", custom_domain = true }]
 [vars]
 GITHUB_REPO = "InterImm/hub"
 GITHUB_BRANCH = "gh-pages"
-ALLOWED_ORIGINS = "https://interimm.org,https://www.interimm.org"
+ALLOWED_ORIGINS = "https://interimm.org,https://www.interimm.org,https://cities.interimm.org"
 
 # Secrets (set with `npx wrangler secret put NAME`, never committed):
 #   GITHUB_TOKEN      fine-grained token for InterImm/hub: Contents, Pull requests and Issues read/write
 #   TURNSTILE_SECRET  secret key of the Turnstile widget for interimm.org
+#   BLOCKED_WORDS     optional, comma separated: more words the Land Office refuses (a plain var also works)
 #   ADMIN_KEY         any long random string; the registrar uses it to issue new edit codes
 
 # Founders' private contacts (only the registrar can read them). Created with

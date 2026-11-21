@@ -1,0 +1,18 @@
+---
+# The public land register for cities.interimm.org, built from _data/land/<city>/<lot>.json.
+# Edit-code hashes (seal) are never printed.
+---
+{%- assign now = site.time | date_to_xmlschema -%}
+{
+  "generated": {{ now | jsonify }},
+  "cities": {
+  {%- for city in site.data.land %}
+    {{ city[0] | jsonify }}: {
+    {%- for pair in city[1] %}
+      {%- assign r = pair[1] %}
+      {{ pair[0] | jsonify }}: { "city": {{ city[0] | jsonify }}, "lot": {{ pair[0] | jsonify }}, "holder": {{ r.holder | jsonify }}{% if r.motto %}, "motto": {{ r.motto | jsonify }}{% endif %}, "building": {{ r.building | jsonify }}{% if r.company %}, "company": { "key": {{ r.company.key | jsonify }}, "name": {{ r.company.name | jsonify }}, "url": {{ site.baseurl | append: "/companies/" | append: r.company.key | append: "/" | jsonify }} }{% endif %}, "granted": {{ r.granted | jsonify }}, "granted_earth": {{ r.granted_earth | jsonify }} }{% unless forloop.last %},{% endunless %}
+    {%- endfor %}
+    }{% unless forloop.last %},{% endunless %}
+  {%- endfor %}
+  }
+}

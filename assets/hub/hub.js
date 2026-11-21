@@ -56,7 +56,8 @@
       saveImage: "保存证书图片", imageHint: "长按或右键即可保存这张图片。它带着你的编辑码，请勿分享。", codeOnCert: "编辑码 · 请勿外传",
       contactChange: "私人联系方式",
       noCode: k => `这家企业还没有编辑码。2026 年以前登记的企业，请写信给登记处 ${REGISTRAR}，附上登记号 ${k} 和当初登记时用的称呼，我们核实后会签发编辑码。`,
-      signOut: "退出", pendingReview: "等待审核", registered: "已登记",
+      signOut: "退出", lotGet: "在南河城选一块地", lotGetHelp: "在 3D 城市里挑一块空地，建起公司的楼。登记号和编辑码会自动填好。", lotHeld: "公司地块", lotSee: "在 3D 城市里看",
+      pendingReview: "等待审核", registered: "已登记",
       jobsDrawer: "招聘", adsDrawer: "广告", noticesDrawer: "公告", profileDrawer: "资料",
       jobsHelp: "公开的职位会出现在招聘会上。每条持续 30 个火星日，到期前可以续期。", adsHelp: "广告刊登在登记册的分类广告栏，同时最多两条。", noticesHelp: "给公报的简短消息：开业、丰收、新航线。每条一行。", profileHelp: "登记册上显示的企业资料。所在地只能由登记处修改。",
       open: "开放中", expiring: "即将到期", solsLeft: n => `剩 ${n} 个火星日`, renew: "续期 30 个火星日", close: "撤下", withdraw: "撤下", del: "删除",
@@ -120,7 +121,8 @@
       saveImage: "Save certificate image", imageHint: "Long-press or right-click to save this image. It carries your edit code, so keep it private.", codeOnCert: "Edit code · keep private",
       contactChange: "Private contact",
       noCode: k => `This company has no edit code yet. If you registered it before 2026, write to the registrar at ${REGISTRAR} with the register key ${k} and the name you filed under; we issue a code once we have checked.`,
-      signOut: "Sign out", pendingReview: "Awaiting review", registered: "Registered",
+      signOut: "Sign out", lotGet: "Choose a lot in Nanhe", lotGetHelp: "Pick a free lot in the 3D city and put up your building. Your register key and edit code are filled in for you.", lotHeld: "Company lot", lotSee: "See it in 3D",
+      pendingReview: "Awaiting review", registered: "Registered",
       jobsDrawer: "Jobs", adsDrawer: "Ads", noticesDrawer: "Notices", profileDrawer: "Profile",
       jobsHelp: "Open postings appear at the job fair. Each runs for 30 sols; renew it before it expires.", adsHelp: "Ads run in the register's classifieds, two at a time.", noticesHelp: "Short dispatches for the gazette: openings, harvests, new routes. One line each.", profileHelp: "What the register shows about you. Only the registrar can change your seat.",
       open: "Open", expiring: "Expiring", solsLeft: n => `${n} sols left`, renew: "Renew 30 sols", close: "Close", withdraw: "Withdraw", del: "Delete",
@@ -261,6 +263,29 @@
     return out;
   }
   const errText = e => T.errors[e.code] || e.message || T.errors.network;
+
+  /* ---------------- the Land Office (cities.interimm.org) ---------------- */
+  // Companies can hold a lot in Nanhe (Isidis Procyon). The claim happens in the 3D explorer;
+  // the hub links there with the company's key and code in the address fragment, which never
+  // reaches a server and which the explorer removes from the address bar straight away.
+  const CITY_URL = "https://cities.interimm.org/";
+  const landClaimUrl = (key, code, name) => `${CITY_URL}${lang === "en" ? "?lang=en" : ""}#city=isidis-procyon&land=company&ckey=${encodeURIComponent(key)}&ccode=${encodeURIComponent(code || "")}&cname=${encodeURIComponent(name || "")}`;
+  const landLotUrl = lot => `${CITY_URL}${lang === "en" ? "?lang=en" : ""}#city=isidis-procyon&plot=${encodeURIComponent(lot)}`;
+  let landFeed = null;
+  function companyLots(key) {
+    if (!landFeed) landFeed = fetch(`${HUB.base}/api/land.json`, { cache: "no-cache" }).then(r => (r.ok ? r.json() : {})).catch(() => ({}));
+    return landFeed.then(d => Object.values((d.cities || {})["isidis-procyon"] || {}).filter(r => r.company && r.company.key === key));
+  }
+  function landBox(key, code, name) {
+    const box = document.createElement("div");
+    box.className = "lot-box";
+    box.innerHTML = `<p class="small muted">${esc(T.lotGetHelp)}</p><a class="btn btn-ghost btn-sm" target="_blank" rel="noopener" href="${esc(landClaimUrl(key, code, name))}">${esc(T.lotGet)}</a>`;
+    companyLots(key).then(lots => {
+      if (!lots.length) return;
+      box.innerHTML = `<p class="small"><b>${esc(T.lotHeld)}</b></p>` + lots.map(r => `<p class="small"><span class="mono">${esc(r.lot)}</span> ${esc(r.building && r.building.sign || r.holder)} · <a class="text-link" target="_blank" rel="noopener" href="${esc(landLotUrl(r.lot))}">${esc(T.lotSee)}</a></p>`).join("");
+    });
+    return box;
+  }
 
   /* ---------------- tabs ---------------- */
   const DESKS = ["fair", "found", "office", "registry"];
@@ -468,10 +493,12 @@
           <p class="code" id="theCode">${esc(out.code)}</p>
           <p class="small">${esc(T.codeHelp)}</p>
           <div class="row"><button class="btn btn-ghost btn-sm" type="button" id="copyCode">${esc(T.copy)}</button><a class="btn btn-ghost btn-sm" id="saveCert" download="interimm-${esc(out.key)}.png">${esc(T.saveImage)}</a><button class="btn btn-primary btn-sm" type="button" id="toOffice">${esc(T.openOffice)}</button></div>
+          <div id="filedLot"></div>
           <figure class="cert-image"><img id="certImg" alt="${esc(T.certTitle)}"><figcaption class="small muted">${esc(T.imageHint)}</figcaption></figure>
         </div>
         <p class="notice-box" style="margin-top:1rem">${esc(T.filedPending)}</p>`;
       $("#copyCode").addEventListener("click", ev => copy(out.code, ev.currentTarget));
+      $("#filedLot").appendChild(landBox(out.key, out.code, body.name.trim()));
       try { const png = certImage(out); $("#certImg").src = png; $("#saveCert").href = png; } catch { $("#saveCert").hidden = true; $("#certImg").closest("figure").hidden = true; }
       $("#toOffice").addEventListener("click", () => { session = { key: out.key, code: out.code, company: null, pending: true }; loadOffice(true); showTab("office", true); });
       $("#foundForm").querySelectorAll("input,select,textarea,button").forEach(x => (x.disabled = true));
@@ -609,6 +636,7 @@
             <div class="row"><span class="chip ${session.pending ? "future" : "live"}">${esc(session.pending ? T.pendingReview : T.registered)}</span>${known ? `<span class="chip">${esc(pname(known.place))}</span>` : ""}</div>
             <p class="small muted mono">${esc(known ? regNo(known) + " · " : "")}${esc(session.key)}</p>
             <button class="btn btn-ghost btn-sm" type="button" id="signOut">${esc(T.signOut)}</button>
+            <div id="officeLot"></div>
           </div>
           <div class="drawers" role="tablist">
             ${[["jobs", T.jobsDrawer, `${counts.jobs}/${LIMIT.jobs}`], ["ads", T.adsDrawer, `${counts.ads}/${LIMIT.ads}`], ["notices", T.noticesDrawer, String(counts.notices)], ["profile", T.profileDrawer, " "]]
@@ -617,6 +645,7 @@
         </aside>
         <div class="office-main" id="officeMain"></div>
       </div>`;
+    $("#officeLot").appendChild(landBox(session.key, session.code, d.profile.name));
     $("#signOut").addEventListener("click", () => { session = null; draft = null; store.set("hub-office", null); renderOffice(); });
     $$("#office .drawer").forEach(b => b.addEventListener("click", () => { drawer = b.dataset.d; renderOffice(); }));
     renderDrawer();

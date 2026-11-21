@@ -1,0 +1,11 @@
+# Ring streets of Nanhe (Isidis Procyon), for lot addresses on company pages.
+# From InterImm/martian-cities web/cities/isidis-procyon/plots.json.
+isidis-procyon:
+  A: { cn: "开拓者环", en: "Pioneer Ring" }
+  B: { cn: "推进剂环", en: "Propellant Ring" }
+  C: { cn: "裂变环", en: "Fission Ring" }
+  D: { cn: "公决环", en: "Referendum Ring" }
+  E: { cn: "亚马逊环", en: "Amazonis Ring" }
+  F: { cn: "希腊环", en: "Hellas Ring" }
+  G: { cn: "十一城环", en: "Eleven Cities Ring" }
+  H: { cn: "改造环", en: "Terraforming Ring" }

@@ -73,6 +73,32 @@ Everything above fits Cloudflare's free plan (100,000 Worker requests a day, Tur
   and pass the returned code on privately.
 - **Removing a post** someone should not have made: edit the company file on GitHub like any other.
 
+## The Land Office (plots in Nanhe)
+
+The same Worker runs the land register for the 3D city at cities.interimm.org (code in `src/land.js`).
+Each held lot is one file, `_data/land/<city>/<lot>.json`, committed straight to `gh-pages`; Jekyll
+publishes them, seals stripped, as `api/land.json`, which the explorer reads.
+
+- `POST /land/claim`, `/land/verify`, `/land/update`, `/land/release`: called by the explorer, behind Turnstile.
+- Claims are instant. Names, mottos and signs pass a word filter and may not contain links. Add more
+  words with a `BLOCKED_WORDS` variable (comma separated). Five claims per network address per day.
+- A lot can be claimed for a hub company with its register key and edit code; the company's code then
+  works for the lot too, and the company page shows the address. The hub's registration desk and
+  Company Office link to the explorer for this.
+- The private contact a holder leaves goes to the `CONTACTS` KV namespace as `land:<city>:<lot>`.
+- To take a lot back (bad name, spam):
+
+  ```sh
+  curl -X POST https://desk.interimm.org/admin/land/revoke -H "Authorization: Bearer $ADMIN_KEY" \
+    -d '{"city":"isidis-procyon","lot":"A17","reason":"spam"}'
+  ```
+
+- The plan (lots, rings, zones, building kit) is fetched from cities.interimm.org and checked with
+  `src/land-plan.js`, a copy of the explorer's `web/js/land-plan.js`. Keep the two in step.
+- One-time setup: add `cities.interimm.org` to the Turnstile widget's hostnames (Cloudflare dashboard,
+  Turnstile, the hub widget, Settings), then `npx wrangler deploy` (the new allowed origin is in
+  `wrangler.toml`).
+
 ## Development
 
 ```sh

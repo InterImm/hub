@@ -189,3 +189,5 @@
 .cert-image { margin: 1rem 0 0; }
 .cert-image img { display: block; width: 100%; max-width: 360px; height: auto; border: 1px solid var(--border); }
 .cert-image figcaption { margin-top: 0.4rem; }
+.lot-box { display: grid; gap: 0.4rem; justify-items: start; border-top: 1px dashed var(--border); padding-top: 0.6rem; margin-top: 0.3rem; }
+.lot-box p { margin: 0; }
