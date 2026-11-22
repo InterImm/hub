@@ -1,0 +1,17 @@
+{
+ "city": "isidis-procyon",
+ "lot": "D163",
+ "holder": "LM",
+ "motto": "Come for green",
+ "building": {
+  "type": "greenhouse",
+  "floors": 2,
+  "color": "sage",
+  "accent": "sky",
+  "roof": "solar",
+  "sign": "LM Greenhouse"
+ },
+ "granted": "2219-11-22",
+ "granted_earth": "2026-11-22",
+ "seal": "63cacc3780757569f7672d1398f2a8ad70ea9e228b1598e86fa676b5bbcec711"
+}
