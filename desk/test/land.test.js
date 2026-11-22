@@ -163,3 +163,84 @@ test("cities.interimm.org is an allowed origin; others are not", async () => {
   const res = await worker.fetch(new Request("https://desk.interimm.org/land/claim", { method: "POST", headers: { Origin: "https://evil.example" }, body: "{}" }), env);
   assert.equal(res.status, 403);
 });
+
+/* ---------------- passkeys ---------------- */
+import { b64url } from "../src/passkey.js";
+const enc = s => new TextEncoder().encode(s);
+const sha = async b => new Uint8Array(await crypto.subtle.digest("SHA-256", b));
+function rawToDer(raw) {
+  const int = b => { let i = 0; while (i < b.length - 1 && b[i] === 0) i++; b = b.slice(i); if (b[0] & 0x80) b = Uint8Array.of(0, ...b); return [0x02, b.length, ...b]; };
+  const body = [...int(raw.slice(0, 32)), ...int(raw.slice(32))];
+  return Uint8Array.from([0x30, body.length, ...body]);
+}
+// A tiny authenticator: one key pair, signs like a browser would.
+async function authenticator(kind = "ES256") {
+  const params = kind === "ES256" ? { name: "ECDSA", namedCurve: "P-256" } : { name: "RSASSA-PKCS1-v1_5", modulusLength: 2048, publicExponent: Uint8Array.of(1, 0, 1), hash: "SHA-256" };
+  const kp = await crypto.subtle.generateKey(params, true, ["sign", "verify"]);
+  const id = b64url(crypto.getRandomValues(new Uint8Array(20)));
+  const spki = b64url(new Uint8Array(await crypto.subtle.exportKey("spki", kp.publicKey)));
+  const challenge = async () => (await call("/land/challenge", { city: "isidis-procyon" })).data.challenge;
+  return {
+    id,
+    async create(origin = ORIGIN) {
+      const cd = enc(JSON.stringify({ type: "webauthn.create", challenge: b64url(enc(await challenge())), origin }));
+      return { id, spki, alg: kind === "ES256" ? -7 : -257, clientDataJSON: b64url(cd), name: "phone" };
+    },
+    async get({ origin = ORIGIN, rp = "cities.interimm.org", tamper = false } = {}) {
+      const cd = enc(JSON.stringify({ type: "webauthn.get", challenge: b64url(enc(await challenge())), origin }));
+      const auth = new Uint8Array(37); auth.set(await sha(enc(rp))); auth[32] = 0x05;
+      const signed = new Uint8Array(37 + 32); signed.set(auth); signed.set(await sha(cd), 37);
+      if (tamper) signed[40] ^= 1;
+      let sig = new Uint8Array(await crypto.subtle.sign(kind === "ES256" ? { name: "ECDSA", hash: "SHA-256" } : { name: "RSASSA-PKCS1-v1_5" }, kp.privateKey, signed));
+      if (kind === "ES256") sig = rawToDer(sig);
+      return { id, clientDataJSON: b64url(cd), authenticatorData: b64url(auth), signature: b64url(sig) };
+    },
+  };
+}
+
+test("a passkey added with the code then works instead of the code, and is never published", async () => {
+  const { data } = await claim("A1");
+  const phone = await authenticator("ES256");
+  const add = await call("/land/passkey/add", { city: "isidis-procyon", lot: "A1", code: data.code, newPasskey: await phone.create() });
+  assert.equal(add.status, 200, JSON.stringify(add.data));
+  assert.equal(add.data.passkeys.length, 1);
+  assert.equal(lotFile("A1").passkeys[0].alg, -7);
+  const v = await call("/land/verify", { city: "isidis-procyon", lot: "A1", passkey: await phone.get() });
+  assert.equal(v.status, 200, JSON.stringify(v.data));
+  assert.equal(v.data.record.passkeys, undefined, "public record carries no keys");
+  assert.equal(v.data.passkeys[0].name, "phone");
+  const up = await call("/land/update", { city: "isidis-procyon", lot: "A1", passkey: await phone.get(), motto: "签名登录" });
+  assert.equal(up.status, 200); assert.equal(lotFile("A1").motto, "签名登录");
+});
+
+test("RS256 passkeys work too", async () => {
+  const { data } = await claim("A2");
+  const laptop = await authenticator("RS256");
+  assert.equal((await call("/land/passkey/add", { city: "isidis-procyon", lot: "A2", code: data.code, newPasskey: await laptop.create() })).status, 200);
+  assert.equal((await call("/land/verify", { city: "isidis-procyon", lot: "A2", passkey: await laptop.get() })).status, 200);
+});
+
+test("bad passkey sign-ins are refused", async () => {
+  const { data } = await claim("A3");
+  const phone = await authenticator(), stranger = await authenticator();
+  await call("/land/passkey/add", { city: "isidis-procyon", lot: "A3", code: data.code, newPasskey: await phone.create() });
+  const v = p => call("/land/verify", { city: "isidis-procyon", lot: "A3", passkey: p });
+  assert.equal((await v(await stranger.get())).data.error, "passkey_unknown");
+  assert.equal((await v(await phone.get({ tamper: true }))).status, 403, "bad signature");
+  assert.equal((await v(await phone.get({ origin: "https://evil.example" }))).data.error, "passkey", "wrong origin");
+  assert.equal((await v(await phone.get({ rp: "evil.example" }))).data.error, "passkey", "wrong rp id");
+  const once = await phone.get();
+  assert.equal((await v(once)).status, 200);
+  assert.equal((await v(once)).data.error, "passkey", "a challenge works once");
+  // a registration needs the lot's code
+  assert.equal((await call("/land/passkey/add", { city: "isidis-procyon", lot: "A3", code: "WRONG", newPasskey: await stranger.create() })).status, 403);
+});
+
+test("passkeys can be removed", async () => {
+  const { data } = await claim("A4");
+  const phone = await authenticator();
+  await call("/land/passkey/add", { city: "isidis-procyon", lot: "A4", code: data.code, newPasskey: await phone.create() });
+  const rm = await call("/land/passkey/remove", { city: "isidis-procyon", lot: "A4", code: data.code, id: phone.id });
+  assert.equal(rm.status, 200); assert.equal(rm.data.passkeys.length, 0);
+  assert.equal(lotFile("A4").passkeys, undefined);
+});

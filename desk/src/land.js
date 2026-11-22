@@ -9,6 +9,11 @@
 //   POST /land/update        lot + edit code -> new building, holder name or motto
 //   POST /land/release       lot + edit code -> the lot is free again
 //   POST /admin/land/revoke  registrar only: take a lot back (bad names, spam)
+//   POST /land/challenge     a fresh passkey challenge (see passkey.js)
+//   POST /land/passkey/add   lot + edit code (or a passkey) + a new passkey's public key
+//   POST /land/passkey/remove
+//
+// Wherever an edit code is asked for, a passkey added to the lot works too (body.passkey).
 //
 // Claims are instant. Every text passes a word filter first, and a registrar can revoke any lot.
 // A lot can be claimed for a company on the hub register (also one still awaiting review): the
@@ -18,6 +23,7 @@
 // fetched from cities.interimm.org and checked with the same functions (land-plan.js).
 
 import { readPlan, ringStatus, cleanBuilding, storyDate as storyDay } from "./land-plan.js";
+import { makeChallenge, checkRegistration, checkAssertion, MAX_PASSKEYS } from "./passkey.js";
 import {
   DeskError, github, readCompany, checkSeal, checkAdmin, committer, text, newCode, normalizeCode,
   sha256hex, safeEqual, b64encode, b64decode, isoDay,
@@ -106,15 +112,48 @@ export async function landClaim(body, request, env) {
 export async function landVerify(body, env) {
   const { city, lot } = await lotFrom(body, env);
   const doc = await readLand(env, city, lot.id);
-  await checkLandCode(env, doc.record, body.code);
-  return { ok: true, lot: lot.id, record: publicLand(doc.record) };
+  await checkLandAuth(env, doc.record, body);
+  return { ok: true, lot: lot.id, record: publicLand(doc.record), passkeys: passkeyList(doc.record) };
+}
+
+export async function landChallenge(body, env) {
+  const city = String(body.city || "");
+  if (!CITIES[city]) throw new DeskError(400, "city", "There is no land register for that city.");
+  return { ok: true, challenge: await makeChallenge(env, city), rpId: env.PASSKEY_RP_ID || "cities.interimm.org" };
+}
+
+export async function landPasskeyAdd(body, env) {
+  const { city, lot } = await lotFrom(body, env);
+  for (let attempt = 0; ; attempt++) {
+    const doc = await readLand(env, city, lot.id);
+    if (attempt === 0) await checkLandAuth(env, doc.record, body);
+    const key = attempt === 0 ? await checkRegistration(env, city, body.newPasskey) : body._key;
+    body._key = key;
+    const keys = (doc.record.passkeys || []).filter(k => k.id !== key.id);
+    if (keys.length >= MAX_PASSKEYS) throw new DeskError(400, "caps", `At most ${MAX_PASSKEYS} passkeys per lot.`);
+    const r = { ...doc.record, passkeys: [...keys, key] };
+    try {
+      await writeLand(env, city, lot.id, r, doc.sha, `Land: ${lot.id} passkey added`);
+      return { ok: true, lot: lot.id, passkeys: passkeyList(r) };
+    } catch (e) { if (e.ghStatus === 409 && attempt === 0) continue; throw e; }
+  }
+}
+
+export async function landPasskeyRemove(body, env) {
+  const { city, lot } = await lotFrom(body, env);
+  const doc = await readLand(env, city, lot.id);
+  await checkLandAuth(env, doc.record, body);
+  const r = { ...doc.record, passkeys: (doc.record.passkeys || []).filter(k => k.id !== String(body.id || "")) };
+  if (!r.passkeys.length) delete r.passkeys;
+  await writeLand(env, city, lot.id, r, doc.sha, `Land: ${lot.id} passkey removed`);
+  return { ok: true, lot: lot.id, passkeys: passkeyList(r) };
 }
 
 export async function landUpdate(body, env) {
   const { city, plan, lot } = await lotFrom(body, env);
   for (let attempt = 0; ; attempt++) {
     const doc = await readLand(env, city, lot.id);
-    await checkLandCode(env, doc.record, body.code);
+    await checkLandAuth(env, doc.record, body);
     const r = { ...doc.record };
     if (body.holder !== undefined) r.holder = text(body.holder, LAND_LIMITS.holder, true, "holder name");
     if (body.motto !== undefined) { const m = text(body.motto, LAND_LIMITS.motto); if (m) r.motto = m; else delete r.motto; }
@@ -126,7 +165,7 @@ export async function landUpdate(body, env) {
         method: "PUT",
         body: { message: `Land: ${lot.id} rebuilt by ${r.holder}`, content: b64encode(JSON.stringify(r, null, 1) + "\n"), sha: doc.sha, branch: env.GITHUB_BRANCH, committer: committer(env) },
       });
-      return { ok: true, lot: lot.id, record: publicLand(r) };
+      return { ok: true, lot: lot.id, record: publicLand(r), passkeys: passkeyList(r) };
     } catch (e) {
       if (e.ghStatus === 409 && attempt === 0) continue;
       throw e;
@@ -137,7 +176,7 @@ export async function landUpdate(body, env) {
 export async function landRelease(body, env) {
   const { city, lot } = await lotFrom(body, env);
   const doc = await readLand(env, city, lot.id);
-  await checkLandCode(env, doc.record, body.code);
+  await checkLandAuth(env, doc.record, body);
   await removeLand(env, city, lot.id, doc.sha, `Land: ${lot.id} given up by ${doc.record.holder}`);
   return { ok: true, lot: lot.id };
 }
@@ -155,6 +194,12 @@ export async function adminLandRevoke(body, request, env) {
 /* ---------------- rules ---------------- */
 
 export async function landSeal(city, lot, code) { return sha256hex(`land:${city}:${lot}:${normalizeCode(code)}`); }
+
+// A passkey on the lot, or else an edit code.
+async function checkLandAuth(env, record, body) {
+  if (body.passkey) { await checkAssertion(env, record.city, record.passkeys, body.passkey); return; }
+  return checkLandCode(env, record, body.code);
+}
 
 // The lot's own code always works. For a company lot, so does the company's code.
 async function checkLandCode(env, record, code) {
@@ -188,7 +233,15 @@ async function rateLimit(request, env) {
   await env.CONTACTS.put(k, String(n + 1), { expirationTtl: 2 * 86400 });
 }
 
-export function publicLand(r) { const { seal: _s, ...rest } = r; return rest; }
+export function publicLand(r) { const { seal: _s, passkeys: _p, ...rest } = r; return rest; }
+function passkeyList(r) { return (r.passkeys || []).map(k => ({ id: k.id, name: k.name || "", added: k.added })); }
+
+async function writeLand(env, city, id, r, sha, message) {
+  await github(env)(`/contents/${landPath(city, id)}`, {
+    method: "PUT",
+    body: { message, content: b64encode(JSON.stringify(r, null, 1) + "\n"), sha, branch: env.GITHUB_BRANCH, committer: committer(env) },
+  });
+}
 
 /* ---------------- files ---------------- */
 

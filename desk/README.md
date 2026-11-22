@@ -85,6 +85,12 @@ publishes them, seals stripped, as `api/land.json`, which the explorer reads.
 - A lot can be claimed for a hub company with its register key and edit code; the company's code then
   works for the lot too, and the company page shows the address. The hub's registration desk and
   Company Office link to the explorer for this.
+- Passkeys (`src/passkey.js`): a holder can add up to five passkeys to a lot with its edit code
+  (`POST /land/passkey/add`, `/land/passkey/remove`); after that a passkey works anywhere the code
+  does. `POST /land/challenge` (no Turnstile) hands out a signed, five-minute challenge; each is
+  usable once (`pk-nonce:*` in `CONTACTS`). The lot file keeps only public keys, and `api/land.json`
+  never lists them. The relying party is `cities.interimm.org`; challenges are signed with
+  `PASSKEY_SECRET` if set, otherwise `ADMIN_KEY`.
 - The private contact a holder leaves goes to the `CONTACTS` KV namespace as `land:<city>:<lot>`.
 - To take a lot back (bad name, spam):
 

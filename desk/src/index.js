@@ -15,7 +15,7 @@
 // Cloudflare Turnstile token. See desk/README.md for setup.
 
 import { parse, stringify } from "yaml";
-import { landClaim, landVerify, landUpdate, landRelease, adminLandRevoke } from "./land.js";
+import { landClaim, landVerify, landUpdate, landRelease, adminLandRevoke, landChallenge, landPasskeyAdd, landPasskeyRemove } from "./land.js";
 
 export const STORY_OFFSET_DAYS = 70491; // InterImm story date = Earth date + 70,491 days (year 2219 in 2026)
 export const POST_DAYS = 31; // a job or ad runs ~30 sols
@@ -64,6 +64,7 @@ export default {
       if (url.pathname === "/admin/contact") return json(await adminContact(body, request, env), 200, cors);
       if (url.pathname === "/admin/land/revoke") return json(await adminLandRevoke(body, request, env), 200, cors);
       if (!cors["Access-Control-Allow-Origin"]) throw new DeskError(403, "origin", "This desk only serves interimm.org pages.");
+      if (url.pathname === "/land/challenge") return json(await landChallenge(body, env), 200, cors);
       await checkTurnstile(body.turnstile, request, env);
       if (url.pathname === "/register") return json(await register(body, env), 200, cors);
       if (url.pathname === "/verify") return json(await verify(body, env), 200, cors);
@@ -72,6 +73,8 @@ export default {
       if (url.pathname === "/land/verify") return json(await landVerify(body, env), 200, cors);
       if (url.pathname === "/land/update") return json(await landUpdate(body, env), 200, cors);
       if (url.pathname === "/land/release") return json(await landRelease(body, env), 200, cors);
+      if (url.pathname === "/land/passkey/add") return json(await landPasskeyAdd(body, env), 200, cors);
+      if (url.pathname === "/land/passkey/remove") return json(await landPasskeyRemove(body, env), 200, cors);
       throw new DeskError(404, "not_found");
     } catch (e) {
       if (e instanceof DeskError) return json({ error: e.code, message: e.message }, e.status, cors);
