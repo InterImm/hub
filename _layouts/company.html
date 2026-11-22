@@ -49,6 +49,13 @@
         {%- if page.author %}<div><dt>登记人 Filed by</dt><dd>{{ page.author | escape }}</dd></div>{% endif %}
         {%- if page.link %}<div><dt>网站 Website</dt><dd><a class="text-link" href="{{ href | escape }}" rel="nofollow noopener">{{ page.link | remove: "https://" | remove: "http://" | truncate: 40 | escape }}</a></dd></div>{% endif %}
         <div><dt>登记号 Register key</dt><dd class="mono small">{{ key }}</dd></div>
+        {%- comment -%} Lots this company holds in the Mars cities (the Land Office, api/land.json). {%- endcomment -%}
+        {%- for city in site.data.land -%}{%- for pair in city[1] -%}{%- assign r = pair[1] -%}
+        {%- if r.company and r.company.key == key -%}
+        {%- assign ring = pair[0] | slice: 0 -%}{%- assign no = pair[0] | remove_first: ring -%}{%- assign cid = city[0] -%}{%- assign rn = site.data.land_rings[cid][ring] -%}
+        <div><dt>地址 Address</dt><dd>南河城 {{ rn.cn }} {{ no }} 号<br><span class="small muted">{{ no }} {{ rn.en }}, Nanhe</span><br><a class="text-link small" href="https://cities.interimm.org/#city={{ city[0] }}&amp;plot={{ pair[0] }}">在 3D 城市里看 See it in 3D</a></dd></div>
+        {%- endif -%}
+        {%- endfor -%}{%- endfor %}
       </dl>
       <p><a class="btn btn-ghost" href="{{ site.baseurl }}/?co={{ key }}#office">{% if page.seal %}企业办公室 Company Office{% else %}认领此企业 Claim this company{% endif %}</a></p>
     </aside>

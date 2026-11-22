@@ -2,6 +2,8 @@
 name = "interimm-front-desk"
 main = "src/index.js"
 compatibility_date = "2026-10-01"
+# InterImm's Cloudflare account (an identifier, not a secret); used by the deploy workflow.
+account_id = "39338f3bb87cbf5b7f50b6e62e0e130f"
 
 # workers.dev addresses are blocked in mainland China, so the desk lives on interimm.org.
 workers_dev = false
@@ -10,11 +12,12 @@ routes = [{ pattern = "desk.interimm.org", custom_domain = true }]
 [vars]
 GITHUB_REPO = "InterImm/hub"
 GITHUB_BRANCH = "gh-pages"
-ALLOWED_ORIGINS = "https://interimm.org,https://www.interimm.org"
+ALLOWED_ORIGINS = "https://interimm.org,https://www.interimm.org,https://cities.interimm.org"
 
 # Secrets (set with `npx wrangler secret put NAME`, never committed):
 #   GITHUB_TOKEN      fine-grained token for InterImm/hub: Contents, Pull requests and Issues read/write
 #   TURNSTILE_SECRET  secret key of the Turnstile widget for interimm.org
+#   BLOCKED_WORDS     optional, comma separated: more words the Land Office refuses (a plain var also works)
 #   ADMIN_KEY         any long random string; the registrar uses it to issue new edit codes
 
 # Founders' private contacts (only the registrar can read them). Created with

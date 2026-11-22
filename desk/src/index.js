@@ -8,12 +8,14 @@
 //   POST /verify        check a company's edit code, return its current record
 //   POST /update        edit code + new jobs/ads/notices/profile -> commit to the site branch
 //   POST /admin/reset   registrar only: issue a new edit code for a company
+//   POST /land/*        the Land Office for plots in the Mars cities (see land.js)
 //
 // Ownership is a random edit code shown once on the certificate. The company
 // file keeps only its SHA-256 (field `seal`). Every public endpoint also needs a
 // Cloudflare Turnstile token. See desk/README.md for setup.
 
 import { parse, stringify } from "yaml";
+import { landClaim, landVerify, landUpdate, landRelease, adminLandRevoke } from "./land.js";
 
 export const STORY_OFFSET_DAYS = 70491; // InterImm story date = Earth date + 70,491 days (year 2219 in 2026)
 export const POST_DAYS = 31; // a job or ad runs ~30 sols
@@ -60,11 +62,16 @@ export default {
       const body = await readJson(request);
       if (url.pathname === "/admin/reset") return json(await adminReset(body, request, env), 200, cors);
       if (url.pathname === "/admin/contact") return json(await adminContact(body, request, env), 200, cors);
+      if (url.pathname === "/admin/land/revoke") return json(await adminLandRevoke(body, request, env), 200, cors);
       if (!cors["Access-Control-Allow-Origin"]) throw new DeskError(403, "origin", "This desk only serves interimm.org pages.");
       await checkTurnstile(body.turnstile, request, env);
       if (url.pathname === "/register") return json(await register(body, env), 200, cors);
       if (url.pathname === "/verify") return json(await verify(body, env), 200, cors);
       if (url.pathname === "/update") return json(await update(body, env), 200, cors);
+      if (url.pathname === "/land/claim") return json(await landClaim(body, request, env), 200, cors);
+      if (url.pathname === "/land/verify") return json(await landVerify(body, env), 200, cors);
+      if (url.pathname === "/land/update") return json(await landUpdate(body, env), 200, cors);
+      if (url.pathname === "/land/release") return json(await landRelease(body, env), 200, cors);
       throw new DeskError(404, "not_found");
     } catch (e) {
       if (e instanceof DeskError) return json({ error: e.code, message: e.message }, e.status, cors);
@@ -187,7 +194,7 @@ export async function adminReset(body, request, env) {
   return { ok: true, key, code, contact: await getContact(env, key) };
 }
 
-function checkAdmin(request, env) {
+export function checkAdmin(request, env) {
   const given = (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
   if (!env.ADMIN_KEY || !given || !safeEqual(given, env.ADMIN_KEY)) throw new DeskError(401, "admin", "Wrong registrar key.");
 }
@@ -302,14 +309,14 @@ export async function seal(key, code) {
   return sha256hex(`${key}:${normalizeCode(code)}`);
 }
 
-async function checkSeal(key, code, front) {
+export async function checkSeal(key, code, front) {
   if (!front.seal) throw new DeskError(403, "unclaimed", "This company has no edit code yet. Ask the registrar to issue one.");
   if (!code || !safeEqual(await seal(key, code), String(front.seal))) throw new DeskError(403, "code", "That edit code does not match this company.");
 }
 
 /* ---------------- GitHub ---------------- */
 
-function github(env) {
+export function github(env) {
   return async function gh(path, init = {}) {
     const res = await fetch(`https://api.github.com/repos/${env.GITHUB_REPO}${path}`, {
       method: init.method || "GET",
@@ -331,7 +338,7 @@ function github(env) {
   };
 }
 
-async function readCompany(env, key, { allowPending = false } = {}) {
+export async function readCompany(env, key, { allowPending = false } = {}) {
   const gh = github(env);
   const get = ref => gh(`/contents/${companyPath(key)}?ref=${encodeURIComponent(ref)}`);
   let file, pending = false;
@@ -380,7 +387,7 @@ async function readJson(request) {
   throw new DeskError(400, "json", "The desk could not read this request.");
 }
 
-async function checkTurnstile(token, request, env) {
+export async function checkTurnstile(token, request, env) {
   if (!env.TURNSTILE_SECRET) {
     if (env.DEV === "1") return;
     throw new DeskError(503, "config", "The desk is not configured yet.");
@@ -396,18 +403,18 @@ async function checkTurnstile(token, request, env) {
   if (!out.success) throw new DeskError(400, "turnstile", "The check did not pass. Please try again.");
 }
 
-function json(data, status, headers) {
+export function json(data, status, headers) {
   return new Response(JSON.stringify(data), { status, headers: { ...headers, "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" } });
 }
 
-function committer(env) { return { name: "InterImm Front Desk", email: env.COMMITTER_EMAIL || "desk@interimm.org" }; }
+export function committer(env) { return { name: "InterImm Front Desk", email: env.COMMITTER_EMAIL || "desk@interimm.org" }; }
 
 function companyKey(k) {
   if (typeof k !== "string" || !KEY_RE.test(k)) throw new DeskError(400, "key", "That is not a register key.");
   return k;
 }
 
-function text(v, max, required = false, label = "text") {
+export function text(v, max, required = false, label = "text") {
   const s = String(v ?? "").replace(/[\u0000-\u0009\u000B-\u001F\u007F]/g, "").replace(/\n{3,}/g, "\n\n").trim();
   if (required && !s) throw new DeskError(400, "missing", `Please fill in the ${label}.`);
   if ([...s].length > max) throw new DeskError(400, "too_long", `The ${label} can be at most ${max} characters.`);
@@ -429,33 +436,33 @@ function mdCell(s) { return String(s).replace(/\|/g, "\\|").replace(/\n+/g, " ")
 export function storyDate(d) { return new Date(d.getTime() + STORY_OFFSET_DAYS * 864e5); }
 export function isoDay(d) { return d.toISOString().slice(0, 10); }
 
-function randomString(n, alphabet) {
+export function randomString(n, alphabet) {
   const bytes = crypto.getRandomValues(new Uint8Array(n));
   let s = "";
   for (const b of bytes) s += alphabet[b % alphabet.length]; // both alphabets used divide 256 or are close enough for ids
   return s;
 }
 
-async function sha256hex(s) {
+export async function sha256hex(s) {
   const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
   return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, "0")).join("");
 }
 
-function safeEqual(a, b) {
+export function safeEqual(a, b) {
   a = String(a); b = String(b);
   let diff = a.length ^ b.length;
   for (let i = 0; i < Math.max(a.length, b.length); i++) diff |= (a.charCodeAt(i) || 0) ^ (b.charCodeAt(i) || 0);
   return diff === 0;
 }
 
-function b64encode(s) {
+export function b64encode(s) {
   const bytes = new TextEncoder().encode(s);
   let bin = "";
   for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
   return btoa(bin);
 }
 
-function b64decode(s) {
+export function b64decode(s) {
   const bin = atob(String(s).replace(/\s/g, ""));
   return new TextDecoder().decode(Uint8Array.from(bin, c => c.charCodeAt(0)));
 }
