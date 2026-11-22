@@ -1,0 +1,71 @@
+name: Front desk
+
+# Tests the front desk Worker on every pull request that touches it, and deploys it to
+# Cloudflare when desk/ changes on gh-pages. The deploy also makes sure every site in
+# ALLOWED_ORIGINS (desk/wrangler.toml) is a hostname of the Turnstile widget, so a new
+# site that uses the desk needs no dashboard visit.
+#
+# One-time setup: a repository secret CLOUDFLARE_API_TOKEN, a Cloudflare API token with
+#   Account · Workers Scripts · Edit, Account · Turnstile · Edit, Zone · Workers Routes · Edit (interimm.org)
+# The Worker's own secrets (GITHUB_TOKEN, TURNSTILE_SECRET, ADMIN_KEY) stay in Cloudflare and are not touched.
+
+on:
+  pull_request:
+    paths: ["desk/**", ".github/workflows/desk.yml"]
+  push:
+    branches: [gh-pages]
+    paths: ["desk/**", ".github/workflows/desk.yml"]
+  workflow_dispatch:
+
+concurrency:
+  group: desk-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: desk } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: desk/package-lock.json }
+      - run: npm ci
+      - run: npm test
+
+  deploy:
+    needs: test
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      TURNSTILE_SITEKEY: "0x4AAAAAAFNeYSMJzUA7HWaV"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: desk/package-lock.json }
+      - name: Check the token is set
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "::error::Add the CLOUDFLARE_API_TOKEN repository secret (see the top of this file)."; exit 1
+          fi
+      - name: Turnstile hostnames follow ALLOWED_ORIGINS
+        working-directory: desk
+        run: |
+          set -euo pipefail
+          acct=$(sed -nE 's/^account_id *= *"([^"]+)".*/\1/p' wrangler.toml)
+          hosts=$(sed -nE 's/^ALLOWED_ORIGINS *= *"([^"]+)".*/\1/p' wrangler.toml | tr ',' '\n' | sed -E 's#^https?://##; s#/.*$##' | grep -v '^$')
+          api="https://api.cloudflare.com/client/v4/accounts/$acct/challenges/widgets/$TURNSTILE_SITEKEY"
+          cur=$(curl -fsS -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "$api")
+          want=$(jq -n --argjson cur "$cur" --arg hosts "$hosts" '$cur.result.domains + ($hosts | split("\n")) | unique')
+          if [ "$(jq -c 'sort' <<<"$want")" = "$(jq -c '.result.domains | sort' <<<"$cur")" ]; then
+            echo "Turnstile hostnames already cover: $(jq -c . <<<"$want")"; exit 0
+          fi
+          body=$(jq --argjson d "$want" '.result | {name, mode, domains: $d, region, bot_fight_mode, offlabel, clearance_level, ephemeral_id} | with_entries(select(.value != null))' <<<"$cur")
+          curl -fsS -X PUT -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -H "Content-Type: application/json" --data "$body" "$api" | jq -c '.result.domains'
+      - name: Deploy the Worker
+        working-directory: desk
+        run: |
+          npm ci
+          npx wrangler deploy
+      - name: The desk answers
+        run: curl -fsS https://desk.interimm.org/ | jq -e '.ok'

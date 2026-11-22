@@ -95,9 +95,10 @@ publishes them, seals stripped, as `api/land.json`, which the explorer reads.
 
 - The plan (lots, rings, zones, building kit) is fetched from cities.interimm.org and checked with
   `src/land-plan.js`, a copy of the explorer's `web/js/land-plan.js`. Keep the two in step.
-- One-time setup: add `cities.interimm.org` to the Turnstile widget's hostnames (Cloudflare dashboard,
-  Turnstile, the hub widget, Settings), then `npx wrangler deploy` (the new allowed origin is in
-  `wrangler.toml`).
+- Deploys are automatic: `.github/workflows/desk.yml` tests every pull request that touches `desk/`,
+  and on `gh-pages` deploys the Worker and adds every site in `ALLOWED_ORIGINS` to the Turnstile
+  widget's hostnames. It needs one repository secret, `CLOUDFLARE_API_TOKEN` (permissions listed at
+  the top of the workflow).
 
 ## Development
 

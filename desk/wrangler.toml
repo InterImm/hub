@@ -2,6 +2,8 @@
 name = "interimm-front-desk"
 main = "src/index.js"
 compatibility_date = "2026-10-01"
+# InterImm's Cloudflare account (an identifier, not a secret); used by the deploy workflow.
+account_id = "39338f3bb87cbf5b7f50b6e62e0e130f"
 
 # workers.dev addresses are blocked in mainland China, so the desk lives on interimm.org.
 workers_dev = false
