@@ -91,6 +91,11 @@ publishes them, seals stripped, as `api/land.json`, which the explorer reads.
   usable once (`pk-nonce:*` in `CONTACTS`). The lot file keeps only public keys, and `api/land.json`
   never lists them. The relying party is `cities.interimm.org`; challenges are signed with
   `PASSKEY_SECRET` if set, otherwise `ADMIN_KEY`.
+- One passkey can hold many lots: `/land/passkey/add` takes `lots: [{lot, code}]` (up to 20) and
+  either a new passkey or `linkPasskey` (a sign-in with one already on other lots).
+  `POST /land/passkey/signin` returns every lot a passkey is on, found through `pk:<city>:<id>` in
+  `CONTACTS` (a hint; each lot file is still checked). `/land/verify` with `lots` checks a key card
+  for several lots in one call.
 - The private contact a holder leaves goes to the `CONTACTS` KV namespace as `land:<city>:<lot>`.
 - To take a lot back (bad name, spam):
 

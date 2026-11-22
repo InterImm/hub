@@ -244,3 +244,64 @@ test("passkeys can be removed", async () => {
   assert.equal(rm.status, 200); assert.equal(rm.data.passkeys.length, 0);
   assert.equal(lotFile("A4").passkeys, undefined);
 });
+
+/* ---------------- one passkey for many lots ---------------- */
+
+test("one passkey can hold several lots, and signing in with it brings them all back", async () => {
+  const phone = await authenticator();
+  const a = (await claim("A1")).data, b = (await claim("A2")).data;
+  const add = await call("/land/passkey/add", { city: "isidis-procyon", lots: [{ lot: "A1", code: a.code }, { lot: "A2", code: b.code }], newPasskey: await phone.create() });
+  assert.equal(add.status, 200, JSON.stringify(add.data));
+  assert.deepEqual(Object.keys(add.data.lots).sort(), ["A1", "A2"]);
+  // a third lot joins the same passkey: its code plus a sign-in with the passkey
+  const c = (await claim("A3")).data;
+  const link = await call("/land/passkey/add", { city: "isidis-procyon", lots: [{ lot: "A3", code: c.code }], linkPasskey: await phone.get() });
+  assert.equal(link.status, 200, JSON.stringify(link.data));
+  assert.equal(lotFile("A3").passkeys[0].id, phone.id);
+  // new device: one sign-in, three lots
+  const s = await call("/land/passkey/signin", { city: "isidis-procyon", passkey: await phone.get() });
+  assert.equal(s.status, 200, JSON.stringify(s.data));
+  assert.deepEqual(Object.keys(s.data.lots).sort(), ["A1", "A2", "A3"]);
+  assert.equal(s.data.lots.A1.record.passkeys, undefined, "public records carry no keys");
+  // giving one up drops it from the passkey
+  await call("/land/release", { city: "isidis-procyon", lot: "A2", passkey: await phone.get() });
+  const s2 = await call("/land/passkey/signin", { city: "isidis-procyon", passkey: await phone.get() });
+  assert.deepEqual(Object.keys(s2.data.lots).sort(), ["A1", "A3"]);
+});
+
+test("adding a second passkey to many lots can be proven with the first passkey", async () => {
+  const phone = await authenticator(), laptop = await authenticator();
+  const a = (await claim("A1")).data, b = (await claim("A2")).data;
+  await call("/land/passkey/add", { city: "isidis-procyon", lots: [{ lot: "A1", code: a.code }, { lot: "A2", code: b.code }], newPasskey: await phone.create() });
+  const add = await call("/land/passkey/add", { city: "isidis-procyon", lots: [{ lot: "A1" }, { lot: "A2" }], passkey: await phone.get(), newPasskey: await laptop.create() });
+  assert.equal(add.status, 200, JSON.stringify(add.data));
+  assert.equal(lotFile("A2").passkeys.length, 2);
+});
+
+test("many-lot passkey calls are refused without proof for every lot", async () => {
+  const phone = await authenticator(), stranger = await authenticator();
+  const a = (await claim("A1")).data; await claim("A2");
+  // A2 has no code given and no passkey: refused, nothing written
+  const r = await call("/land/passkey/add", { city: "isidis-procyon", lots: [{ lot: "A1", code: a.code }, { lot: "A2" }], newPasskey: await phone.create() });
+  assert.equal(r.status, 403);
+  assert.equal(lotFile("A1").passkeys, undefined);
+  // linking a passkey that is on no lot
+  const l = await call("/land/passkey/add", { city: "isidis-procyon", lots: [{ lot: "A1", code: a.code }], linkPasskey: await stranger.get() });
+  assert.equal(l.data.error, "passkey_unknown");
+  // signing in with a passkey that is on no lot
+  assert.equal((await call("/land/passkey/signin", { city: "isidis-procyon", passkey: await stranger.get() })).data.error, "passkey_unknown");
+  // the lot hint does not let a stranger in either
+  await call("/land/passkey/add", { city: "isidis-procyon", lot: "A1", code: a.code, newPasskey: await phone.create() });
+  assert.equal((await call("/land/passkey/signin", { city: "isidis-procyon", lot: "A1", passkey: await stranger.get() })).data.error, "passkey_unknown");
+  assert.equal((await call("/land/passkey/signin", { city: "isidis-procyon", passkey: await phone.get({ tamper: true }) })).status, 403);
+});
+
+test("a key card for several lots is checked in one call", async () => {
+  const a = (await claim("A1")).data, b = (await claim("A2")).data;
+  const v = await call("/land/verify", { city: "isidis-procyon", lots: [{ lot: "A1", code: a.code }, { lot: "A2", code: b.code }, { lot: "A3", code: a.code }] });
+  assert.equal(v.status, 200, JSON.stringify(v.data));
+  assert.deepEqual(Object.keys(v.data.lots).sort(), ["A1", "A2"]);
+  assert.deepEqual(v.data.failed, ["A3"]);
+  assert.equal(v.data.lots.A1.record.seal, undefined);
+  assert.equal((await call("/land/verify", { city: "isidis-procyon", lots: [{ lot: "A1", code: b.code }] })).status, 403);
+});

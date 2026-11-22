@@ -15,7 +15,7 @@
 // Cloudflare Turnstile token. See desk/README.md for setup.
 
 import { parse, stringify } from "yaml";
-import { landClaim, landVerify, landUpdate, landRelease, adminLandRevoke, landChallenge, landPasskeyAdd, landPasskeyRemove } from "./land.js";
+import { landClaim, landVerify, landUpdate, landRelease, adminLandRevoke, landChallenge, landPasskeyAdd, landPasskeyRemove, landPasskeySignin } from "./land.js";
 
 export const STORY_OFFSET_DAYS = 70491; // InterImm story date = Earth date + 70,491 days (year 2219 in 2026)
 export const POST_DAYS = 31; // a job or ad runs ~30 sols
@@ -75,6 +75,7 @@ export default {
       if (url.pathname === "/land/release") return json(await landRelease(body, env), 200, cors);
       if (url.pathname === "/land/passkey/add") return json(await landPasskeyAdd(body, env), 200, cors);
       if (url.pathname === "/land/passkey/remove") return json(await landPasskeyRemove(body, env), 200, cors);
+      if (url.pathname === "/land/passkey/signin") return json(await landPasskeySignin(body, env), 200, cors);
       throw new DeskError(404, "not_found");
     } catch (e) {
       if (e instanceof DeskError) return json({ error: e.code, message: e.message }, e.status, cors);
